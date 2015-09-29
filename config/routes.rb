@@ -1,4 +1,12 @@
+
 Rails.application.routes.draw do
+
+  api_version(:module => "Api::V1", path: {value: 'v1'}) do
+    resources :robots, :agv, :nc, :defaults => { :format => 'json' }
+  end
+
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
