@@ -23,6 +23,7 @@ gem 'rails_admin'
 gem 'devise'
 gem 'rails_admin-i18n'
 gem 'nokogiri'
+gem 'mqtt', :git => 'https://github.com/njh/ruby-mqtt.git'
 
 
 # To use ActiveModel has_secure_password
