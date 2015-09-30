@@ -11,7 +11,7 @@ module TestApp
   def default_config
     %{
       set :deploy_to, '#{deploy_to}'
-      set :repo_url, 'git://github.com/capistrano/capistrano.git'
+      set :repo_url, 'git://github.com/capistrano_bak/capistrano_bak.git'
       set :branch, 'master'
       set :ssh_options, { keys: "\#{ENV['HOME']}/.vagrant.d/insecure_private_key", auth_methods: ['publickey'] }
       server 'vagrant@localhost:2220', roles: %w{web app}
@@ -37,7 +37,7 @@ module TestApp
     FileUtils.mkdir(test_app_path)
 
     File.open(gemfile, 'w+') do |file|
-      file.write "gem 'capistrano', path: '#{path_to_cap}'"
+      file.write "gem 'capistrano_bak', path: '#{path_to_cap}'"
     end
 
     Dir.chdir(test_app_path) do
@@ -150,7 +150,7 @@ module TestApp
   end
 
   def task_dir
-    test_app_path.join('lib/capistrano/tasks')
+    test_app_path.join('lib/capistrano_bak/tasks')
   end
 
   def copy_task_to_test_app(source)

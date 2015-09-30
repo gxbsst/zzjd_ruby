@@ -1,8 +1,7 @@
-source 'https://ruby.taobao.org'
+source 'http://ruby.taobao.org'
 
 gem 'rails', '4.2.4'
 gem 'rails-api'
-gem 'pg'
 gem "bcrypt-ruby"
 
 gem 'kaminari'
@@ -13,10 +12,11 @@ gem 'versionist'
 gem 'sidekiq', '3.2.1'
 gem 'redis'
 gem 'config'
-gem 'therubyracer'
+gem 'therubyracer', platforms: [:ruby]
+gem 'therubyrhino'
 # gem "rails_admin_import", "~> 1.0.0", path: "./lib/"
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# gem 'capistrano_bak-rails', group: :development
 gem 'rails_admin'
 gem 'devise'
 gem 'rails_admin-i18n'
@@ -33,21 +33,23 @@ gem 'nokogiri'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano', :group => :development
+# gem 'capistrano_bak', :group => :development
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
+gem 'jruby-openssl', :platforms => [:jruby]
 group :development do
-  gem 'jruby-openssl', :platforms => [:jruby]
+  gem 'pg', platforms: [:ruby]
   gem 'sshkit', path: 'lib'
-  gem 'capistrano', path: 'lib', platforms: [:ruby, :jruby]
+  gem 'capistrano'#, path: 'lib', platforms: [:ruby, :jruby]
   gem 'capistrano-rails', :platforms => [:ruby]
   gem 'capistrano3-puma', :platforms => [:ruby]
   gem 'capistrano-rvm', :platforms => [:ruby, :jruby]
   gem 'capistrano-bundler', :platforms => [:ruby, :jruby]
-  gem 'pry-rails'
-  gem 'pry-debugger'
+  gem 'capistrano-sidekiq'
+  gem 'pry-rails', :platforms => [:ruby]
+  # gem 'pry-debugger', :platforms => [:ruby]
 end
 
 group :development, :test do

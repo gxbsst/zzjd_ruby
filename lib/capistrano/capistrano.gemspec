@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'capistrano/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "capistrano"
+  gem.name          = "capistrano_bak"
   gem.version       = Capistrano::VERSION
   gem.authors       = ["Tom Clements", "Lee Hambley"]
   gem.email         = ["seenmyfate@gmail.com", "lee.hambley@gmail.com"]
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
   gem.licenses      = ['MIT']
 
   gem.required_ruby_version = '>= 1.9.3'
-  # gem.add_dependency 'sshkit', '~> 1.3'
+  gem.add_dependency 'sshkit', '~> 1.3'
   gem.add_dependency 'rake', '>= 10.0.0'
   gem.add_dependency 'i18n'
 
