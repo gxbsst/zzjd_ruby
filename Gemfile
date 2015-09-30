@@ -69,6 +69,7 @@ group :test do
   gem 'email_spec'
   gem 'json_spec'
   gem 'shoulda-matchers', require: false
+  gem 'spring-commands-rspec'
 end
 
 gem "spring", group: :development
