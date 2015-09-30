@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150929085153) do
+ActiveRecord::Schema.define(version: 20150930072517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -3317,6 +3317,43 @@ ActiveRecord::Schema.define(version: 20150929085153) do
     t.integer  "workstation"
   end
 
+  create_table "mj_stock_tray_base", force: :cascade do |t|
+    t.integer  "create_uid"
+    t.datetime "create_date"
+    t.integer  "write_uid"
+    t.integer  "location"
+    t.datetime "write_date"
+    t.integer  "tray"
+  end
+
+  create_table "mj_tcs_order_base", force: :cascade do |t|
+    t.string   "status"
+    t.integer  "create_uid"
+    t.datetime "create_date"
+    t.string   "no"
+    t.string   "order_name"
+    t.integer  "write_uid"
+    t.integer  "production"
+    t.datetime "write_date"
+    t.string   "execution_success_ful"
+  end
+
+  create_table "mj_tcs_order_task_base", force: :cascade do |t|
+    t.string   "status"
+    t.integer  "create_uid"
+    t.string   "current_position"
+    t.datetime "create_date"
+    t.string   "no"
+    t.string   "order_name"
+    t.integer  "write_uid"
+    t.string   "action"
+    t.integer  "tcs_order"
+    t.datetime "write_date"
+    t.string   "intended_vehicle"
+    t.string   "destination_name"
+    t.string   "execution_success_ful"
+  end
+
   create_table "mj_technology_arg", force: :cascade do |t|
     t.integer  "create_uid"
     t.string   "code"
@@ -3350,6 +3387,9 @@ ActiveRecord::Schema.define(version: 20150929085153) do
     t.string   "technology_arg"
     t.string   "name"
     t.integer  "equipment_id"
+    t.integer  "sequence"
+    t.string   "program_no"
+    t.text     "note"
   end
 
   create_table "mj_tm_operation_material", force: :cascade do |t|
@@ -3363,6 +3403,16 @@ ActiveRecord::Schema.define(version: 20150929085153) do
     t.integer  "product_id"
   end
 
+  create_table "mj_tm_operation_product_base", force: :cascade do |t|
+    t.integer  "create_uid"
+    t.integer  "product"
+    t.datetime "create_date"
+    t.integer  "number"
+    t.integer  "write_uid"
+    t.datetime "write_date"
+    t.integer  "operation"
+  end
+
   create_table "mj_tm_routing", force: :cascade do |t|
     t.integer  "create_uid"
     t.string   "code"
@@ -3373,6 +3423,16 @@ ActiveRecord::Schema.define(version: 20150929085153) do
     t.datetime "write_date"
     t.boolean  "active"
     t.integer  "product_id"
+  end
+
+  create_table "mj_tray_product_base", force: :cascade do |t|
+    t.integer  "create_uid"
+    t.integer  "product"
+    t.datetime "create_date"
+    t.integer  "number"
+    t.integer  "write_uid"
+    t.datetime "write_date"
+    t.integer  "tray"
   end
 
   create_table "mj_vehicle_workstations", force: :cascade do |t|
@@ -5495,6 +5555,175 @@ ActiveRecord::Schema.define(version: 20150929085153) do
   add_index "wkf_workitem", ["state"], name: "wkf_workitem_state_index", using: :btree
   add_index "wkf_workitem", ["subflow_id"], name: "wkf_workitem_subflow_id_index", using: :btree
 
+  create_table "wms_location", force: :cascade do |t|
+    t.integer  "no_max_transport_units"
+    t.boolean  "counting_active"
+    t.datetime "create_date"
+    t.integer  "write_uid"
+    t.boolean  "incoming_active"
+    t.integer  "create_uid"
+    t.string   "area",                           null: false
+    t.boolean  "considered_in_allocation"
+    t.string   "check_state"
+    t.datetime "last_access"
+    t.float    "maximum_weight"
+    t.text     "description"
+    t.boolean  "location_group_counting_active"
+    t.integer  "location_group"
+    t.integer  "plc_state"
+    t.boolean  "outgoing_active"
+    t.datetime "write_date"
+    t.integer  "location_type"
+    t.string   "aisle",                          null: false
+    t.string   "y",                              null: false
+    t.string   "x",                              null: false
+    t.string   "z",                              null: false
+  end
+
+  create_table "wms_location_group", force: :cascade do |t|
+    t.integer  "create_uid"
+    t.datetime "create_date"
+    t.integer  "parent"
+    t.boolean  "location_group_counting_active"
+    t.string   "name",                           null: false
+    t.integer  "state_out_locker"
+    t.integer  "state_in_locker"
+    t.string   "group_state_in"
+    t.float    "max_fill_level"
+    t.string   "system_code"
+    t.datetime "write_date"
+    t.string   "group_state_out"
+    t.boolean  "no_locations"
+    t.integer  "write_uid"
+    t.string   "group_type"
+    t.text     "description"
+  end
+
+  add_index "wms_location_group", ["name"], name: "wms_location_group_name_index", using: :btree
+  add_index "wms_location_group", ["name"], name: "wms_location_group_wms_location_group_name_unique", unique: true, using: :btree
+
+  create_table "wms_location_type", force: :cascade do |t|
+    t.integer  "create_uid"
+    t.datetime "create_date"
+    t.text     "description"
+    t.integer  "height"
+    t.integer  "width"
+    t.integer  "length"
+    t.datetime "write_date"
+    t.integer  "write_uid"
+    t.string   "type",        null: false
+  end
+
+  add_index "wms_location_type", ["type"], name: "wms_location_type_type_index", using: :btree
+  add_index "wms_location_type", ["type"], name: "wms_location_type_wms_location_type_type_unique", unique: true, using: :btree
+
+  create_table "wms_location_wms_message_rel", id: false, force: :cascade do |t|
+    t.integer "wms_location_id", null: false
+    t.integer "wms_message_id",  null: false
+  end
+
+  add_index "wms_location_wms_message_rel", ["wms_location_id", "wms_message_id"], name: "wms_location_wms_message_rel_wms_location_id_wms_message_id_key", unique: true, using: :btree
+  add_index "wms_location_wms_message_rel", ["wms_location_id"], name: "wms_location_wms_message_rel_wms_location_id_index", using: :btree
+  add_index "wms_location_wms_message_rel", ["wms_message_id"], name: "wms_location_wms_message_rel_wms_message_id_index", using: :btree
+
+  create_table "wms_message", force: :cascade do |t|
+    t.integer  "create_uid"
+    t.datetime "create_date"
+    t.string   "message_no"
+    t.string   "message_text"
+    t.integer  "write_uid"
+    t.datetime "write_date"
+  end
+
+  create_table "wms_product", force: :cascade do |t|
+    t.integer  "create_uid"
+    t.datetime "create_date"
+    t.text     "description"
+    t.integer  "write_uid"
+    t.datetime "write_date"
+    t.string   "name",        null: false
+  end
+
+  add_index "wms_product", ["name"], name: "wms_product_name_index", using: :btree
+
+  create_table "wms_transport_order", force: :cascade do |t|
+    t.integer  "create_uid"
+    t.datetime "create_date"
+    t.integer  "transport_unit",        null: false
+    t.datetime "end_date"
+    t.integer  "problem_message_no"
+    t.integer  "source_location"
+    t.integer  "target_location_group"
+    t.datetime "problem_occurred"
+    t.string   "priority"
+    t.string   "state"
+    t.integer  "target_location"
+    t.datetime "start_date"
+    t.datetime "write_date"
+    t.integer  "write_uid"
+    t.text     "problem_message"
+  end
+
+  create_table "wms_transport_unit", force: :cascade do |t|
+    t.integer  "create_uid"
+    t.integer  "product"
+    t.datetime "create_date"
+    t.integer  "parent"
+    t.float    "weight"
+    t.integer  "transport_unit_type"
+    t.string   "barcode",             null: false
+    t.integer  "write_uid"
+    t.datetime "inventory_date"
+    t.string   "state"
+    t.integer  "target_location"
+    t.datetime "actualLocation_date"
+    t.datetime "write_date"
+    t.integer  "product_quantity"
+    t.integer  "inventory_user"
+    t.integer  "actual_location"
+    t.boolean  "empty"
+  end
+
+  add_index "wms_transport_unit", ["barcode"], name: "wms_transport_unit_barcode_index", using: :btree
+  add_index "wms_transport_unit", ["barcode"], name: "wms_transport_unit_wms_transport_unit_barcode_unique", unique: true, using: :btree
+
+  create_table "wms_transport_unit_type", force: :cascade do |t|
+    t.float    "weight_max"
+    t.datetime "create_date"
+    t.text     "description"
+    t.integer  "create_uid"
+    t.float    "payload"
+    t.string   "compatibility"
+    t.integer  "height"
+    t.integer  "width"
+    t.integer  "length"
+    t.datetime "write_date"
+    t.float    "weight_tare"
+    t.integer  "write_uid"
+    t.string   "type",          null: false
+  end
+
+  add_index "wms_transport_unit_type", ["type"], name: "wms_transport_unit_type_type_index", using: :btree
+  add_index "wms_transport_unit_type", ["type"], name: "wms_transport_unit_type_wms_location_unit_type_type", unique: true, using: :btree
+
+  create_table "wms_transport_unit_wms_unit_error_rel", id: false, force: :cascade do |t|
+    t.integer "wms_transport_unit_id", null: false
+    t.integer "wms_unit_error_id",     null: false
+  end
+
+  add_index "wms_transport_unit_wms_unit_error_rel", ["wms_transport_unit_id", "wms_unit_error_id"], name: "wms_transport_unit_wms_unit_e_wms_transport_unit_id_wms_uni_key", unique: true, using: :btree
+  add_index "wms_transport_unit_wms_unit_error_rel", ["wms_transport_unit_id"], name: "wms_transport_unit_wms_unit_error_rel_wms_transport_unit_id_ind", using: :btree
+  add_index "wms_transport_unit_wms_unit_error_rel", ["wms_unit_error_id"], name: "wms_transport_unit_wms_unit_error_rel_wms_unit_error_id_index", using: :btree
+
+  create_table "wms_unit_error", force: :cascade do |t|
+    t.integer  "create_uid"
+    t.datetime "create_date"
+    t.integer  "write_uid"
+    t.datetime "write_date"
+    t.string   "error_no"
+    t.text     "error_text"
+  end
+
   add_foreign_key "account_account", "account_account", column: "parent_id", name: "account_account_parent_id_fkey", on_delete: :cascade
   add_foreign_key "account_account", "account_account_type", column: "user_type", name: "account_account_user_type_fkey", on_delete: :nullify
   add_foreign_key "account_account", "res_company", column: "company_id", name: "account_account_company_id_fkey", on_delete: :nullify
@@ -6338,6 +6567,16 @@ ActiveRecord::Schema.define(version: 20150929085153) do
   add_foreign_key "mj_routing_operation", "mj_routing", column: "routing_id", name: "mj_routing_operation_routing_id_fkey", on_delete: :nullify
   add_foreign_key "mj_routing_operation", "res_users", column: "create_uid", name: "mj_routing_operation_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_routing_operation", "res_users", column: "write_uid", name: "mj_routing_operation_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_stock_tray_base", "res_users", column: "create_uid", name: "mj_stock_tray_base_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_stock_tray_base", "res_users", column: "write_uid", name: "mj_stock_tray_base_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_stock_tray_base", "wms_location", column: "location", name: "mj_stock_tray_base_location_fkey", on_delete: :nullify
+  add_foreign_key "mj_stock_tray_base", "wms_transport_unit", column: "tray", name: "mj_stock_tray_base_tray_fkey", on_delete: :nullify
+  add_foreign_key "mj_tcs_order_base", "mj_production_base", column: "production", name: "mj_tcs_order_base_production_fkey", on_delete: :nullify
+  add_foreign_key "mj_tcs_order_base", "res_users", column: "create_uid", name: "mj_tcs_order_base_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_tcs_order_base", "res_users", column: "write_uid", name: "mj_tcs_order_base_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_tcs_order_task_base", "mj_tcs_order_base", column: "tcs_order", name: "mj_tcs_order_task_base_tcs_order_fkey", on_delete: :nullify
+  add_foreign_key "mj_tcs_order_task_base", "res_users", column: "create_uid", name: "mj_tcs_order_task_base_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_tcs_order_task_base", "res_users", column: "write_uid", name: "mj_tcs_order_task_base_write_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_technology_arg", "res_users", column: "create_uid", name: "mj_technology_arg_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_technology_arg", "res_users", column: "write_uid", name: "mj_technology_arg_write_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_technology_arg_line", "mj_technology_arg", name: "mj_technology_arg_line_mj_technology_arg_id_fkey", on_delete: :nullify
@@ -6350,9 +6589,17 @@ ActiveRecord::Schema.define(version: 20150929085153) do
   add_foreign_key "mj_tm_operation_material", "mj_tm_operation", column: "operation_id", name: "mj_tm_operation_material_operation_id_fkey", on_delete: :nullify
   add_foreign_key "mj_tm_operation_material", "res_users", column: "create_uid", name: "mj_tm_operation_material_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_tm_operation_material", "res_users", column: "write_uid", name: "mj_tm_operation_material_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_tm_operation_product_base", "mj_product_base", column: "product", name: "mj_tm_operation_product_base_product_fkey", on_delete: :nullify
+  add_foreign_key "mj_tm_operation_product_base", "mj_tm_operation", column: "operation", name: "mj_tm_operation_product_base_operation_fkey", on_delete: :nullify
+  add_foreign_key "mj_tm_operation_product_base", "res_users", column: "create_uid", name: "mj_tm_operation_product_base_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_tm_operation_product_base", "res_users", column: "write_uid", name: "mj_tm_operation_product_base_write_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_tm_routing", "mj_product_base", column: "product_id", name: "mj_tm_routing_product_id_fkey", on_delete: :nullify
   add_foreign_key "mj_tm_routing", "res_users", column: "create_uid", name: "mj_tm_routing_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_tm_routing", "res_users", column: "write_uid", name: "mj_tm_routing_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_tray_product_base", "mj_product_base", column: "product", name: "mj_tray_product_base_product_fkey", on_delete: :nullify
+  add_foreign_key "mj_tray_product_base", "res_users", column: "create_uid", name: "mj_tray_product_base_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_tray_product_base", "res_users", column: "write_uid", name: "mj_tray_product_base_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_tray_product_base", "wms_transport_unit", column: "tray", name: "mj_tray_product_base_tray_fkey", on_delete: :nullify
   add_foreign_key "mj_work_order_base", "mj_production_base", column: "production", name: "mj_work_order_base_production_fkey", on_delete: :nullify
   add_foreign_key "mj_work_order_base", "res_users", column: "create_uid", name: "mj_work_order_base_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_work_order_base", "res_users", column: "user", name: "mj_work_order_base_user_fkey", on_delete: :nullify
@@ -6936,4 +7183,41 @@ ActiveRecord::Schema.define(version: 20150929085153) do
   add_foreign_key "wkf_workitem", "wkf_activity", column: "act_id", name: "wkf_workitem_act_id_fkey", on_delete: :cascade
   add_foreign_key "wkf_workitem", "wkf_instance", column: "inst_id", name: "wkf_workitem_inst_id_fkey", on_delete: :cascade
   add_foreign_key "wkf_workitem", "wkf_instance", column: "subflow_id", name: "wkf_workitem_subflow_id_fkey", on_delete: :nullify
+  add_foreign_key "wms_location", "res_users", column: "create_uid", name: "wms_location_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "wms_location", "res_users", column: "write_uid", name: "wms_location_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "wms_location", "wms_location_group", column: "location_group", name: "wms_location_location_group_fkey", on_delete: :nullify
+  add_foreign_key "wms_location", "wms_location_type", column: "location_type", name: "wms_location_location_type_fkey", on_delete: :nullify
+  add_foreign_key "wms_location_group", "res_users", column: "create_uid", name: "wms_location_group_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "wms_location_group", "res_users", column: "write_uid", name: "wms_location_group_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "wms_location_group", "wms_location_group", column: "parent", name: "wms_location_group_parent_fkey", on_delete: :nullify
+  add_foreign_key "wms_location_group", "wms_location_group", column: "state_in_locker", name: "wms_location_group_state_in_locker_fkey", on_delete: :nullify
+  add_foreign_key "wms_location_group", "wms_location_group", column: "state_out_locker", name: "wms_location_group_state_out_locker_fkey", on_delete: :nullify
+  add_foreign_key "wms_location_type", "res_users", column: "create_uid", name: "wms_location_type_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "wms_location_type", "res_users", column: "write_uid", name: "wms_location_type_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "wms_location_wms_message_rel", "wms_location", name: "wms_location_wms_message_rel_wms_location_id_fkey", on_delete: :cascade
+  add_foreign_key "wms_location_wms_message_rel", "wms_message", name: "wms_location_wms_message_rel_wms_message_id_fkey", on_delete: :cascade
+  add_foreign_key "wms_message", "res_users", column: "create_uid", name: "wms_message_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "wms_message", "res_users", column: "write_uid", name: "wms_message_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "wms_product", "res_users", column: "create_uid", name: "wms_product_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "wms_product", "res_users", column: "write_uid", name: "wms_product_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "wms_transport_order", "res_users", column: "create_uid", name: "wms_transport_order_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "wms_transport_order", "res_users", column: "write_uid", name: "wms_transport_order_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "wms_transport_order", "wms_location", column: "source_location", name: "wms_transport_order_source_location_fkey", on_delete: :nullify
+  add_foreign_key "wms_transport_order", "wms_location", column: "target_location", name: "wms_transport_order_target_location_fkey", on_delete: :nullify
+  add_foreign_key "wms_transport_order", "wms_location_group", column: "target_location_group", name: "wms_transport_order_target_location_group_fkey", on_delete: :nullify
+  add_foreign_key "wms_transport_order", "wms_transport_unit", column: "transport_unit", name: "wms_transport_order_transport_unit_fkey", on_delete: :nullify
+  add_foreign_key "wms_transport_unit", "res_users", column: "create_uid", name: "wms_transport_unit_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "wms_transport_unit", "res_users", column: "inventory_user", name: "wms_transport_unit_inventory_user_fkey", on_delete: :nullify
+  add_foreign_key "wms_transport_unit", "res_users", column: "write_uid", name: "wms_transport_unit_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "wms_transport_unit", "wms_location", column: "actual_location", name: "wms_transport_unit_actual_location_fkey", on_delete: :nullify
+  add_foreign_key "wms_transport_unit", "wms_location", column: "target_location", name: "wms_transport_unit_target_location_fkey", on_delete: :nullify
+  add_foreign_key "wms_transport_unit", "wms_product", column: "product", name: "wms_transport_unit_product_fkey", on_delete: :nullify
+  add_foreign_key "wms_transport_unit", "wms_transport_unit", column: "parent", name: "wms_transport_unit_parent_fkey", on_delete: :nullify
+  add_foreign_key "wms_transport_unit", "wms_transport_unit_type", column: "transport_unit_type", name: "wms_transport_unit_transport_unit_type_fkey", on_delete: :nullify
+  add_foreign_key "wms_transport_unit_type", "res_users", column: "create_uid", name: "wms_transport_unit_type_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "wms_transport_unit_type", "res_users", column: "write_uid", name: "wms_transport_unit_type_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "wms_transport_unit_wms_unit_error_rel", "wms_transport_unit", name: "wms_transport_unit_wms_unit_error_re_wms_transport_unit_id_fkey", on_delete: :cascade
+  add_foreign_key "wms_transport_unit_wms_unit_error_rel", "wms_unit_error", name: "wms_transport_unit_wms_unit_error_rel_wms_unit_error_id_fkey", on_delete: :cascade
+  add_foreign_key "wms_unit_error", "res_users", column: "create_uid", name: "wms_unit_error_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "wms_unit_error", "res_users", column: "write_uid", name: "wms_unit_error_write_uid_fkey", on_delete: :nullify
 end
