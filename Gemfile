@@ -3,6 +3,8 @@ source 'http://ruby.taobao.org'
 gem 'rails', '4.2.4'
 gem 'rails-api'
 gem "bcrypt-ruby"
+gem 'pg', platforms: [:ruby]
+gem 'activerecord-jdbcpostgresql-adapter', platforms: [:jruby]
 
 gem 'kaminari'
 gem 'whenever', :require => false
@@ -40,13 +42,12 @@ gem 'nokogiri'
 
 gem 'jruby-openssl', :platforms => [:jruby]
 group :development do
-  gem 'pg', platforms: [:ruby]
   gem 'sshkit', path: 'lib'
   gem 'capistrano'#, path: 'lib', platforms: [:ruby, :jruby]
-  gem 'capistrano-rails', :platforms => [:ruby]
-  gem 'capistrano3-puma', :platforms => [:ruby]
-  gem 'capistrano-rvm', :platforms => [:ruby, :jruby]
-  gem 'capistrano-bundler', :platforms => [:ruby, :jruby]
+  gem 'capistrano-rails'#, :platforms => [:ruby]
+  gem 'capistrano3-puma'#, :platforms => [:ruby]
+  gem 'capistrano-rvm'#, :platforms => [:ruby, :jruby]
+  gem 'capistrano-bundler'#, :platforms => [:ruby, :jruby]
   gem 'capistrano-sidekiq'
   gem 'pry-rails', :platforms => [:ruby]
   # gem 'pry-debugger', :platforms => [:ruby]
@@ -59,7 +60,6 @@ group :development, :test do
 end
 
 group :production, :release do
-  gem 'activerecord-jdbcpostgresql-adapter', platforms: [:jruby]
   gem 'rack-cache', :require => 'rack/cache'
   gem 'puma'
 end

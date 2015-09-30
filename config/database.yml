@@ -63,6 +63,6 @@ test:
 #
 production:
   <<: *default
-  database: zzjd_ruby_production
-  username: zzjd_ruby
-  password: <%= ENV['ZZJD_RUBY_DATABASE_PASSWORD'] %>
+  database:  part_trace
+  username:  odoo
+  password:  shmingjiang

@@ -8,7 +8,7 @@ server 'jd234-1',
            #keys: %w(/home/user_name/.ssh/id_rsa),
            #forward_agent: true,
            auth_methods: %w(password),
-           password: 'jd888888'
+           password: 'jidian888888'
        }
 
 fetch(:default_env).merge!(rails_env: 'production', jruby_opts: '"-J-Xmx4096m --1.9"')

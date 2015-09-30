@@ -32,4 +32,4 @@ require 'capistrano/puma/nginx'   #if you want to upload a nginx site template
 # require 'capistrano/rails/migrations'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
-# Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
+Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
