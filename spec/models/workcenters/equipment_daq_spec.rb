@@ -8,4 +8,6 @@ RSpec.describe Workcenters::EquipmentDaq, type: :model do
   it { expect(equipment_state.address).to eq('00001')}
   it { expect(equipment_state.value).to eq('111')}
 
+
+
 end

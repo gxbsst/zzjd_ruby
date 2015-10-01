@@ -5,7 +5,9 @@ class WorkstationWorker
 
   def perform
       # If you pass a block to the get method, then it will loop
-      $mqtt.get("test") do |topic,message|
+
+      client = MQTT::Client.connect('127.0.0.1')
+      client.get("test") do |topic,message|
 
         logger.info("*"*20)
         logger.info("#{topic} - #{message}")
