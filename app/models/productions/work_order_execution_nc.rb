@@ -1,6 +1,6 @@
 # encoding: utf-8
-# 机器人装配工位
-class Productions::WorkOrderExecutionRobot < Productions::WorkOrderExecution
+# NC设备加工工位
+class Productions::WorkOrderExecutionNC < Productions::WorkOrderExecution
 
   state_machine :state, :initial => :unstart do
     event :agv_ready do

@@ -1,6 +1,6 @@
 # encoding: utf-8
-# 机器人装配工位
-class Productions::WorkOrderExecutionRobot < Productions::WorkOrderExecution
+# 立体仓库工位
+class Productions::WorkOrderExecutionWms < Productions::WorkOrderExecution
 
   state_machine :state, :initial => :unstart do
     event :agv_ready do
@@ -9,19 +9,19 @@ class Productions::WorkOrderExecutionRobot < Productions::WorkOrderExecution
 
     # 通知机器人开始动作
     after_transition :unstart => :agv_ready do |er, transition|
-      er.do_notify_robot
+      er.do_notify_duiduoche
     end
 
-    event :notify_robot do
-      transition [:agv_ready] => :notified_robot
+    event :notify_duiduoche do
+      transition [:agv_ready] => :notified_duiduoche
     end
 
     event :complete do
-      transition [:notified_robot] => :completed
+      transition [:notified_duiduoche] => :completed
     end
 
     # 通知机器人开始动作
-    after_transition :notified_robot => :completed do |er, transition|
+    after_transition :notified_duiduoche => :completed do |er, transition|
       er.do_notify_agv
     end
 
@@ -31,17 +31,17 @@ class Productions::WorkOrderExecutionRobot < Productions::WorkOrderExecution
     #   end
     # end
   end
-
+  
   after_transition :notified_robot => :completed do |er, transition|
     er.do_notify_agv
   end
 
-  def do_notify_robot
+  def do_notify_duiduoche
     # 找到这个工位
     workstation = self.work_order.workstation
 
     # 找到对应PLC，发送IO信号
-    workstation.notify_robot
+    # workstation.notify_robot
   end
 
   def do_notify_agv
