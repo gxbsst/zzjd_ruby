@@ -226,6 +226,8 @@ GEM
     rack-pjax (0.8.0)
       nokogiri (~> 1.5)
       rack (~> 1.1)
+    rack-protection (1.5.3)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.4)
@@ -318,6 +320,10 @@ GEM
       json
       redis (>= 3.0.6)
       redis-namespace (>= 1.3.1)
+    sinatra (1.4.6)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (>= 1.3, < 3)
     slop (3.6.0)
     spoon (0.0.4)
       ffi
@@ -334,6 +340,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    state_machine (1.2.0)
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
@@ -395,10 +402,12 @@ DEPENDENCIES
   rspec-rails
   shoulda-matchers
   sidekiq (= 3.2.1)
+  sinatra
   spork-rails
   spring
   spring-commands-rspec
   sshkit!
+  state_machine
   therubyracer
   therubyrhino
   versionist

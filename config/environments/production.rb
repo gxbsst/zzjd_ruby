@@ -76,4 +76,16 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+
+  Sidekiq.configure_server do |config|
+    config.server_middleware do |chain|
+      chain.add Kiqstand::Middleware
+    end
+    config.redis = {:url => 'redis://127.0.0.1:6379/0', :namespace => 'sidekiq'}
+  end
+
+  Sidekiq.configure_client do |config|
+    config.redis = {:url => 'redis://127.0.0.1:6379/0', :namespace => 'sidekiq'}
+  end
 end

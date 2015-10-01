@@ -11,4 +11,8 @@ RSpec.describe Workcenters::Workstation do
   end
   # it { expect(described_class.new).to have_many(:equipments) }
   # it { expect(described_class.new).to have_many(:users) }
+
+  describe '#state' do
+
+  end
 end

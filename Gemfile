@@ -24,6 +24,7 @@ gem 'devise'
 gem 'rails_admin-i18n'
 gem 'nokogiri'
 gem 'mqtt', :git => 'https://github.com/njh/ruby-mqtt.git'
+# gem 'sidekiq-daemon', platforms: [:jruby], github: "yabawock/sidekiq-daemon"
 
 
 # To use ActiveModel has_secure_password
@@ -74,3 +75,6 @@ group :test do
 end
 
 gem "spring", group: :development
+
+gem 'sinatra', require: false, platforms: [:ruby]
+gem 'state_machine'

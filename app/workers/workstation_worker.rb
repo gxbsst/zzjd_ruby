@@ -1,11 +1,15 @@
 # encoding: utf-8
-class Workstation
+class WorkstationWorker
   include Sidekiq::Worker
   sidekiq_options :queue => :default
 
   def perform
       # If you pass a block to the get method, then it will loop
-      $mqtt.get do |topic,message|
+      $mqtt.get("test") do |topic,message|
+
+        logger.info("*"*20)
+        logger.info("#{topic} - #{message}")
+        logger.info("*"*20)
         # WORKSTATION1001
         # if workstation/1001/robot
         #   if massage == put ok
