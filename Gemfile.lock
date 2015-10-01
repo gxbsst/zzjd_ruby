@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/ugoa/state_machine.git
+  revision: 07781195d0445f0ed1e62529303a264efced0fee
+  specs:
+    state_machine (1.2.0)
+
+GIT
   remote: https://github.com/njh/ruby-mqtt.git
   revision: 1dad32c02777268121f0108933d7be93dfdf3890
   specs:
@@ -340,7 +346,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    state_machine (1.2.0)
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
@@ -407,7 +412,7 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   sshkit!
-  state_machine
+  state_machine!
   therubyracer
   therubyrhino
   versionist

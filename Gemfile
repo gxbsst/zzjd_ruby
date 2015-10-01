@@ -77,4 +77,4 @@ end
 gem "spring", group: :development
 
 gem 'sinatra', require: false, platforms: [:ruby]
-gem 'state_machine'
+gem 'state_machine', github: 'ugoa/state_machine'
