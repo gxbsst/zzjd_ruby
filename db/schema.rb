@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151001050803) do
+ActiveRecord::Schema.define(version: 20151001070958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -5742,6 +5742,23 @@ ActiveRecord::Schema.define(version: 20151001050803) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "workcenters_workstation_task_items", force: :cascade do |t|
+    t.integer  "task_id"
+    t.string   "no"
+    t.string   "name"
+    t.integer  "step"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "workcenters_workstation_tasks", force: :cascade do |t|
+    t.integer  "workstation_id"
+    t.string   "name"
+    t.string   "no"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_foreign_key "account_account", "account_account", column: "parent_id", name: "account_account_parent_id_fkey", on_delete: :cascade
