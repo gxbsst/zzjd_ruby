@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :product, class: "Products::Product" do
+  factory :operation, class: "TechManagements::Operation" do
     sequence(:name) { |n| "product_name - #{}"}
   end
 

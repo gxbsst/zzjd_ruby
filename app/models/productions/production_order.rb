@@ -1,10 +1,68 @@
+# encoding: utf-8
 class Productions::ProductionOrder < ActiveRecord::Base
+
+  WMS_STATION_NO = 1001
+  TEST_STATION_NO = 1009
+  PRODUCT_ROBOT_NO = 3001
+
   self.table_name = "mj_production_base"
 
   belongs_to :plan, :class_name => 'Productions::Plan'
-  has_many :orders, :class_name => 'Productions::WorkOrder'
+  has_many :orders, :class_name => 'Productions::WorkOrder', foreign_key: :production
+  belongs_to :product, :class_name => 'Products::Product'
+  has_one :one_tcs_order, :class_name => 'Tcs::Order', foreign_key: :production, dependent: :destroy # 因为有个字段叫tcs_order
+  # has_many :tcs_order_lines,  through: :tcs_order
 
+  after_create :create_tcs_order, :generate_tcs_order_lines
 
-  # TODO
+  def create_tcs_order
+   self.build_one_tcs_order(order_name: "#{self.production_no}--物流配送单").save
+  end
+
   # after_create to generate work_order
+  def generate_work_orders
+    product.routing.operations.each do |operation|
+        self.orders.create(
+            sequence: operation.sequence,
+            operation_name: operation.name,
+            status: 'draft'
+        )
+    end
+  end
+
+  # AGV 调拨单
+  def generate_tcs_order_lines
+    if product.no == PRODUCT_ROBOT_NO
+      create_robot_tcs_order_lines
+    else
+      create_nc_tcs_order_lines
+    end
+  end
+
+  private
+
+  def create_nc_tcs_order_lines
+    operations = [WMS_STATION_NO] << self.product.workstation_nos << TEST_STATION_NO
+    operations.flatten.uniq.each do |workstation_no|
+      self.one_tcs_order.tcs_order_lines.create!(
+          action: 'transport',
+          destination_name: workstation_no.to_s,
+          vehicle_type_available: false,
+          # intended_vehicle: 'robot',
+          operation: 'OP_WAIT'
+      )
+    end
+  end
+
+  def create_robot_tcs_order_lines
+    [WMS_STATION_NO, 1010, 1011, 1012, 1013, 1014, WMS_STATION_NO].each do |workstation_no|
+      self.one_tcs_order.tcs_order_lines.create!(
+          action: 'transport',
+          destination_name: workstation_no,
+          vehicle_type_available: false,
+          # intended_vehicle: 'robot',
+          operation: 'OP_WAIT'
+      )
+    end
+  end
 end

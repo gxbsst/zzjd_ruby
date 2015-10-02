@@ -14,11 +14,10 @@ namespace :app do
   def init_workstations
     result = YAML.load_file(Rails.root + 'lib/tasks/init_data/workstation.yml')
     map_type = {
-        'wms': 'Workcenters::WorkstationWms',
-        'nc': 'Workcenters::WorkstationNc',
-        'robot': 'Workcenters::WorkstationRobot',
-        'test': 'Workcenters::WorkstationTest',
-
+        'wms' =>  'Workcenters::WorkstationWms',
+        'nc' =>  'Workcenters::WorkstationNc',
+        'robot' => 'Workcenters::WorkstationRobot',
+        'test' => 'Workcenters::WorkstationTest'
     }
     result['workstations'].each do |w|
       print "."

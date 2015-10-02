@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151002073149) do
+ActiveRecord::Schema.define(version: 20151002120502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -3252,6 +3252,7 @@ ActiveRecord::Schema.define(version: 20151002073149) do
     t.datetime "write_date"
     t.datetime "create_date"
     t.integer  "parent_id"
+    t.integer  "product_id"
   end
 
   create_table "mj_production_plan_base", force: :cascade do |t|
@@ -3353,6 +3354,8 @@ ActiveRecord::Schema.define(version: 20151002073149) do
     t.string   "intended_vehicle"
     t.string   "destination_name"
     t.string   "execution_success_ful"
+    t.boolean  "vehicle_type_available"
+    t.string   "operation"
   end
 
   create_table "mj_technology_arg", force: :cascade do |t|
@@ -3459,6 +3462,7 @@ ActiveRecord::Schema.define(version: 20151002073149) do
     t.string   "operation_name"
     t.datetime "create_date"
     t.string   "work_order_no"
+    t.integer  "sequence"
   end
 
   create_table "mj_workcenter_equipment", force: :cascade do |t|
