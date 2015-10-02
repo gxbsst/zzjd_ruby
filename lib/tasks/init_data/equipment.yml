@@ -1,4 +1,4 @@
-workstations: [
+equipments: [
   # 设备
   {
     workstation_no: 1001,
