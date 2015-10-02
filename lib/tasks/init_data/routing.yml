@@ -1,0 +1,66 @@
+routings: [
+  # 机器人装配
+  {
+    product_no: 3001,
+    name:  "1#机器人",
+    operations: [
+      {
+        name: "工位1",
+        sequence: 1,
+        workstation_no: 1010,
+        materials: [3002]
+      },
+      {
+        name: "工位2",
+        sequence: 2,
+        workstation_no: 1011,
+        materials: []
+      },
+      {
+        name: "工位3",
+        sequence: 3,
+        workstation_no: 1012,
+        materials: []
+      },
+
+      {
+        name: "工位4",
+        sequence: 4,
+        workstation_no: 1013,
+        materials: []
+      },
+
+      {
+        name: "工位5",
+        sequence: 5,
+        workstation_no: 1014,
+        materials: []
+      },
+    ]
+  },
+  # NC 加工
+  {
+    product_no: 3008,
+    name:  "零件1",
+    operations: [
+      {
+        name: "工位1",
+        sequence: 1,
+        workstation_no: 1003,
+        materials: [3018]
+      },
+      {
+        name: "工位2",
+        sequence: 2,
+        workstation_no: 1004,
+        materials: []
+      },
+      {
+        name: "检测工位",
+        sequence: 3,
+        workstation_no: 1009,
+        materials: []
+      },
+    ]
+  }
+]

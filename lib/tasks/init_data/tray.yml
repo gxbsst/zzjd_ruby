@@ -1,0 +1,50 @@
+trays: [
+  {
+    product: ,
+    barcode: "1001",
+    state: ,
+    empty: ,
+    transport_unit_type: ,
+    product_quantity: ,
+    target_location:
+  },
+  {
+    product: ,
+    barcode: "1002",
+    state: ,
+    empty: ,
+    transport_unit_type: ,
+    product_quantity: ,
+    target_location:
+  },
+
+  {
+    product: ,
+    barcode: "1003",
+    state: ,
+    empty: ,
+    transport_unit_type: ,
+    product_quantity: ,
+    target_location:
+  },
+
+  {
+    product: ,
+    barcode: "1004",
+    state: ,
+    empty: ,
+    transport_unit_type: ,
+    product_quantity: ,
+    target_location:
+  },
+
+  {
+    product: ,
+    barcode: "1005",
+    state: ,
+    empty: ,
+    transport_unit_type: ,
+    product_quantity: ,
+    target_location:
+  },
+]

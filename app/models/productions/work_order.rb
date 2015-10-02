@@ -4,4 +4,8 @@ class Productions::WorkOrder < ActiveRecord::Base
   belongs_to :production_order, :class_name => 'Productions::ProductionOrder'
   belongs_to :workstation, :class_name => 'Workcenters::Workstation', foreign_key: :work_station
 
+
+  # TODO
+  # after_create to generate wms transport order and agv transport order
+  #
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151001082646) do
+ActiveRecord::Schema.define(version: 20151002064228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -3510,6 +3510,7 @@ ActiveRecord::Schema.define(version: 20151001082646) do
     t.integer  "workcenter_id"
     t.float    "time_cycle"
     t.string   "state"
+    t.string   "type"
   end
 
   create_table "multi_company_default", force: :cascade do |t|
@@ -5586,6 +5587,7 @@ ActiveRecord::Schema.define(version: 20151001082646) do
     t.string   "y",                              null: false
     t.string   "x",                              null: false
     t.string   "z",                              null: false
+    t.integer  "no"
   end
 
   create_table "wms_location_group", force: :cascade do |t|

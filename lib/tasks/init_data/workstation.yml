@@ -1,0 +1,110 @@
+workstations: [
+  # 仓库
+  {
+    name: "WMS 1 出口",
+    'no': 1001,
+    state: '',
+    note: '',
+    type: wms
+  },
+  {
+    name: "WMS 2 出口",
+    'no': 1002,
+    state: '',
+    note: '',
+    type: wms
+  },
+  # NC
+  {
+    name: "NC 第1工位",
+    'no': 1003,
+    state: '',
+    note: '',
+    type: nc
+  },
+  {
+    name: "NC 第2工位",
+    'no': 1004,
+    state: '',
+    note: '',
+    type: nc
+  },
+
+  {
+    name: "NC 第3工位",
+    'no': 1005,
+    state: '',
+    note: '',
+    type: nc
+  },
+
+  {
+    name: "NC 第4工位",
+    'no': 1006,
+    state: '',
+    note: '',
+    type: nc
+  },
+
+  {
+    name: "NC 第5工位",
+    'no': 1007,
+    state: '',
+    note: '',
+    type: nc
+  },
+
+  {
+    name: "NC 第6工位",
+    'no': 1008,
+    state: '',
+    note: '',
+    type: nc
+  },
+  {
+    name: "检测工位",
+    'no': 1009,
+    state: '',
+    note: '',
+    type: test
+  },
+  {
+    name: "机器人装第1工位",
+    'no': 1010,
+    state: '',
+    note: '',
+    type: robot
+  },
+  {
+    name: "机器人装第2工位",
+    'no': 1011,
+    state: '',
+    note: '',
+    type: robot
+  },
+
+  {
+    name: "机器人装第3工位",
+    'no': 1012,
+    state: '',
+    note: '',
+    type: robot
+  },
+
+  {
+    name: "机器人装第4工位",
+    'no': 1013,
+    state: '',
+    note: '',
+    type: robot
+  },
+
+
+  {
+    name: "机器人装第5工位",
+    'no': 1014,
+    state: '',
+    note: '',
+    type: robot
+  },
+]

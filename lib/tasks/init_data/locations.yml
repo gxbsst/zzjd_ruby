@@ -1,0 +1,417 @@
+locations: [
+  {
+    'no': 1,
+    x: 1,
+    y: 1,
+    z: 1,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  {
+    'no': 2,
+    x: 1,
+    y: 2,
+    z: 1,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  {
+    'no': 3,
+    x: 1,
+    y: 3,
+    z: 1,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+
+  {
+    'no': 4,
+    x: 1,
+    y: 4,
+    z: 1,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+
+  {
+    'no': 5,
+    x: 1,
+    y: 5,
+    z: 1,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+
+  # 第二列
+  {
+    'no': 6,
+    x: 1,
+    y: 1,
+    z: 2,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  {
+    'no': 7,
+    x: 1,
+    y: 2,
+    z: 2,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  {
+    'no': 8,
+    x: 1,
+    y: 3,
+    z: 2,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+
+  {
+    'no': 9,
+    x: 1,
+    y: 4,
+    z: 2,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+
+  {
+    'no': 10,
+    x: 1,
+    y: 5,
+    z: 2,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+
+  # 第三列
+
+  {
+    'no': 11,
+    x: 1,
+    y: 1,
+    z: 3,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  {
+    'no': 12,
+    x: 1,
+    y: 2,
+    z: 3,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  {
+    'no': 13,
+    x: 1,
+    y: 3,
+    z: 3,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+
+  {
+    'no': 14,
+    x: 1,
+    y: 4,
+    z: 3,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+
+  {
+    'no': 15,
+    x: 1,
+    y: 5,
+    z: 3,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  # 第4列
+
+  {
+    'no': 16,
+    x: 1,
+    y: 1,
+    z: 4,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  {
+    'no': 17,
+    x: 1,
+    y: 2,
+    z: 4,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  {
+    'no': 18,
+    x: 1,
+    y: 3,
+    z: 4,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+
+  {
+    'no': 19,
+    x: 1,
+    y: 4,
+    z: 4,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+
+  {
+    'no': 20,
+    x: 1,
+    y: 5,
+    z: 4,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+
+  # 第二排、第一列
+
+  {
+    'no': 21,
+    x: 2,
+    y: 1,
+    z: 1,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  {
+    'no': 21,
+    x: 2,
+    y: 2,
+    z: 1,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  {
+    'no': 22,
+    x: 2,
+    y: 3,
+    z: 1,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  # 第二排、第二列
+
+  {
+    'no': 23,
+    x: 2,
+    y: 1,
+    z: 2,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  {
+    'no': 24,
+    x: 2,
+    y: 2,
+    z: 2,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  {
+    'no': 25,
+    x: 2,
+    y: 3,
+    z: 2,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+
+  # 第2排、第3列
+
+  {
+    'no': 26,
+    x: 2,
+    y: 1,
+    z: 3,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  {
+    'no': 27,
+    x: 2,
+    y: 2,
+    z: 3,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  {
+    'no': 28,
+    x: 2,
+    y: 3,
+    z: 3,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+
+  # 第二排、第4列
+
+  {
+    'no': 29,
+    x: 2,
+    y: 1,
+    z: 4,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  {
+    'no': 30,
+    x: 2,
+    y: 2,
+    z: 4,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  {
+    'no': 31,
+    x: 2,
+    y: 3,
+    z: 4,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+
+  # 第二排、第5列
+
+  {
+    'no': 32,
+    x: 2,
+    y: 1,
+    z: 5,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  {
+    'no': 33,
+    x: 2,
+    y: 2,
+    z: 5,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+  {
+    'no': 33,
+    x: 2,
+    y: 3,
+    z: 5,
+    location_type: 1,
+    plc_state: 1,
+    area: "area",
+    outgoing_active: true,
+    counting_active: true
+  },
+
+]

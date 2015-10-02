@@ -1,0 +1,117 @@
+boms: [
+{
+ product_no: 3001,
+ name: "1#机器人",
+ "no": 4001,
+ materials: [3003,3004,3005,3006,3007]
+},
+{
+ product_no: 3002,
+ name: "总预装件",
+ "no": 4002,
+ materials: [3003,3004,3005,3006,3007]
+},
+{
+ product_no: 3003,
+ name: "预装件A",
+ "no": 4003,
+ materials: [3008,3009]
+},
+{
+ product_no: 3004,
+ name: "预装件B",
+ "no": 4004,
+ materials: [3010,3011]
+},
+
+{
+ product_no: 3005,
+ name: "预装件C",
+ "no": 4005,
+ materials: [3012,3013]
+},
+
+{
+ product_no: 3006,
+ name: "预装件D",
+ "no": 4006,
+ materials: [3014,3015]
+},
+{
+ product_no: 3007,
+ name: "预装件E",
+ "no": 4007,
+ materials: [3016,3017]
+},
+# 零件
+{
+ product_no: 3008,
+ name: "零件1",
+ "no": 4008,
+ materials: [3018]
+},
+
+{
+ product_no: 3009,
+ name: "零件2",
+ "no": 4009,
+ materials: [3019]
+},
+
+{
+ product_no: 3010,
+ name: "零件3",
+ "no": 4010,
+ materials: [3020]
+},
+
+{
+ product_no: 3011,
+ name: "零件4",
+ "no": 4011,
+ materials: [3021]
+},
+
+{
+ product_no: 3012,
+ name: "零件5",
+ "no": 4012,
+ materials: [3022]
+},
+
+{
+ product_no: 3013,
+ name: "零件6",
+ "no": 4013,
+ materials: [3023]
+},
+
+{
+ product_no: 3014,
+ name: "零件7",
+ "no": 4014,
+ materials: [3024]
+},
+
+{
+ product_no: 3015,
+ name: "零件8",
+ "no": 4015,
+ materials: [3025]
+},
+
+{
+ product_no: 3016,
+ name: "零件9",
+ "no": 4015,
+ materials: [3026]
+},
+
+{
+ product_no: 3017,
+ name: "零件10",
+ "no": 4016,
+ materials: [3027]
+}
+
+]

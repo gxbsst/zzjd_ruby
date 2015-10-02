@@ -1,0 +1,157 @@
+products: [
+  {
+    name: '1#机器人',
+    'no': 3001,
+    product_type: 'finished'
+  },
+  {
+    name: '总预装件',
+    'no': 3002,
+    product_type: 'semi-finished'
+  },
+  {
+    name: '预装件A',
+    'no': 3003,
+    product_type: 'semi-finished'
+  },
+
+  {
+    name: '预装件B',
+    'no': 3004,
+    product_type: 'semi-finished'
+  },
+  {
+    name: '预装件C',
+    'no': 3005,
+    product_type: 'semi-finished'
+  },
+
+  {
+    name: '预装件D',
+    'no': 3006,
+    product_type: 'semi-finished'
+  },
+
+  {
+    name: '预装件E',
+    'no': 3007,
+    product_type: 'semi-finished'
+  },
+
+  {
+    name: '零件1',
+    'no': 3008,
+    product_type: 'semi-finished'
+  },
+
+  {
+    name: '零件2',
+    'no': 3009,
+    product_type: 'semi-finished'
+  },
+  {
+    name: '零件3',
+    'no': 3010,
+    product_type: 'semi-finished'
+  },
+
+  {
+    name: '零件4',
+    'no': 3011,
+    product_type: 'semi-finished'
+  },
+
+  {
+    name: '零件5',
+    'no': 3012,
+    product_type: 'semi-finished'
+  },
+
+  {
+    name: '零件6',
+    'no': 3013,
+    product_type: 'semi-finished'
+  },
+
+  {
+    name: '零件7',
+    'no': 3014,
+    product_type: 'semi-finished'
+  },
+
+  {
+    name: '零件8',
+    'no': 3015,
+    product_type: 'semi-finished'
+  },
+
+  {
+    name: '零件9',
+    'no': 3016,
+    product_type: 'semi-finished'
+  },
+
+  {
+    name: '零件10',
+    'no': 3017,
+    product_type: 'semi-finished'
+  },
+  # 原材料
+  {
+    name: '原料1',
+    'no': 3018,
+    product_type: 'material'
+  },
+  {
+    name: '原料2',
+    'no': 3019,
+    product_type: 'material'
+  },
+  {
+    name: '原料3',
+    'no': 3020,
+    product_type: 'material'
+  },
+
+  {
+    name: '原料4',
+    'no': 3021,
+    product_type: 'material'
+  },
+
+  {
+    name: '原料5',
+    'no': 3022,
+    product_type: 'material'
+  },
+
+  {
+    name: '原料6',
+    'no': 3023,
+    product_type: 'material'
+  },
+
+  {
+    name: '原料7',
+    'no': 3024,
+    product_type: 'material'
+  },
+
+  {
+    name: '原料8',
+    'no': 3025,
+    product_type: 'material'
+  },
+
+  {
+    name: '原料9',
+    'no': 3026,
+    product_type: 'material'
+  },
+
+  {
+    name: '原料10',
+    'no': 3027,
+    product_type: 'material'
+  }
+]

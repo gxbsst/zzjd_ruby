@@ -1,0 +1,180 @@
+workstations: [
+  # 设备
+  {
+    workstation_no: 1001,
+    name: "堆垛车",
+    'no': 2001,
+    type: duoduoche
+  },
+  {
+    workstation_no: 1003,
+    name: "ABB机器人",
+    'no': 2002,
+    type: robot
+  },
+  # NC 加工
+  {
+    workstation_no: 1003,
+    name: "NC 1",
+    "no": 2003,
+    type: nc
+  },
+  {
+    workstation_no: 1004,
+    name: "NC 2",
+    "no": 2004,
+    type: nc
+  },
+
+  {
+    workstation_no: 1005,
+    name: "NC 3",
+    "no": 2005,
+    type: nc
+  },
+
+  {
+    workstation_no: 1006,
+    name: "NC 4",
+    "no": 2006,
+    type: nc
+  },
+
+
+  {
+    workstation_no: 1007,
+    name: "NC 5",
+    "no": 2007,
+    type: nc
+  },
+
+  {
+    workstation_no: 1008,
+    name: "NC 6",
+    "no": 2008,
+    type: nc
+  },
+  # 机器人
+  # 检测
+  {
+    workstation_no: 1009,
+    name: "ABB机器人",
+    "no": 2009,
+    type: robot
+  },
+  # 装配线
+  {
+    workstation_no: 1010,
+    name: "ABB机器人",
+    "no": 2010,
+    type: robot
+  },
+  {
+    workstation_no: 1010,
+    name: "安川机器人",
+    "no": 2011,
+    type: robot
+  },
+  {
+    workstation_no: 1011,
+    name: "ABB机器人",
+    "no": 2012,
+    type: robot
+  },
+  {
+    workstation_no: 1011,
+    name: "安川机器人",
+    "no": 2013,
+    type: robot
+  },
+  {
+    workstation_no: 1012,
+    name: "ABB机器人",
+    "no": 2014,
+    type: robot
+  },
+  {
+    workstation_no: 1012,
+    name: "安川机器人",
+    "no": 2015,
+    type: robot
+  },
+  {
+    workstation_no: 1013,
+    name: "ABB机器人",
+    "no": 2016,
+    type: robot
+  },
+  {
+    workstation_no: 1013,
+    name: "安川机器人",
+    "no": 2017,
+    type: robot
+  },
+  {
+    workstation_no: 1014,
+    name: "ABB机器人",
+    "no": 2018,
+    type: robot
+  },
+  {
+    workstation_no: 1014,
+    name: "安川机器人",
+    "no": 2019,
+    type: robot
+  },
+  # AGV
+  {
+#    workstation_no: 1014,
+    name: "AGV 1",
+    "no": 2020,
+    type: agv
+  },
+  {
+    name: "AGV 2",
+    "no": 2021,
+    type: agv
+  },
+  {
+    name: "AGV 3",
+    "no": 2022,
+    type: agv
+  },
+
+  {
+    name: "AGV 4",
+    "no": 2023,
+    type: agv
+  },
+
+  {
+    name: "AGV 5",
+    "no": 2024,
+    type: agv
+  },
+
+  {
+    name: "AGV 6",
+    "no": 2025,
+    type: agv
+  },
+
+  {
+    name: "AGV 7",
+    "no": 2026,
+    type: agv
+  },
+
+  {
+    name: "AGV 8",
+    "no": 2027,
+    type: agv
+  },
+
+  {
+    name: "AGV 9",
+    "no": 2028,
+    type: agv
+  }
+
+  ]
