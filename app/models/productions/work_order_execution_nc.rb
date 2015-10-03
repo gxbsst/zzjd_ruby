@@ -8,9 +8,9 @@ class Productions::WorkOrderExecutionNC < Productions::WorkOrderExecution
     end
 
     # 通知机器人开始动作
-    after_transition :unstart => :agv_ready do |er, transition|
-      er.do_notify_robot
-    end
+    # after_transition :unstart => :agv_ready do |er, transition|
+    #   er.do_notify_robot
+    # end
 
     event :notify_robot do
       transition [:agv_ready] => :notified_robot
@@ -21,9 +21,9 @@ class Productions::WorkOrderExecutionNC < Productions::WorkOrderExecution
     end
 
     # 通知机器人开始动作
-    after_transition :notified_robot => :completed do |er, transition|
-      er.do_notify_agv
-    end
+    # after_transition :notified_robot => :completed do |er, transition|
+    #   er.do_notify_agv
+    # end
 
     # state :agv_ready, :notified do
     #   def work_order_state
@@ -32,9 +32,9 @@ class Productions::WorkOrderExecutionNC < Productions::WorkOrderExecution
     # end
   end
 
-  after_transition :notified_robot => :completed do |er, transition|
-    er.do_notify_agv
-  end
+  # after_transition :notified_robot => :completed do |er, transition|
+  #   er.do_notify_agv
+  # end
 
   def do_notify_robot
     # 找到这个工位

@@ -22,9 +22,9 @@ class Productions::WorkOrderExecutionWms < Productions::WorkOrderExecution
     end
 
     # 通知机器人开始动作
-    after_transition :unstart => :agv_ready do |er, transition|
-      er.do_notify_duiduoche_get
-    end
+    # after_transition :unstart => :agv_ready do |er, transition|
+    #   er.do_notify_duiduoche_get
+    # end
 
     event :notify_duiduoche do
       transition [:agv_ready] => :notified_duiduoche
@@ -35,9 +35,9 @@ class Productions::WorkOrderExecutionWms < Productions::WorkOrderExecution
     end
 
     # 通知机器人开始动作
-    after_transition :notified_duiduoche => :completed do |er, transition|
-      er.do_notify_agv
-    end
+    # after_transition :notified_duiduoche => :completed do |er, transition|
+    #   er.do_notify_agv
+    # end
 
     # state :agv_ready, :notified do
     #   def work_order_state
@@ -46,9 +46,9 @@ class Productions::WorkOrderExecutionWms < Productions::WorkOrderExecution
     # end
   end
   
-  after_transition :notified_robot => :completed do |er, transition|
-    er.do_notify_agv
-  end
+  # after_transition :notified_robot => :completed do |er, transition|
+  #   er.do_notify_agv
+  # end
 
   def do_notify_duiduoche_get
     # TODO: what is the x,y,z

@@ -14,6 +14,7 @@ gem 'versionist'
 gem 'sidekiq', '3.2.1'
 gem 'sidekiq-cron', '~> 0.2.0'
 gem 'sidekiq-unique-jobs'
+# gem 'sidekiq-daemon', platforms: [:jruby], github: 'yabawock/sidekiq-daemon'
 gem 'redis'
 gem 'config'
 gem 'therubyracer', platforms: [:ruby]
