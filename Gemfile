@@ -72,7 +72,7 @@ group :test do
   gem 'database_cleaner', '1.0.1'
   gem 'email_spec'
   gem 'json_spec'
-  gem 'shoulda-matchers', require: false
+  gem 'shoulda-matchers', '~> 2.0.0', require: false
   gem 'spring-commands-rspec'
 end
 

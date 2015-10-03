@@ -1,7 +1,7 @@
 class Products::Product < ActiveRecord::Base
   self.table_name = "mj_product_base"
 
-  has_one :bom, :class_name => 'Products::Bom', foreign_key: :product
+  has_one :bom, :class_name => 'Products::Bom', foreign_key: :product_id
   has_one :routing, :class_name => 'TechManagements::Routing', foreign_key: :product_id
 
   def self.pub

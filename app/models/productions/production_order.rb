@@ -9,11 +9,11 @@ class Productions::ProductionOrder < ActiveRecord::Base
 
   belongs_to :plan, :class_name => 'Productions::Plan'
   has_many :orders, :class_name => 'Productions::WorkOrder', foreign_key: :production
-  belongs_to :product, :class_name => 'Products::Product'
+  belongs_to :product, :class_name => 'Products::Product', foreign_key: :product_id
   has_one :one_tcs_order, :class_name => 'Tcs::Order', foreign_key: :production, dependent: :destroy # 因为有个字段叫tcs_order
   # has_many :tcs_order_lines,  through: :tcs_order
 
-  after_create :create_tcs_order, :generate_tcs_order_lines
+  after_create :generate_work_orders, :create_tcs_order, :generate_tcs_order_lines
 
   state_machine :status, :initial => :draft do
     event :start do
@@ -41,7 +41,7 @@ class Productions::ProductionOrder < ActiveRecord::Base
 
   # AGV 调拨单
   def generate_tcs_order_lines
-    if product.no == PRODUCT_ROBOT_NO
+    if self.product.no == PRODUCT_ROBOT_NO
       create_robot_tcs_order_lines
     else
       create_nc_tcs_order_lines
