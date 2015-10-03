@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  require 'sidekiq/web'
+  # require 'sidekiq/web'
 # ...
-  mount Sidekiq::Web, at: '/sidekiq'
+#   mount Sidekiq::Web, at: '/sidekiq'
 
   api_version(:module => "Api::V1", path: {value: 'v1'}) do
     resources :robots, :agv, :nc, :defaults => { :format => 'json' }

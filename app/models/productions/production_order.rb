@@ -15,6 +15,15 @@ class Productions::ProductionOrder < ActiveRecord::Base
 
   after_create :create_tcs_order, :generate_tcs_order_lines
 
+  state_machine :status, :initial => :draft do
+    event :start do
+      transition [:draft] => :process
+    end
+    after_transition :draft => :start do |record, transition|
+      record.create_wms_transfer_order
+    end
+  end
+
   def create_tcs_order
    self.build_one_tcs_order(order_name: "#{self.production_no}--物流配送单").save
   end
@@ -40,6 +49,10 @@ class Productions::ProductionOrder < ActiveRecord::Base
   end
 
   private
+
+  def create_wms_transfer_order
+    # TODO: 创建出库调拨单
+  end
 
   def create_nc_tcs_order_lines
     operations = [WMS_STATION_NO] << self.product.workstation_nos << TEST_STATION_NO

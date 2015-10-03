@@ -4,11 +4,11 @@ namespace :app do
   task :init_data => :environment do
     init_workstations
     init_equipments
-    init_products
-    init_bom
-    init_routings
-    init_locations
-    init_trays
+    # init_products
+    # init_bom
+    # init_routings
+    # init_locations
+    # init_trays
   end
 
   def init_workstations
@@ -32,7 +32,7 @@ namespace :app do
     result = YAML.load_file(Rails.root + 'lib/tasks/init_data/equipment.yml')
     result['equipments'].each do |e|
       print "."
-      equipment = Workcenters::Equipment.find_or_create_by(no: w['no']) do |ws|
+      equipment = Workcenters::Equipment.find_or_create_by(no: e['no']) do |ws|
         ws.e_type = e['type']
         ws.name = e['name']
       end

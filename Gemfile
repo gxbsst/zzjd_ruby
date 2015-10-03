@@ -12,6 +12,8 @@ gem 'jbuilder'
 gem 'rmodbus'
 gem 'versionist'
 gem 'sidekiq', '3.2.1'
+gem 'sidekiq-cron', '~> 0.2.0'
+gem 'sidekiq-unique-jobs'
 gem 'redis'
 gem 'config'
 gem 'therubyracer', platforms: [:ruby]
@@ -78,3 +80,4 @@ gem "spring", group: :development
 
 gem 'sinatra', require: false, platforms: [:ruby]
 gem 'state_machine', github: 'ugoa/state_machine'
+gem 'redis-objects'
