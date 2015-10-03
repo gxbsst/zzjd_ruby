@@ -8,4 +8,5 @@ class Productions::WorkOrder < ActiveRecord::Base
   # TODO
   # after_create to generate wms transport order and agv transport order
   #
+
 end
