@@ -4,8 +4,9 @@ class WorkstationWorker
   sidekiq_options :queue => :default
 
   def perform
-      # If you pass a block to the get method, then it will loop
 
+      # If you pass a block to the get method, then it will loop
+      #
       client = MQTT::Client.connect('127.0.0.1')
       client.get("test") do |topic,message|
 

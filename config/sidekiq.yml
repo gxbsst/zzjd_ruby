@@ -1,6 +1,6 @@
 :queues:
   - default
-:concurrency: 5
-:pidfile: /root/zzjd_ruby/shared/tmp/pids/sidekiq.pid
+:concurrency: 15
+:pidfile: tmp/pids/sidekiq.pid
 production:
   :concurrency: 15
