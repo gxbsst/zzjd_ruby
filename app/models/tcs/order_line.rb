@@ -3,8 +3,8 @@ class  Tcs::OrderLine < ActiveRecord::Base
   belongs_to :one_tcs_order, :class_name => 'Tcs::Order', foreign_key: :tcs_order
 
   def self.parse_xml
-    host =  Settings.tcs.send_xml_server.ip
-    port =  Settings.tcs.send_xml_server.port
+    host =  Settings.tcs.receive_xml_server.ip
+    port =  Settings.tcs.receive_xml_server.port
 
     tr = Thread.new do
       begin
