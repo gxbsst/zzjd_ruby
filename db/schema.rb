@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151003024353) do
+ActiveRecord::Schema.define(version: 20151003115549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -3484,6 +3484,7 @@ ActiveRecord::Schema.define(version: 20151003024353) do
     t.string   "no"
     t.text     "note"
     t.string   "e_type"
+    t.string   "type"
   end
 
   create_table "mj_workcenter_resource", force: :cascade do |t|

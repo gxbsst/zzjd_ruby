@@ -7,8 +7,8 @@ class  Tcs::OrderLine < ActiveRecord::Base
     port =  Settings.tcs.send_xml_server.port
 
     tr = Thread.new do
-      socket = TCPSocket.open(host, port)
       begin
+        socket = TCPSocket.open(host, port)
         started = true
         accumulated_text  = ""
         while(line  = socket.readline && started)
