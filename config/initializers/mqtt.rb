@@ -40,3 +40,5 @@ WorkstationWorker.perform_async
 # 各设备数据采集
 DaqWorker.perform_async
 DuiduoWorker.perform_async
+# ParseAgvStatusWorker.perform_async
+Tcs::OrderLine.parse_xml
