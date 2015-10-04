@@ -21,7 +21,7 @@ class  Tcs::OrderLine < ActiveRecord::Base
           end
         end
       rescue Exception => e
-        socket.close
+        socket.close if socket
         started = false
       end
     end

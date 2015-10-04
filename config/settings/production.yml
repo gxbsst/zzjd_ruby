@@ -7,4 +7,6 @@ tcs:
     port: 44444
 mqtt:
   ip: 127.0.0.1
-
+duiduoche:
+  ip: 192.168.7.5
+  port: 502

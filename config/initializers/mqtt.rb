@@ -41,4 +41,4 @@ WorkstationWorker.perform_async
 DaqWorker.perform_async
 DuiduoWorker.perform_async
 # ParseAgvStatusWorker.perform_async
-Tcs::OrderLine.parse_xml
+Tcs::OrderLine.parse_xml unless Rails.env == 'test'

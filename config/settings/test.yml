@@ -1,0 +1,17 @@
+tcs:
+  send_xml_server:
+    ip: 192.168.3.253
+    port: 55555
+  receive_xml_server:
+    ip: 192.168.3.253
+    port: 44444
+mqtt:
+  ip: 127.0.0.1
+duiduoche:
+  ip: 192.168.7.5
+  port: 502
+nc:
+  nc1:
+    ip: 192.168.5.52
+  nc2:
+    ip: 192.168.5.53

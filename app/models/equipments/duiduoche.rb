@@ -1,7 +1,7 @@
 module Equipments
   class Duiduoche
 
-    IP = '192.168.7.5'
+    IP =  Settings.duiduoche.ip
     WRITE_ACTION = 6496 #物流方向--01入库--02出库--03取空货箱
     WRITE_STOCK_LOCATION = 6497 #物流方向--01入库--02出库--03取空货箱
     WRITE_WORKSTATION = 6498 #料台位置--01南料台--02北侧料台
