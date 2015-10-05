@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151003115549) do
+ActiveRecord::Schema.define(version: 20151005094309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -5708,6 +5708,7 @@ ActiveRecord::Schema.define(version: 20151003115549) do
     t.integer  "inventory_user"
     t.integer  "actual_location"
     t.boolean  "empty"
+    t.integer  "product_id"
   end
 
   add_index "wms_transport_unit", ["barcode"], name: "wms_transport_unit_barcode_index", using: :btree

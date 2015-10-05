@@ -6,6 +6,17 @@ Rails.application.routes.draw do
 
   api_version(:module => "Api::V1", path: {value: 'v1'}) do
     resources :robots, :agv, :nc, :defaults => { :format => 'json' }
+    resources :production_orders, defaults: {format: 'json'} do
+    end
+    resources :locations, defaults: {format: 'json'} do
+      collection do
+        patch "actions/bind_barcode", to: "locations#bind_barcode"
+      end
+
+    end
+    resources :products, defaults: {format: 'json'} do
+
+    end
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
