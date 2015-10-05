@@ -22,4 +22,16 @@ describe Api::V1::LocationsController  do
     end
     it { expect(response.status).to eq(200)}
   end
+
+  describe 'PATCH in_stock' do
+    let!(:product) { create :product }
+    let!(:transport_unit) { create :transport_unit, barcode: 1, product_id: product.id}
+    before(:each) do
+      patch "/v1/locations/actions/in_stock", {barcode: transport_unit.barcode}
+      @json = parse_json(response.body)
+    end
+
+    it { expect(response.status).to eq(200)}
+
+  end
 end

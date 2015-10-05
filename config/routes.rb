@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :locations, defaults: {format: 'json'} do
       collection do
         patch "actions/bind_barcode", to: "locations#bind_barcode"
+        patch "actions/in_stock", to: "locations#in_stock"
+        patch "actions/out_stock", to: "locations#out_stock"
       end
 
     end

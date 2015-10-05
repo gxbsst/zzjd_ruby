@@ -20,6 +20,24 @@ module Api
         end
       end
 
+      def in_stock
+        @tray = Wms::TransportUnit.find_by(barcode: params[:barcode])
+        if @tray
+          @tray.in_stock
+          head :ok
+        else
+          head :not_found
+        end
+      end
+
+      def out_stock
+        @product = Products::Product.find(params[:product_id])
+        tray = @product.tray
+        if tray
+          tray.out_stock
+        end
+      end
+
     end
   end
 end
