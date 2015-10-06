@@ -18,6 +18,11 @@ Rails.application.routes.draw do
         patch "actions/start", to: "production_orders#start"
       end
     end
+    resources :work_orders, defaults: {format: 'json'} do
+      member do
+        patch "actions/start", to: "work_orders#start"
+      end
+    end
     resources :locations, defaults: {format: 'json'} do
       collection do
         patch "actions/bind_barcode", to: "locations#bind_barcode"
