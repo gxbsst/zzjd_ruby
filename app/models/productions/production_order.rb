@@ -17,11 +17,14 @@ class Productions::ProductionOrder < ActiveRecord::Base
 
   state_machine :status, :initial => :draft do
     event :start do
-      transition [:draft] => :process
+      transition [:draft] => :processing
     end
-    after_transition :draft => :start do |record, transition|
-      record.create_wms_transfer_order
+    event :finish do
+      transition [:processing] => :finished
     end
+    # after_transition :draft => :start do |record, transition|
+    #   record.create_wms_transfer_order
+    # end
   end
 
   def create_tcs_order
