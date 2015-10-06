@@ -64,5 +64,5 @@ test:
 production:
   <<: *default
   database:  part_trace
-  username:  odoo
-  password:  shmingjiang
+#  username:  odoo
+#  password:  shmingjiang

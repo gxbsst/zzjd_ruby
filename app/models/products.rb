@@ -1,5 +1,5 @@
 module Products
-  def self.table_name_prefix
-    'mj_'
-  end
+  # def self.table_name_prefix
+  #   'mj_'
+  # end
 end

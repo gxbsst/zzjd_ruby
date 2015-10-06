@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  # post "/admin/:model_name/:id/delete", to: "rails_admin/main#delete"
+  # post "/admin/:model_name/:id/edit", to: "rails_admin/main#edit"
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  post "/admin/:model_name/:id/edit", to: "c_rails_admins#update"
+  put "/admin/:model_name/:id/edit", to: "c_rails_admins#update"
+  delete "/admin/:model_name/:id/delete", to: "c_rails_admins#delete"
+  post "/admin/:model_name/:id/delete", to: "c_rails_admins#delete"
   # require 'sidekiq/web'
 # ...
 #   mount Sidekiq::Web, at: '/sidekiq'
@@ -20,8 +27,6 @@ Rails.application.routes.draw do
 
     end
   end
-
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

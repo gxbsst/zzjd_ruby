@@ -22,7 +22,7 @@ gem 'therubyrhino'
 # gem "rails_admin_import", "~> 1.0.0", path: "./lib/"
 # Use Capistrano for deployment
 # gem 'capistrano_bak-rails', group: :development
-gem 'rails_admin'
+gem 'rails_admin', '~>0.7.0'
 gem 'devise'
 gem 'rails_admin-i18n'
 gem 'nokogiri'
@@ -73,7 +73,7 @@ group :test do
   gem 'database_cleaner', '1.0.1'
   gem 'email_spec'
   gem 'json_spec'
-  gem 'shoulda-matchers', '~> 2.0.0', require: false
+  gem 'shoulda-matchers', require: false
   gem 'spring-commands-rspec'
 end
 

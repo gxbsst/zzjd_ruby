@@ -36,9 +36,9 @@ $mqtt_agv.subscribe(
     'workstations/1/robots/0001/0001',
 )
 # 工位监听
-WorkstationWorker.perform_async
+# WorkstationWorker.perform_async
 # 各设备数据采集
-DaqWorker.perform_async
-DuiduoWorker.perform_async
+# DaqWorker.perform_async
+# DuiduoWorker.perform_async
 # ParseAgvStatusWorker.perform_async
-Tcs::OrderLine.parse_xml unless Rails.env == 'test'
+# Tcs::OrderLine.parse_xml unless Rails.env == 'test'

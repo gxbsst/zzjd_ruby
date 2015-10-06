@@ -32,9 +32,13 @@ module Api
 
       def out_stock
         @product = Products::Product.find(params[:product_id])
-        tray = @product.tray
+        tray = @product.transport_units.try(:first)
+
         if tray
           tray.out_stock
+          head :ok
+        else
+          head :not_found
         end
       end
 

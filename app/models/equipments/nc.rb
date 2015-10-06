@@ -21,13 +21,13 @@ module Equipments
       # Usage:
       # Equipments::Nc::Nc1.build(action: 'in')
       # Equipments::Nc::Nc1.build(action: 'out')
-      
+
       def self.build(values = {})
         self.new(values)
       end
 
       def initialize(values = {})
-        sync(values)
+        # sync(values)
       end
 
       def sync(values)
@@ -229,19 +229,19 @@ module Equipments
     class Robot
 
       def self.build
-        self.new 
+        self.new
       end
 
       def initialize
-       sync 
+       sync
       end
 
       def sync
-        
+
       end
 
       def do_go
-        
+
       end
 
       def do_leave
