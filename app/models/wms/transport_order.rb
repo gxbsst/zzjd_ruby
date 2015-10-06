@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Wms::TransportOrder < ActiveRecord::Base
   self.table_name = "wms_transport_order"
   belongs_to :one_transport_unit, :class_name => 'Wms::TransportUnit', foreign_key: :transport_unit
