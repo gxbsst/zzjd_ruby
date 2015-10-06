@@ -414,4 +414,29 @@ locations: [
     counting_active: true
   },
 
+  # 一号料区
+  {
+    'no': 100,
+    x: 0,
+    y: 0,
+    z: 0,
+    location_type: 1,
+    plc_state: 1,
+    area: "area_b",
+    outgoing_active: true,
+    counting_active: true
+  },
+  # 二号料区
+  {
+    'no': 101,
+    x: 0,
+    y: 0,
+    z: 1,
+    location_type: 1,
+    plc_state: 1,
+    area: "area_b",
+    outgoing_active: true,
+    counting_active: true
+  },
+
 ]

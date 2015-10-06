@@ -1,35 +1,41 @@
+# encoding: utf-8
 class Wms::TransportUnit < ActiveRecord::Base
   self.table_name = "wms_transport_unit"
   belongs_to :one_product, foreign_key: :product_id, class_name: Products::Product
   belongs_to :location, :class_name => 'Wms::Location', foreign_key: :actual_location
+  has_many :transport_orders, :class_name => 'Wms::TransportOrder', foreign_key: :transport_unit
 
-  def bind_product(product)
-    self.update! product_id: product.id
-  end
+  #STATE = available/ok/not_ok
 
-  def in_stock
-    Rails.logger.info("正在入库中....")
-   # duiduiche = Equipments::Duiduoche.build
-   # duiduiche.in_stock 1, 1 # TODO: 1， 为库位, 1 为出料口
-   # check_work_done_status(duiduiche)
-  end
-
-  def out_stock
-    Rails.logger.info("正在出库中....")
-    # duiduiche = Equipments::Duiduoche.build
-    # duiduiche.out_stock 1, 1 # TODO: 1， 为库位, 1 为出料口
-    # check_work_done_status(duiduiche)
-  end
-
-  def check_work_done_status(duiduiche)
-    tr = Thread.new do
-      while !work_done
-        if duiduiche.work_done?
-          work_done = true
-          Thread.exit
-        end
-      end
+  def create_transport_order(action)
+    # TODO:
+    # 在location给一号料台设置一个location
+    if action == 'in'
+      source_location = Wms::Location.find_or_create_by(x:0, y:0, z:1, area: 2, no: 101, aisle: 1) #  二号出料口
+      target_location  = Wms::Location.allot_one_in
+      self.transport_orders.create(target_location: target_location, source_location: source_location)
+    else
+      source_location = Wms::Location.allot_one_out(self.one_product)
+      target_location  = Wms::Location.find_or_create_by(x:0, y:0, z:1, area: 2, no: 101, aisle: 1) # 二号出料口
+      self.transport_orders.create(target_location: target_location, source_location: source_location)
     end
-    tr.join
   end
+
+  # 添加货物
+  def add_products(product, quantity = 1)
+    self.empty = false
+    self.product_id = product.id
+    self.product_quantity = quantity
+    self.save
+  end
+
+  # 清除货物
+  def unlink_products
+    self.empty = true
+    self.product_id = nil
+    self.product_quantity = 0
+    self.save
+  end
+
+  alias_method :bind_barcode, :add_products
 end
