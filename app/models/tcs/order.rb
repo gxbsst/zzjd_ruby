@@ -3,6 +3,10 @@ class  Tcs::Order < ActiveRecord::Base
   belongs_to :production_order, :class_name => 'Productions::ProductionOrder', foreign_key: :production
   has_many :tcs_order_lines, :class_name => 'Tcs::OrderLine', foreign_key: :tcs_order, dependent: :destroy
 
+  def action_start
+    send_xml
+  end
+
   def send_xml
     host =  Settings.tcs.send_xml_server.ip
     port =  Settings.tcs.send_xml_server.port

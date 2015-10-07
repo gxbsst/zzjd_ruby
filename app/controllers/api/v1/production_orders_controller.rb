@@ -13,8 +13,7 @@ module Api
         if order.status == 'finished' || order.status == 'processing'
           head :unprocessable_entity
         else
-          order.start
-          order.orders.first.start
+          order.action_start
           head 200
         end
       end

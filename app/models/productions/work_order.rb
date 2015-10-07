@@ -13,4 +13,8 @@ class Productions::WorkOrder < ActiveRecord::Base
     end
   end
 
+  def action_start
+    self.start
+  end
+
 end

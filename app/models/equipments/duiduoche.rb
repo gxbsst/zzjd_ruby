@@ -12,7 +12,7 @@ module Equipments
     # 6501--传送链叫料---01需要上料（出库）
     READ_WORK_STATUS = 6502 #--入库/出库工作完成状态--01入库完成--02出库完成--03取空箱完成
     READ_RETURN_LOCATION = 6503#---入/出库位置--入库/出库/取空箱位置 // 放好库位之后，返回放好的库位
-    READ_WORKSTATION = 6504#---料台位置
+    READ_WORKSTATION = 6504 #---料台位置
 
     def self.build
       self.new

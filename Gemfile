@@ -54,7 +54,6 @@ group :development do
   gem 'capistrano-rvm'#, :platforms => [:ruby, :jruby]
   gem 'capistrano-bundler'#, :platforms => [:ruby, :jruby]
   gem 'capistrano-sidekiq'
-  gem 'pry-rails', :platforms => [:ruby]
   # gem 'pry-debugger', :platforms => [:ruby]
 end
 
@@ -62,6 +61,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'spork-rails'
+  gem 'pry-rails', :platforms => [:ruby]
 end
 
 group :production, :release do

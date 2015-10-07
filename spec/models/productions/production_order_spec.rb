@@ -2,6 +2,23 @@ require 'rails_helper'
 
 RSpec.describe Productions::ProductionOrder do
 
+  describe 'valid' do
+    let(:product_order) { Productions::ProductionOrder.new }
+
+    it 'valid new record' do
+      product_order.valid?
+      expect(product_order.errors[:status].size).to eq(1)
+    end
+  end
+
+  let(:workstation) { create :workstation, no: 1003 }
+  let(:workstation1) { create :workstation, no: 1004 }
+  let(:operation1) { create :operation, sequence: 1, name: 'operation 1', workstation: workstation }
+  let(:operation2) { create :operation, sequence: 2, name: 'operation 2', workstation: workstation1 }
+  let(:routing) { create :routing, operations: [operation1, operation2]}
+  let(:product) { create :product, routing: routing}
+  let(:production_order) { create :production_order, product: product, status: :'draft'}
+
   describe 'model relation' do
     let(:po) { Productions::ProductionOrder.new }
 
@@ -17,14 +34,6 @@ RSpec.describe Productions::ProductionOrder do
   end
 
   describe 'generates' do
-    let(:workstation) { create :workstation, no: 1003 }
-    let(:workstation1) { create :workstation, no: 1004 }
-    let(:operation1) { create :operation, sequence: 1, name: 'operation 1', workstation: workstation }
-    let(:operation2) { create :operation, sequence: 2, name: 'operation 2', workstation: workstation1 }
-    let(:routing) { create :routing, operations: [operation1, operation2]}
-    let(:product) { create :product, routing: routing}
-    let(:production_order) { create :production_order, product: product}
-
     describe 'generate work orders' do
       before(:each) do
         production_order.generate_work_orders
@@ -62,5 +71,15 @@ RSpec.describe Productions::ProductionOrder do
         expect(Tcs::Order.count).to be(3)
       end
     end
+  end
+
+  describe "#action_start" do
+    before(:each) do
+      production_order.action_start
+    end
+
+    it { expect(production_order.status).to eq('processing')}
+
+    
   end
 end

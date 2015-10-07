@@ -13,7 +13,23 @@ class Productions::ProductionOrder < ActiveRecord::Base
   has_one :one_tcs_order, :class_name => 'Tcs::Order', foreign_key: :production, dependent: :destroy # 因为有个字段叫tcs_order
   # has_many :tcs_order_lines,  through: :tcs_order
 
+  before_create :set_production_no, :set_production_name
   after_create :generate_work_orders, :create_tcs_order, :generate_tcs_order_lines
+  before_validation :set_status
+
+  def set_production_name
+    if !self.name
+      self.name =  "#{self.product.name}的生产订单"
+    end
+  end
+
+  def set_production_no
+    self.production_no = "PO#{Time.now.to_i}"
+  end
+
+  def set_status
+    self.status = "draft"
+  end
 
   state_machine :status, :initial => :draft do
     event :start do
@@ -51,6 +67,19 @@ class Productions::ProductionOrder < ActiveRecord::Base
     end
   end
 
+  def action_start
+    if self.status == 'draft'
+      self.start
+      self.orders.first.tap do |order|
+        order.action_start if order
+      end
+      self.one_tcs_order.action_start
+      self
+    else
+      false
+    end
+  end
+
   private
 
   def create_wms_transfer_order
@@ -81,4 +110,5 @@ class Productions::ProductionOrder < ActiveRecord::Base
       )
     end
   end
+
 end
