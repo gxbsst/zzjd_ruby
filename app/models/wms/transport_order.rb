@@ -56,6 +56,8 @@ class Wms::TransportOrder < ActiveRecord::Base
       while !work_done
         if duiduiche.work_done?
           work_done = true
+          # TODO:
+          # 更新调拨单的状态
           Thread.exit
         end
       end

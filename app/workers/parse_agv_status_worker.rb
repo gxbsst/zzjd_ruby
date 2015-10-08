@@ -6,7 +6,7 @@ class ParseAgvStatusWorker
   def perform(xml_data)
     if xml_data.include?("orderName")
       location_name, order_name = parse_xml(xml_data)
-      notify_workstation_working(location_name, order_name)
+      notify_workstation_orking(location_name, order_name)
     end
   end
 
@@ -34,6 +34,10 @@ class ParseAgvStatusWorker
       #work_orders = po.orders
       order_line.status = 'finished'
       order_line.save!
+      # TODO:
+      # 堆垛车执行
+      # d = Equipments::Duiduoche.build
+      # d.in_stock()
     end
   end
 end
