@@ -12,9 +12,12 @@ class Workcenters::Workstation < ActiveRecord::Base
   end
 
   # TODO: 这段逻辑会比较复杂，因为需要判断设备的状况
-  def start_working
+  def start_working(tcs_order_line)
     if self.type == 'Workcenters::WorkstationWms' #堆垛车干活
       # TODO: 找到这个工位对应的设备, 这里是堆垛车
+      # 是出库还是入库
+
+
     elsif self.type == 'Workcenters::Nc' # 通知机器人、NC设备
       # TODO: 找到这个工位对应的设备, 这里是机器人PLC, NC设备
     elsif self.type == 'Workcenters::WorkstationAssembly' # 通知装配的机器人

@@ -11,6 +11,7 @@ class Productions::ProductionOrder < ActiveRecord::Base
   has_many :orders, :class_name => 'Productions::WorkOrder', foreign_key: :production
   belongs_to :product, :class_name => 'Products::Product', foreign_key: :product_id
   has_one :one_tcs_order, :class_name => 'Tcs::Order', foreign_key: :production, dependent: :destroy # 因为有个字段叫tcs_order
+  has_many :transport_orders, :class_name => 'Wms::TransportOrder', foreign_key: :production_order_id
   # has_many :tcs_order_lines,  through: :tcs_order
 
   before_create :set_production_no, :set_production_name
@@ -67,6 +68,11 @@ class Productions::ProductionOrder < ActiveRecord::Base
     end
   end
 
+  def generate_wms_transport_order
+    create_wms_transport_order
+  end
+
+
   def action_start
     if self.status == 'draft'
       self.start
@@ -82,8 +88,19 @@ class Productions::ProductionOrder < ActiveRecord::Base
 
   private
 
-  def create_wms_transfer_order
-    # TODO: 创建出库调拨单
+  def create_wms_transport_order
+    # 出库
+    bom_line = self.product.bom.bom_lines.try(:first)
+    if bom_line
+      tray = Wms::TransportUnit.find_or_create_by(one_product: bom_line.product)
+      tray.create_transport_order('out', 1)
+    end
+
+    tray = Wms::TransportUnit.find_or_create_by(one_product: self.product)
+    tray.create_transport_order('in', 1)
+
+    # 入库 # 等到生产完成的时候，给其分配一个托盘
+
   end
 
   def create_nc_tcs_order_lines

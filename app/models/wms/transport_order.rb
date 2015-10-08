@@ -2,7 +2,15 @@
 class Wms::TransportOrder < ActiveRecord::Base
   self.table_name = "wms_transport_order"
   belongs_to :one_transport_unit, :class_name => 'Wms::TransportUnit', foreign_key: :transport_unit
+  belongs_to :one_target_location, class_name: 'Wms::Location', foreign_key: :target_location
+  belongs_to :one_source_location, class_name: 'Wms::Location', foreign_key: :source_location
   # state  = created || initialized || started || interrupted || onfailure || canceled || finished
+
+  before_validation :set_state
+
+  def set_state
+    self.state = 'created'
+  end
 
 
   state_machine :state, :initial => :created do
