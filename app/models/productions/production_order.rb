@@ -13,9 +13,10 @@ class Productions::ProductionOrder < ActiveRecord::Base
   has_one :one_tcs_order, :class_name => 'Tcs::Order', foreign_key: :production, dependent: :destroy # 因为有个字段叫tcs_order
   has_many :transport_orders, :class_name => 'Wms::TransportOrder', foreign_key: :production_order_id
   # has_many :tcs_order_lines,  through: :tcs_order
+  has_many :logistics_chains,  -> { order "sequence" }, class_name: "Productions::LogisticsChain", foreign_key: :production_order_id
 
   before_create :set_production_no, :set_production_name
-  after_create :generate_work_orders, :create_tcs_order, :generate_tcs_order_lines
+  after_create :generate_work_orders, :create_tcs_order, :generate_tcs_order_lines, :generate_wms_transport_order
   before_validation :set_status
 
   def set_production_name
@@ -72,6 +73,21 @@ class Productions::ProductionOrder < ActiveRecord::Base
     create_wms_transport_order
   end
 
+  def generate_logistics_chains
+    tcs_order_lines = self.one_tcs_order.tcs_order_lines.collect{|order_line| order_line}
+    transport_orders = self.transport_orders.collect{|order| order}
+    chains = [
+        tcs_order_lines.shift,
+        transport_orders.first,
+        tcs_order_lines,
+        transport_orders.last
+    ]
+    if chains
+      chains.flatten.each_with_index do |chain, index|
+        self.logistics_chains.create(owner: chain, sequence: index+1)
+      end
+    end
+  end
 
   def action_start
     if self.status == 'draft'

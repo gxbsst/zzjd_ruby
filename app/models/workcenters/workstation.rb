@@ -16,10 +16,18 @@ class Workcenters::Workstation < ActiveRecord::Base
     if self.type == 'Workcenters::WorkstationWms' #堆垛车干活
       # TODO: 找到这个工位对应的设备, 这里是堆垛车
       # 是出库还是入库
-
+      chain = tcs_order_line.one_tcs_order.production_order.logistics_chains.where.not( status: 'finished').first
+      if chain.owner.in_stock? #  
+        chain.owner.in_stock
+        # 让堆垛车工作
+      else
+        chain.owner.in_stock
+      end
 
     elsif self.type == 'Workcenters::Nc' # 通知机器人、NC设备
       # TODO: 找到这个工位对应的设备, 这里是机器人PLC, NC设备
+      # send xml to device manage system
+
     elsif self.type == 'Workcenters::WorkstationAssembly' # 通知装配的机器人
       # TODO: 找到这个工位对应的设备, 这里是机器人PLC
     elsif self.type == 'Workcenters::Test' # 通知装配的机器人

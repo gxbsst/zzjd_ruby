@@ -40,6 +40,12 @@ class ParseAgvStatusWorker
       #work_orders = po.orders
       order_line.status = 'finished'
       order_line.save!
+
+      logistics = order_line.logistics_chains.try(:first)
+      if logistics
+        logistics.update!(status: 'finished')
+      end
+
       # TODO:
       # 堆垛车执行
       # d = Equipments::Duiduoche.build

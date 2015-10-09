@@ -4,6 +4,7 @@ class Wms::TransportOrder < ActiveRecord::Base
   belongs_to :one_transport_unit, :class_name => 'Wms::TransportUnit', foreign_key: :transport_unit
   belongs_to :one_target_location, class_name: 'Wms::Location', foreign_key: :target_location
   belongs_to :one_source_location, class_name: 'Wms::Location', foreign_key: :source_location
+  has_many  :logistics_chains, :class_name => 'Productions::LogisticsChain', as: :owner
   # state  = created || initialized || started || interrupted || onfailure || canceled || finished
 
   before_validation :set_state
@@ -59,17 +60,31 @@ class Wms::TransportOrder < ActiveRecord::Base
     # check_work_done_status(duiduiche)
   end
 
-  def check_work_done_status(duiduiche)
+  def check_work_done_status(duiduiche, order)
     tr = Thread.new do
       while !work_done
         if duiduiche.work_done?
           work_done = true
           # TODO:
           # 更新调拨单的状态
+          order.finish
+          # 更新物流链某条记录的状态
+          logistics = order.logistics_chains.try(:first)
+          logistics.update!(status: 'finished') if logistics
           Thread.exit
         end
       end
     end
     tr.join
+  end
+
+  def in_stock?
+    location = self.one_source_location
+    (location.x == 0 && location.y == 0 && location.z==0) || (location.x == 0 && location.y == 0 && location.z==1)
+  end
+
+  def out_stock?
+    location = self.one_target_location
+    (location.x == 0 && location.y == 0 && location.z==0) || (location.x == 0 && location.y == 0 && location.z==1)
   end
 end

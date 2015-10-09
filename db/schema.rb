@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008112454) do
+ActiveRecord::Schema.define(version: 20151008132136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -4058,6 +4058,19 @@ ActiveRecord::Schema.define(version: 20151008112454) do
     t.integer  "write_uid"
     t.datetime "write_date"
   end
+
+  create_table "productions_logistics_chains", force: :cascade do |t|
+    t.integer  "production_order_id"
+    t.string   "owner_type"
+    t.integer  "owner_id"
+    t.integer  "sequence"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "status"
+  end
+
+  add_index "productions_logistics_chains", ["owner_id", "owner_type"], name: "index_productions_logistics_chains_on_owner_id_and_owner_type", using: :btree
+  add_index "productions_logistics_chains", ["production_order_id"], name: "index_productions_logistics_chains_on_production_order_id", using: :btree
 
   create_table "productions_work_order_executions", force: :cascade do |t|
     t.integer  "work_order_id"
