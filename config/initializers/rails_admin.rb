@@ -1,6 +1,6 @@
 # encoding: utf-8
 require 'i18n'
-I18n.default_locale = 'zh-CN'
+#I18n.default_locale = 'zh-CN'
 
 require Rails.root.join('lib', 'rails_admin', 'publish_production_order.rb')
 RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::PublishProductionOrder)
@@ -70,6 +70,8 @@ RailsAdmin.config do |config|
         field :one_tcs_order do
           label "AGV 调拨单"
         end
+        field :logistics_chains
+        field :transport_orders
       end
     end
   end

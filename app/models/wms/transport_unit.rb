@@ -5,19 +5,35 @@ class Wms::TransportUnit < ActiveRecord::Base
   belongs_to :location, :class_name => 'Wms::Location', foreign_key: :actual_location
   has_many :transport_orders, :class_name => 'Wms::TransportOrder', foreign_key: :transport_unit
 
+  before_create :set_barcode
+
+  def set_barcode
+   self.barcode = Time.now.to_i + Random.rand(11)
+  end
+
   #STATE = available/ok/not_ok
 
-  def create_transport_order(action)
+  # exist_no: 出料口
+  def create_transport_order(action, exit_no = 2)
+    if exit_no == 2
+      exit_location = {
+          x:0, y:0, z:1, area: 2, no: 101, aisle: 1
+      }
+    elsif exit_no == 1
+      exit_location = {
+          x: 0, y: 0, z: 0, area: 2, no: 100, aisle: 1
+      }
+    end
     # TODO:
     # 在location给一号料台设置一个location
     if action == 'in'
-      source_location = Wms::Location.find_or_create_by(x:0, y:0, z:1, area: 2, no: 101, aisle: 1) #  二号出料口
+      source_location = Wms::Location.find_or_create_by(exit_location) #  二号出料口
       target_location  = Wms::Location.allot_one_in
-      self.transport_orders.create(target_location: target_location, source_location: source_location)
+      self.transport_orders.create(one_target_location: target_location, one_source_location: source_location)
     else
       source_location = Wms::Location.allot_one_out(self.one_product)
-      target_location  = Wms::Location.find_or_create_by(x:0, y:0, z:1, area: 2, no: 101, aisle: 1) # 二号出料口
-      self.transport_orders.create(target_location: target_location, source_location: source_location)
+      target_location  = Wms::Location.find_or_create_by(exit_location) # 二号出料口
+      self.transport_orders.create(one_target_location: target_location, one_source_location: source_location)
     end
   end
 

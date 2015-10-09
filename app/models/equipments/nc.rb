@@ -262,19 +262,19 @@ end
 
 agv_arrived = true
 if agv_arrived
-  nc = Equipments::Nc::Nc1.build(action: 'in')
-  button =  Equipments::Nc::Button.build
-  door =  Equipments::Nc::Door.build
-  jig =  Equipments::Nc::Jig.build
-  robot =  Equipments::Nc::Robot.build
-  button.open_door(nc)
-  button.switch(nc)
-
-  if door.opened?
-    robot.do_go
-  end
-
-  if robot.arrived?
-
-  end
+  # nc = Equipments::Nc::Nc1.build(action: 'in')
+  # button =  Equipments::Nc::Button.build
+  # door =  Equipments::Nc::Door.build
+  # jig =  Equipments::Nc::Jig.build
+  # robot =  Equipments::Nc::Robot.build
+  # button.open_door(nc)
+  # button.switch(nc)
+  #
+  # if door.opened?
+  #   robot.do_go
+  # end
+  #
+  # if robot.arrived?
+  #
+  # end
 end

@@ -2,12 +2,12 @@
 namespace :app do
   desc "同步资源库对应用户"
   task :init_data => :environment do
-    # init_workstations
-    # init_equipments
-    # init_products
-    # init_bom
+    init_workstations
+    init_equipments
+    init_products
+    init_bom
     init_routings
-    # init_locations
+    init_locations
     init_trays
   end
 
@@ -63,7 +63,7 @@ namespace :app do
 
       e['materials'].each do |product_no|
         product = Products::Product.find_by_no(product_no)
-        bom.bom_lines.create(product_id: product.id, bill_of_material: bom.id)
+        bom.bom_lines.create(product_id: product.id, bill_of_material_id: bom.id)
       end
 
     end
@@ -96,7 +96,7 @@ namespace :app do
 
   def init_locations
     result = YAML.load_file(Rails.root + 'lib/tasks/init_data/locations.yml')
-    type = Wms::LocationType.create(type: 'normal')
+    type = Wms::LocationType.find_or_create_by(type: 'normal')
     result['locations'].each do |location|
 
      Wms::Location.find_or_create_by(x: location['x'], y: location['y'], z: location['z']) do |l|

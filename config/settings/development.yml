@@ -1,9 +1,9 @@
 tcs:
   send_xml_server:
-    ip: 192.168.3.253
+    ip: 127.0.0.1
     port: 55555
   receive_xml_server:
-    ip: 192.168.3.253
+    ip: 127.0.0.1
     port: 44444
 mqtt:
   ip: 127.0.0.1

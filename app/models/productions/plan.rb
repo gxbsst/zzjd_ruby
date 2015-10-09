@@ -1,6 +1,6 @@
 class Productions::Plan < ActiveRecord::Base
   self.table_name = "mj_production_plan_base"
-  has_many :production_orders, class_name: 'Productions::ProductionOrder', foreign_key: :production_plan
+  has_many :production_orders, class_name: 'Productions::ProductionOrder', foreign_key: :production_plan_id
   belongs_to :one_product, class_name: "Products::Product", foreign_key: :product_id
   validates :product_id, presence: true
 

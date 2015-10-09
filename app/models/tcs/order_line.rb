@@ -1,7 +1,8 @@
 # encoding: utf-8
 class  Tcs::OrderLine < ActiveRecord::Base
   self.table_name = "mj_tcs_order_task_base"
-  belongs_to :one_tcs_order, :class_name => 'Tcs::Order', foreign_key: :tcs_order
+  belongs_to :one_tcs_order, :class_name => 'Tcs::Order', foreign_key: :tcs_order_id
+  has_many :logistics_chains, :class_name => 'Productions::LogisticsChain', as: :owner
 
   # TODO:
   # to_one_xml 还未完成

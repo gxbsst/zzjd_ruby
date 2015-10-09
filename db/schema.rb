@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151005094309) do
+ActiveRecord::Schema.define(version: 20151008132136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1151,6 +1151,15 @@ ActiveRecord::Schema.define(version: 20151005094309) do
     t.integer  "workstation"
   end
 
+  create_table "mj_stock_tray_base", force: :cascade do |t|
+    t.integer  "create_uid"
+    t.datetime "create_date"
+    t.integer  "write_uid"
+    t.integer  "location"
+    t.datetime "write_date"
+    t.integer  "tray"
+  end
+
   create_table "mj_tcs_order_base", force: :cascade do |t|
     t.string   "status"
     t.integer  "create_uid"
@@ -1162,6 +1171,7 @@ ActiveRecord::Schema.define(version: 20151005094309) do
     t.string   "order_name"
     t.string   "execution_success_ful"
     t.integer  "production_id"
+    t.string   "vehicle"
   end
 
   create_table "mj_tcs_order_task_base", force: :cascade do |t|
@@ -1255,6 +1265,16 @@ ActiveRecord::Schema.define(version: 20151005094309) do
     t.datetime "write_date"
     t.boolean  "active"
     t.string   "name"
+  end
+
+  create_table "mj_tray_product_base", force: :cascade do |t|
+    t.integer  "create_uid"
+    t.integer  "product"
+    t.datetime "create_date"
+    t.integer  "number"
+    t.integer  "write_uid"
+    t.datetime "write_date"
+    t.integer  "tray"
   end
 
   create_table "mj_vehicle_workstations", force: :cascade do |t|
@@ -1361,6 +1381,19 @@ ActiveRecord::Schema.define(version: 20151005094309) do
     t.datetime "write_date"
     t.integer  "write_uid"
   end
+
+  create_table "productions_logistics_chains", force: :cascade do |t|
+    t.integer  "production_order_id"
+    t.string   "owner_type"
+    t.integer  "owner_id"
+    t.integer  "sequence"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "status"
+  end
+
+  add_index "productions_logistics_chains", ["owner_id", "owner_type"], name: "index_productions_logistics_chains_on_owner_id_and_owner_type", using: :btree
+  add_index "productions_logistics_chains", ["production_order_id"], name: "index_productions_logistics_chains_on_production_order_id", using: :btree
 
   create_table "productions_work_order_executions", force: :cascade do |t|
     t.integer  "work_order_id"
@@ -2098,6 +2131,7 @@ ActiveRecord::Schema.define(version: 20151005094309) do
     t.datetime "write_date"
     t.integer  "write_uid"
     t.text     "problem_message"
+    t.integer  "production_order_id"
   end
 
   create_table "wms_transport_unit", force: :cascade do |t|
@@ -2422,6 +2456,10 @@ ActiveRecord::Schema.define(version: 20151005094309) do
   add_foreign_key "mj_routing_operation", "mj_routing", column: "routing_id", name: "mj_routing_operation_routing_id_fkey", on_delete: :nullify
   add_foreign_key "mj_routing_operation", "res_users", column: "create_uid", name: "mj_routing_operation_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_routing_operation", "res_users", column: "write_uid", name: "mj_routing_operation_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_stock_tray_base", "res_users", column: "create_uid", name: "mj_stock_tray_base_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_stock_tray_base", "res_users", column: "write_uid", name: "mj_stock_tray_base_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_stock_tray_base", "wms_location", column: "location", name: "mj_stock_tray_base_location_fkey", on_delete: :nullify
+  add_foreign_key "mj_stock_tray_base", "wms_transport_unit", column: "tray", name: "mj_stock_tray_base_tray_fkey", on_delete: :nullify
   add_foreign_key "mj_tcs_order_base", "res_users", column: "create_uid", name: "mj_tcs_order_base_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_tcs_order_base", "res_users", column: "write_uid", name: "mj_tcs_order_base_write_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_tcs_order_task_base", "mj_tcs_order_base", column: "tcs_order", name: "mj_tcs_order_task_base_tcs_order_fkey", on_delete: :nullify
@@ -2447,6 +2485,10 @@ ActiveRecord::Schema.define(version: 20151005094309) do
   add_foreign_key "mj_tm_routing", "mj_product_base", column: "product_id", name: "mj_tm_routing_product_id_fkey", on_delete: :nullify
   add_foreign_key "mj_tm_routing", "res_users", column: "create_uid", name: "mj_tm_routing_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_tm_routing", "res_users", column: "write_uid", name: "mj_tm_routing_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_tray_product_base", "mj_product_base", column: "product", name: "mj_tray_product_base_product_fkey", on_delete: :nullify
+  add_foreign_key "mj_tray_product_base", "res_users", column: "create_uid", name: "mj_tray_product_base_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_tray_product_base", "res_users", column: "write_uid", name: "mj_tray_product_base_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_tray_product_base", "wms_transport_unit", column: "tray", name: "mj_tray_product_base_tray_fkey", on_delete: :nullify
   add_foreign_key "mj_work_order_base", "mj_production_base", column: "production", name: "mj_work_order_base_production_fkey", on_delete: :nullify
   add_foreign_key "mj_work_order_base", "mj_production_base", column: "production_id", name: "mj_work_order_base_production_id_fkey", on_delete: :nullify
   add_foreign_key "mj_work_order_base", "res_users", column: "create_uid", name: "mj_work_order_base_create_uid_fkey", on_delete: :nullify
