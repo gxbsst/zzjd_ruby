@@ -9,11 +9,11 @@ class Productions::ProductionOrder < ActiveRecord::Base
 
   belongs_to :plan, :class_name => 'Productions::Plan'
   has_many :orders, :class_name => 'Productions::WorkOrder', foreign_key: :production_id
-  belongs_to :product, :class_name => 'Products::Product', foreign_key: :product_id
   has_one :one_tcs_order, :class_name => 'Tcs::Order', foreign_key: :production_id, dependent: :destroy # 因为有个字段叫tcs_order
   has_many :transport_orders, :class_name => 'Wms::TransportOrder', foreign_key: :production_order_id
   # has_many :tcs_order_lines,  through: :tcs_order
   has_many :logistics_chains,  -> { order "sequence" }, class_name: "Productions::LogisticsChain", foreign_key: :production_order_id
+  belongs_to :product, :class_name => 'Products::Product', foreign_key: :product_id
 
   before_create :set_production_no, :set_production_name
   after_create :generate_work_orders, :create_tcs_order, :generate_tcs_order_lines, :generate_wms_transport_order, :generate_logistics_chains
@@ -55,7 +55,8 @@ class Productions::ProductionOrder < ActiveRecord::Base
         self.orders.create(
             sequence: operation.sequence,
             operation_name: operation.name,
-            status: 'draft'
+            status: 'draft',
+            operation: operation
         )
     end
   end
@@ -102,6 +103,56 @@ class Productions::ProductionOrder < ActiveRecord::Base
     end
   end
 
+  def send_xml
+    host =  Settings.tcs.send_xml_server.ip
+    port =  33333
+    client_socket = TCPSocket.new(host, port)
+    client_socket.write(self.to_xml)
+    client_socket.close_write # Send EOF after writing the request.
+    parse_xml(client_socket.read)
+  end
+
+  def to_xml
+    builder = Nokogiri::XML::Builder.new do |xml|
+      xml.ProductionOrder("xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance") {
+        xml.workorder("device" => "1", "program_no" => "6001")
+      }
+    end
+    builder.to_xml
+  end
+
+  def parse_xml(data)
+    # TODO
+  end
+
+  def self.parse_receive_xml
+    host =  Settings.tcs.receive_xml_server.ip
+    port =  33334
+
+    tr = Thread.new do
+      begin
+        socket = TCPSocket.open(host, port)
+        started = true
+        accumulated_text  = ""
+        while(line  = socket.readline && started)
+          accumulated_text += line
+          if accumulated_text.include?("|")
+            split_xml_data = accumulated_text.split('|')
+            xml_data = split_xml_data[0]
+            # TODO ...
+            # ParseAgvStatusWorker.perform_async(xml_data)
+            accumulated_text = split_xml_data[1]
+          end
+        end
+      rescue Exception => e
+        socket.close if socket
+        started = false
+      end
+    end
+    tr.join
+  end
+
+
   private
 
   def create_wms_transport_order
@@ -109,11 +160,13 @@ class Productions::ProductionOrder < ActiveRecord::Base
     bom_line = self.product.bom.bom_lines.try(:first)
     if bom_line
       tray = Wms::TransportUnit.find_or_create_by(one_product: bom_line.product)
-      tray.create_transport_order('out', 1)
+      transport_order = tray.create_transport_order('out', 1)
+      transport_order.update!(production_order_id: self.id)
     end
 
     tray = Wms::TransportUnit.find_or_create_by(one_product: self.product)
-    tray.create_transport_order('in', 1)
+    transport_order = tray.create_transport_order('in', 1)
+    transport_order.update!(production_order_id: self.id)
 
     # 入库 # 等到生产完成的时候，给其分配一个托盘
 

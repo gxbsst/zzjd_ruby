@@ -2,12 +2,12 @@
 namespace :app do
   desc "同步资源库对应用户"
   task :init_data => :environment do
-    # init_workstations
-    # init_equipments
-    # init_products
-    # init_bom
+    init_workstations
+    init_equipments
+    init_products
+    init_bom
     init_routings
-    # init_locations
+    init_locations
     init_trays
   end
 

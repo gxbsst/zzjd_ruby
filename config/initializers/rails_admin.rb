@@ -70,6 +70,8 @@ RailsAdmin.config do |config|
         field :one_tcs_order do
           label "AGV 调拨单"
         end
+        field :logistics_chains
+        field :transport_orders
       end
     end
   end

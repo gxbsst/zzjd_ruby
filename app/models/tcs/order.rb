@@ -8,8 +8,7 @@ class  Tcs::Order < ActiveRecord::Base
   end
 
   def send_xml
-    # host =  Settings.tcs.send_xml_server.ip
-    host = '127.0.0.1'
+    host =  Settings.tcs.send_xml_server.ip
     port =  Settings.tcs.send_xml_server.port
     client_socket = TCPSocket.new(host, port)
     client_socket.write(self.to_xml)
