@@ -28,7 +28,7 @@ Rails.application.configure do
   # config.assets.js_compressor = :uglifier
   # Compress JavaScripts and CSS
   config.assets.compress = true
-  config.serve_static_assets = true
+  config.serve_static_files = true
   config.assets.js_compressor = Uglifier.new(mangle: false) if defined? Uglifier# Sprockets::LazyCompressor.new {
   # config.assets.css_compressor = :sass
 
