@@ -10,7 +10,7 @@ class Productions::ProductionOrder < ActiveRecord::Base
   belongs_to :plan, :class_name => 'Productions::Plan'
   has_many :orders, :class_name => 'Productions::WorkOrder', foreign_key: :production_id
   belongs_to :product, :class_name => 'Products::Product', foreign_key: :product_id
-  has_one :one_tcs_order, :class_name => 'Tcs::Order', foreign_key: :production, dependent: :destroy # 因为有个字段叫tcs_order
+  has_one :one_tcs_order, :class_name => 'Tcs::Order', foreign_key: :production_id, dependent: :destroy # 因为有个字段叫tcs_order
   has_many :transport_orders, :class_name => 'Wms::TransportOrder', foreign_key: :production_order_id
   # has_many :tcs_order_lines,  through: :tcs_order
   has_many :logistics_chains,  -> { order "sequence" }, class_name: "Productions::LogisticsChain", foreign_key: :production_order_id
