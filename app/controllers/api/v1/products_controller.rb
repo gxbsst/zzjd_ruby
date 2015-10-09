@@ -6,6 +6,12 @@ module Api
         @collections = Products::Product.all
       end
 
+      # 获取半成品
+      def half_product
+        @collections = Products::Product.where(["product_type = ?","半成品"])
+
+      end
+
     end
   end
 end
