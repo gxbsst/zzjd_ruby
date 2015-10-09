@@ -15,9 +15,9 @@ class Productions::ProductionOrder < ActiveRecord::Base
   has_many :logistics_chains,  -> { order "sequence" }, class_name: "Productions::LogisticsChain", foreign_key: :production_order_id
   belongs_to :product, :class_name => 'Products::Product', foreign_key: :product_id
 
-  before_create :set_production_no, :set_production_name
+  before_create :set_production_no, :set_production_name, :set_status
   after_create :generate_work_orders, :create_tcs_order, :generate_tcs_order_lines, :generate_wms_transport_order, :generate_logistics_chains
-  before_validation :set_status
+  # before_validation :set_status
 
   def set_production_name
     if !self.name
