@@ -66,14 +66,13 @@ class  Tcs::OrderLine < ActiveRecord::Base
 
   # 小车到下一站
   def send_next_xml
-
     host =  Settings.tcs.send_xml_server.ip
     port =  Settings.tcs.send_xml_server.port
     client_socket = TCPSocket.new(host, port)
     client_socket.write(self.to_next_xml)
     client_socket.close_write # Send EOF after writing the request.
     # client_socket.read # Read until EOF to get the response.
-    parse_xml(client_socket.read)
+    # parse_xml(client_socket.read)
 
   end
 
