@@ -82,3 +82,10 @@ gem "spring", group: :development
 gem 'sinatra', require: false, platforms: [:ruby]
 gem 'state_machine', github: 'ugoa/state_machine'
 gem 'redis-objects'
+
+group :assets do
+  gem 'compass-rails'
+  gem 'uglifier', '>= 1.0.3'
+end
+
+gem 'turbolinks'
