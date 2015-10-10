@@ -42,6 +42,14 @@ class Wms::TransportOrder < ActiveRecord::Base
 
   def action_start
 
+    if in_stock?
+      in_stock
+    elsif out_stock?
+      out_stock
+    else
+      raise '未知动作'
+    end
+
   end
 
   def in_stock
@@ -49,7 +57,7 @@ class Wms::TransportOrder < ActiveRecord::Base
     # location.update!(incoming_active: false)
     duiduiche = Equipments::Duiduoche.build
 
-    duiduiche.in_stock 1, 1 # TODO: 1， 为库位, 1 为出料口
+    duiduiche.in_stock self.one_target_location.no, 1 # TODO: 1， 为库位, 1 为出料口
 
     check_work_done_status(duiduiche, self)
   end
@@ -58,11 +66,14 @@ class Wms::TransportOrder < ActiveRecord::Base
     Rails.logger.info("正在出库中....")
     # duiduiche = Equipments::Duiduoche.build
     # duiduiche.out_stock 1, 1 # TODO: 1， 为库位, 1 为出料口
-    # check_work_done_status(duiduiche)
+    duiduiche = Equipments::Duiduoche.build
+    duiduiche.out_stock self.one_source_location.no, 1 # TODO: 1， 为库位, 1 为出料口
+    check_work_done_status(duiduiche, self)
   end
 
   def check_work_done_status(duiduiche, order)
     tr = Thread.new do
+      work_done = false
       while !work_done
         if duiduiche.work_done?
           work_done = true
@@ -72,7 +83,12 @@ class Wms::TransportOrder < ActiveRecord::Base
           # 更新物流链某条记录的状态
           logistics = order.logistics_chains.try(:first)
           logistics.update!(status: 'finished') if logistics
+
+          if order.out_stock?
+            order.one_transport_unit.unlink_products
+          end
           Thread.exit
+
         end
       end
     end
@@ -81,11 +97,11 @@ class Wms::TransportOrder < ActiveRecord::Base
 
   def in_stock?
     location = self.one_source_location
-    (location.x == 0 && location.y == 0 && location.z==0) || (location.x == 0 && location.y == 0 && location.z==1)
+    (location.x.to_i == 0 && location.y.to_i == 0 && location.z.to_i ==0) || (location.x.to_i == 0 && location.y.to_i == 0 && location.z.to_i ==1)
   end
 
   def out_stock?
     location = self.one_target_location
-    (location.x == 0 && location.y == 0 && location.z==0) || (location.x == 0 && location.y == 0 && location.z==1)
+    (location.x.try(:to_i) == 0 && location.y.try(:to_i) == 0 && location.z.try(:to_i)==0) || (location.x.to_i == 0 && location.y.to_i == 0 && location.z.to_i ==1)
   end
 end

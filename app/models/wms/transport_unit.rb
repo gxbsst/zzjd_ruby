@@ -14,7 +14,7 @@ class Wms::TransportUnit < ActiveRecord::Base
   #STATE = available/ok/not_ok
 
   # exist_no: 出料口
-  def create_transport_order(action, exit_no = 2)
+  def create_transport_order(action, exit_no = 2, production_order = '')
     if exit_no == 2
       exit_location = {
           x:0, y:0, z:1
@@ -30,7 +30,7 @@ class Wms::TransportUnit < ActiveRecord::Base
       source_location = Wms::Location.find_or_create_by(exit_location) #  二号出料口
       target_location  = Wms::Location.allot_one_in
       if target_location
-        self.transport_orders.create(one_target_location: target_location, one_source_location: source_location)
+        self.transport_orders.create(one_target_location: target_location, one_source_location: source_location, production_order_id: production_order.try(:id))
       else
         raise "已经没有可用库位了"
       end
@@ -38,7 +38,7 @@ class Wms::TransportUnit < ActiveRecord::Base
       source_location = Wms::Location.allot_one_out(self.one_product)
       target_location  = Wms::Location.find_or_create_by(exit_location) # 二号出料口
       if source_location
-        self.transport_orders.create(one_target_location: target_location, one_source_location: source_location)
+        self.transport_orders.create(one_target_location: target_location, one_source_location: source_location, production_order_id: production_order.try(:id))
       else
         raise "库中没有这个产品"
       end

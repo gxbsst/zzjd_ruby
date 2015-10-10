@@ -16,8 +16,10 @@ class Productions::ProductionOrder < ActiveRecord::Base
   belongs_to :product, :class_name => 'Products::Product', foreign_key: :product_id
 
   before_create :set_production_no, :set_production_name
-  after_create :generate_work_orders, :create_tcs_order, :generate_tcs_order_lines, :generate_wms_transport_order, :generate_logistics_chains
+  after_create :generate_work_orders, :create_tcs_order, :generate_tcs_order_lines
   before_validation :set_status, :set_production_no
+  after_save :generate_wms_transport_order
+  after_commit :generate_logistics_chains
 
   def set_production_name
     if !self.name
@@ -73,36 +75,41 @@ class Productions::ProductionOrder < ActiveRecord::Base
   end
 
   def generate_wms_transport_order
-    create_wms_transport_order
+    if !self.new_record?
+      create_wms_transport_order
+    end
   end
 
   def generate_logistics_chains
-    tcs_order_lines = self.one_tcs_order.tcs_order_lines.collect{|order_line| order_line}
-    transport_orders = self.transport_orders.collect{|order| order}
-    chains = [
-        tcs_order_lines.shift,
-        transport_orders.first,
-        tcs_order_lines,
-        transport_orders.last
-    ]
-    if chains
-      chains.flatten.each_with_index do |chain, index|
-        self.logistics_chains.create(owner: chain, sequence: index+1)
+    if !self.new_record?
+      tcs_order_lines = self.one_tcs_order.tcs_order_lines.collect{|order_line| order_line}
+      transport_orders = Wms::TransportOrder.where(production_order_id: self.id)
+      chains = [
+          tcs_order_lines.shift,
+          transport_orders.first,
+          tcs_order_lines,
+          transport_orders.last
+      ]
+      if chains
+        chains.flatten.each_with_index do |chain, index|
+          self.logistics_chains.create(owner: chain, sequence: index+1)
+        end
       end
     end
   end
 
   def action_start
-    if self.status == 'draft'
+    # if self.status == 'draft'
       self.start
+      self.logistics_chains.first.owner.action_start
       self.orders.first.tap do |order|
         order.action_start if order
       end
       self.one_tcs_order.action_start
       self
-    else
-      false
-    end
+    # else
+    #   false
+    # end
   end
 
   def send_xml
@@ -171,13 +178,13 @@ class Productions::ProductionOrder < ActiveRecord::Base
       tray.location = Wms::Location.allot_one_in
       tray.save!
 
-      transport_order = tray.create_transport_order('out', 1)
-      transport_order.update!(production_order_id: self.id)
+      transport_order = tray.create_transport_order('out', 1, self)
+      # transport_order.update!(production_order_id: self.id)
     end
 
     tray = Wms::TransportUnit.find_or_create_by(one_product: self.product)
-    transport_order = tray.create_transport_order('in', 1)
-    transport_order.update!(production_order_id: self.id)
+    transport_order = tray.create_transport_order('in', 1, self)
+    # transport_order.update!(production_order_id: self.id)
 
     # 入库 # 等到生产完成的时候，给其分配一个托盘
 
