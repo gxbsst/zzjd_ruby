@@ -11,6 +11,7 @@ class Workcenters::Workstation < ActiveRecord::Base
     raise "该方法必须在子类调用"
   end
 
+  # AGV 到站
   # TODO: 这段逻辑会比较复杂，因为需要判断设备的状况
   def start_working(tcs_order_line)
     if self.type == 'Workcenters::WorkstationWms' #堆垛车干活
@@ -30,6 +31,28 @@ class Workcenters::Workstation < ActiveRecord::Base
       send_xml_at_wms(tcs_order_line)
 
     elsif self.type == 'Workcenters::WorkstationAssembly' # 通知装配的机器人
+      workstation_no = destination_name.destination_name
+      workstation_no_to_registers = {
+          "1010"  => 4097,
+          "1011" => 4098,
+          "1012" => 4099 ,
+          "1013" => 4100,
+          "1014" =>  4101,
+          "1015"  => 4102
+      }
+
+      ip = Settings.robot_plc.ip
+      workstation_add = workstation_no_to_registers[workstation_no]
+      command_add = 4096
+      value = 1
+      ModBus::TCPClient.new(ip, 502) do |cl|
+        cl.with_slave(2) do |slave|
+          slave.holding_registers[workstation_add] = values
+          slave.holding_registers[command_add] = values
+        end
+      end
+
+
       # TODO: 找到这个工位对应的设备, 这里是机器人PLC
     elsif self.type == 'Workcenters::Test' # 通知装配的机器人
       # TODO: 找到这个工位对应的设备, 这里是机器人PLC
