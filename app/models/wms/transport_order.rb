@@ -47,10 +47,11 @@ class Wms::TransportOrder < ActiveRecord::Base
   def in_stock
     Rails.logger.info("正在入库中....")
     # location.update!(incoming_active: false)
-    # duiduiche = Equipments::Duiduoche.build
-    # duiduiche.in_stock 1, 1 # TODO: 1， 为库位, 1 为出料口
+    duiduiche = Equipments::Duiduoche.build
 
-    # check_work_done_status(duiduiche)
+    duiduiche.in_stock 1, 1 # TODO: 1， 为库位, 1 为出料口
+
+    check_work_done_status(duiduiche, self)
   end
 
   def out_stock

@@ -17,11 +17,11 @@ class Wms::TransportUnit < ActiveRecord::Base
   def create_transport_order(action, exit_no = 2)
     if exit_no == 2
       exit_location = {
-          x:0, y:0, z:1, area: 2, no: 101, aisle: 1
+          x:0, y:0, z:1
       }
     elsif exit_no == 1
       exit_location = {
-          x: 0, y: 0, z: 0, area: 2, no: 100, aisle: 1
+          x: 0, y: 0, z: 0
       }
     end
     # TODO:
@@ -29,11 +29,19 @@ class Wms::TransportUnit < ActiveRecord::Base
     if action == 'in'
       source_location = Wms::Location.find_or_create_by(exit_location) #  二号出料口
       target_location  = Wms::Location.allot_one_in
-      self.transport_orders.create(one_target_location: target_location, one_source_location: source_location)
+      if target_location
+        self.transport_orders.create(one_target_location: target_location, one_source_location: source_location)
+      else
+        raise "已经没有可用库位了"
+      end
     else
       source_location = Wms::Location.allot_one_out(self.one_product)
       target_location  = Wms::Location.find_or_create_by(exit_location) # 二号出料口
-      self.transport_orders.create(one_target_location: target_location, one_source_location: source_location)
+      if source_location
+        self.transport_orders.create(one_target_location: target_location, one_source_location: source_location)
+      else
+        raise "库中没有这个产品"
+      end
     end
   end
 

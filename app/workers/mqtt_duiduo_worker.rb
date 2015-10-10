@@ -29,7 +29,7 @@ class MqttDuiduoWorker
       add_8 = 6504 # 料台位置
       # 收到完成信号，清理出入库标志位
       if add_7 == address.to_i && message.to_i == 1
-        Modbus.write(IP, add_5, 0)
+        Modbus.write(IP, add_1, 0)
       end
     end
     # $mqtt_duiduo.get do |topic,message|

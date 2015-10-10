@@ -6,20 +6,23 @@ class MqttRobotWorker
   IP = Settings.robot_plc.ip
 
   ADDRESS_MAP_WORKSTATION_NO = {
-      "6496" => "1011",
-      "6497" => "1012",
-      "6498" => "1013",
-      "6499" => "1014",
-      "6500" => "1015"
+      "4097" => "1010",
+      "4098" => "1011",
+      "4099" => "1012",
+      "4100" => "1013",
+      "4101" => "1014",
+      "4102" => "1015"
   }
   def perform
     client = MQTT::Client.connect(Settings.mqtt.ip)
     client.subscribe(
-        'robot/1010/6496',
-        'robot/1011/6497',
-        'robot/1012/6498',
-        'robot/1013/6499',
-        'robot/1014/6500'
+        'robot/1010/4097',
+        'robot/1011/4098',
+        'robot/1012/4099',
+        'robot/1013/4100',
+        'robot/1014/4101',
+        'robot/1015/4102',
+        'robot/1010/plc/4103' # 1 完成 2 进行中 3 Error 4 准备完成
     )
     client.get do |topic,message|
       _, workstation_id, address = topic.split('/')

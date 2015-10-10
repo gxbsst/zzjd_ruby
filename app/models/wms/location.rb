@@ -5,7 +5,7 @@ class Wms::Location < ActiveRecord::Base
   has_many :one_products, :class_name => 'Products::Product', through: :transport_unit
   scope :area_a, -> { where area: 'area_a'}
   scope :area_b, -> { where area: 'area_b'}
-  scope :available, -> { where incoming_active: true}
+  scope :available, -> { where incoming_active: [true, nil]}
   scope :unavailable, -> { where incoming_active: false}
 
   def self.allot_one_in

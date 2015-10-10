@@ -47,7 +47,7 @@ namespace :app do
     result = YAML.load_file(Rails.root + 'lib/tasks/init_data/product.yml')
     result['products'].each do |e|
        Products::Product.find_or_create_by(no: e['no']) do |ws|
-        ws.product_type = e['type']
+        ws.product_type = e['product_type']
         ws.name = e['name']
       end
     end

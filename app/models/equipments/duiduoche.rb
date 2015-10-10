@@ -2,7 +2,7 @@
 module Equipments
   class Duiduoche
 
-    IP =  Settings.duiduoche.ip
+    IP =  '192.168.5.7'
     WRITE_ACTION = 6496 #物流方向--01入库--02出库--03取空货箱
     WRITE_STOCK_LOCATION = 6497 #物流方向--01入库--02出库--03取空货箱
     WRITE_WORKSTATION = 6498 #料台位置--01南料台--02北侧料台
@@ -58,7 +58,7 @@ module Equipments
 
     def sync
       begin
-        ModBus::TCPClient.new(IP, 502) do |cl|
+        ModBus::TCPClient.new('192.168.5.7', 502) do |cl|
           cl.with_slave(1) do |slave|
             @a6496, @a6497, @a6498, @a6499 = slave.holding_registers[WRITE_ACTION..WRITE_CLEAN_STATUS]
             @a6500, @a6501, @a6502, @a6503, @a6504 = slave.holding_registers[READ_STATUS..READ_WORKSTATION]
@@ -66,7 +66,7 @@ module Equipments
         end
       rescue ModBus::Errors::ModBusTimeout => e
         Rails.logger.info("*"*100)
-        Rails.logger.info("IP地址是不是设置错了啊, Modbus无法连接!!!")
+        Rails.logger.info("IP地址:#{IP}是不是设置错了啊, Modbus无法连接!!!")
         Rails.logger.info("*"*100)
       end
       self
@@ -132,15 +132,15 @@ module Equipments
       end
 
       address = [1] << value
-      begin
+      # begin
         ModBus::TCPClient.new(IP, 502) do |cl|
           cl.with_slave(1) do |slave|
             slave.holding_registers[6496..6498] = address.flatten
           end
         end
-      rescue Exception => e
-        Rails.logger.info("没有完成，请查看错误日志")
-      end
+      # rescue Exception => e
+      #   Rails.logger.info("没有完成，请查看错误日志#{e}")
+      # end
     end
 
     def out_stock(*value)

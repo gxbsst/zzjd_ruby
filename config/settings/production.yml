@@ -8,7 +8,7 @@ tcs:
 mqtt:
   ip: 127.0.0.1
 duiduoche:
-  ip: 192.168.7.5
+  ip: 192.168.5.7
   port: 502
 nc:
   nc1:

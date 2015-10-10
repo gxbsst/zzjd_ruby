@@ -12,5 +12,18 @@ class Products::Product < ActiveRecord::Base
   def workstation_nos
     self.routing.workstations.collect(&:no)
   end
+
+  def finished? # 成品-机器人
+   self.product_type == 'finished'
+  end
+
+  def semi_finished? # 办成品-机器人
+    self.product_type == 'semi-finished'
+  end
+
+  def material? # 办成品-机器人
+    self.product_type == 'material?'
+  end
+
   alias_attribute :no, :product_no
 end

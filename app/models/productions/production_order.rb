@@ -15,9 +15,9 @@ class Productions::ProductionOrder < ActiveRecord::Base
   has_many :logistics_chains,  -> { order "sequence" }, class_name: "Productions::LogisticsChain", foreign_key: :production_order_id
   belongs_to :product, :class_name => 'Products::Product', foreign_key: :product_id
 
-  before_create :set_production_no, :set_production_name, :set_status
+  before_create :set_production_no, :set_production_name
   after_create :generate_work_orders, :create_tcs_order, :generate_tcs_order_lines, :generate_wms_transport_order, :generate_logistics_chains
-  # before_validation :set_status
+  before_validation :set_status, :set_production_no
 
   def set_production_name
     if !self.name
@@ -26,11 +26,13 @@ class Productions::ProductionOrder < ActiveRecord::Base
   end
 
   def set_production_no
-    self.production_no = "PO#{Time.now.to_i}"
+    if !self.production_no
+      self.production_no = "PO#{Time.now.to_i}"
+    end
   end
 
   def set_status
-    self.status = "draft"
+      self.status = "draft" if self.status.blank?
   end
 
   state_machine :status, :initial => :draft do
@@ -157,9 +159,18 @@ class Productions::ProductionOrder < ActiveRecord::Base
 
   def create_wms_transport_order
     # 出库
-    bom_line = self.product.bom.bom_lines.try(:first)
+    bom_line = if self.product.finished? || self.product.material?
+                 self.product.bom.bom_lines.try(:first)
+               else
+                 self.product
+               end
     if bom_line
       tray = Wms::TransportUnit.find_or_create_by(one_product: bom_line.product)
+
+      # 给这个托盘分配库存，主要为了演示
+      tray.location = Wms::Location.allot_one_in
+      tray.save!
+
       transport_order = tray.create_transport_order('out', 1)
       transport_order.update!(production_order_id: self.id)
     end
