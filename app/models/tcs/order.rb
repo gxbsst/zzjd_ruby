@@ -23,6 +23,7 @@ class  Tcs::Order < ActiveRecord::Base
         xml.order('xsi:type' => 'transport',
                   'deadline' => '2015-10-22 21:17:01',
                   "vehicleTypeAvailable" => "false",
+                  "id" => "",
                   "xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance") do
 
           self.tcs_order_lines.each do |line|

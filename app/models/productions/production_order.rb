@@ -67,7 +67,7 @@ class Productions::ProductionOrder < ActiveRecord::Base
 
   # AGV 调拨单
   def generate_tcs_order_lines
-    if self.product.no == PRODUCT_ROBOT_NO
+    if self.product.no.to_i == PRODUCT_ROBOT_NO
       create_robot_tcs_order_lines
     else
       create_nc_tcs_order_lines
@@ -166,7 +166,7 @@ class Productions::ProductionOrder < ActiveRecord::Base
 
   def create_wms_transport_order
     # 出库
-    bom_line = if self.product.finished? || self.product.material?
+    bom_line = if self.product.finished? || self.product.semi_finished?
                  self.product.bom.bom_lines.try(:first)
                else
                  self.product
