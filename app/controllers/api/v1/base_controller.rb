@@ -7,7 +7,6 @@ module Api::V1
       # 转码二进制
       data =resource.file
       decoded_val = Base64.decode64(data)
-      puts decoded_val
       # 设置头
       response.headers['Cache-Control'] = "public, max-age=#{12.hours.to_i}"
       response.headers['Content-Type'] = 'image/jpeg'
