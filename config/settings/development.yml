@@ -8,14 +8,17 @@ tcs:
 mqtt:
   ip: 127.0.0.1
 duiduoche:
-  ip: 192.168.5.7
+  ip: 192.168.7.5
   port: 502
 nc:
   nc1:
     ip: 192.168.5.52
   nc2:
     ip: 192.168.5.53
+
+host:
+  ip: 192.168.1.157
+  port: 3000
+
 robot_plc:
-  ip: 192.168.5.88
-multi_screen:
-  ip: 192.168.5.58
+  ip: 192.168.5.10

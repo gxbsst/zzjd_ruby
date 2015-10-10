@@ -32,9 +32,29 @@ Rails.application.routes.draw do
 
     end
     resources :products, defaults: {format: 'json'} do
-
+      collection do
+        get "actions/operation_instruction", to: "products#half_product"
+      end
     end
-  end
+
+    resources :work_centers, defaults:{format: "json"} do
+      collection do
+        get "actions/show", to: "work_centers#show"
+
+      end
+    end
+
+    resources :routings, defaults:{format: "json"} do
+      collection do
+        get "actions/:id/show", to: "tm_routing#show"
+      end
+    end
+    resources :resources, defaults:{format: "json"} do
+      collection do
+        get "actions/:id/show", to: "base#show_image"
+      end
+    end
+    end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
