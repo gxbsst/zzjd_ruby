@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008132136) do
+ActiveRecord::Schema.define(version: 20151009150402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1081,7 +1081,11 @@ ActiveRecord::Schema.define(version: 20151008132136) do
     t.integer  "parent_id"
     t.integer  "product_id"
     t.string   "name"
+<<<<<<< HEAD
     t.integer  "production_plan_id"
+=======
+    t.integer  "product_id"
+>>>>>>> 22691d4215fa4b8bd11b865dc3811200331fbf20
   end
 
   create_table "mj_production_plan_base", force: :cascade do |t|
@@ -1193,7 +1197,11 @@ ActiveRecord::Schema.define(version: 20151008132136) do
     t.string   "execution_success_ful"
     t.boolean  "vehicle_type_available"
     t.string   "operation"
+<<<<<<< HEAD
     t.integer  "tcs_order_id"
+=======
+    t.string   "location_name"
+>>>>>>> 22691d4215fa4b8bd11b865dc3811200331fbf20
   end
 
   create_table "mj_technology_arg", force: :cascade do |t|
@@ -2433,6 +2441,7 @@ ActiveRecord::Schema.define(version: 20151008132136) do
   add_foreign_key "mj_material_base", "res_users", column: "write_uid", name: "mj_material_base_write_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_product_base", "res_users", column: "create_uid", name: "mj_product_base_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_product_base", "res_users", column: "write_uid", name: "mj_product_base_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_production_base", "mj_product_base", column: "product_id", name: "mj_production_base_product_id_fkey", on_delete: :nullify
   add_foreign_key "mj_production_base", "mj_production_base", column: "parent_id", name: "mj_production_base_parent_id_fkey", on_delete: :nullify
   add_foreign_key "mj_production_base", "mj_production_plan_base", column: "production_plan", name: "mj_production_base_production_plan_fkey", on_delete: :nullify
   add_foreign_key "mj_production_base", "mj_production_plan_base", column: "production_plan_id", name: "mj_production_base_production_plan_id_fkey", on_delete: :nullify
@@ -2460,6 +2469,10 @@ ActiveRecord::Schema.define(version: 20151008132136) do
   add_foreign_key "mj_stock_tray_base", "res_users", column: "write_uid", name: "mj_stock_tray_base_write_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_stock_tray_base", "wms_location", column: "location", name: "mj_stock_tray_base_location_fkey", on_delete: :nullify
   add_foreign_key "mj_stock_tray_base", "wms_transport_unit", column: "tray", name: "mj_stock_tray_base_tray_fkey", on_delete: :nullify
+<<<<<<< HEAD
+=======
+  add_foreign_key "mj_tcs_order_base", "mj_production_base", column: "production_id", name: "mj_tcs_order_base_production_id_fkey", on_delete: :nullify
+>>>>>>> 22691d4215fa4b8bd11b865dc3811200331fbf20
   add_foreign_key "mj_tcs_order_base", "res_users", column: "create_uid", name: "mj_tcs_order_base_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_tcs_order_base", "res_users", column: "write_uid", name: "mj_tcs_order_base_write_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_tcs_order_task_base", "mj_tcs_order_base", column: "tcs_order", name: "mj_tcs_order_task_base_tcs_order_fkey", on_delete: :nullify
@@ -2489,7 +2502,10 @@ ActiveRecord::Schema.define(version: 20151008132136) do
   add_foreign_key "mj_tray_product_base", "res_users", column: "create_uid", name: "mj_tray_product_base_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_tray_product_base", "res_users", column: "write_uid", name: "mj_tray_product_base_write_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_tray_product_base", "wms_transport_unit", column: "tray", name: "mj_tray_product_base_tray_fkey", on_delete: :nullify
+<<<<<<< HEAD
   add_foreign_key "mj_work_order_base", "mj_production_base", column: "production", name: "mj_work_order_base_production_fkey", on_delete: :nullify
+=======
+>>>>>>> 22691d4215fa4b8bd11b865dc3811200331fbf20
   add_foreign_key "mj_work_order_base", "mj_production_base", column: "production_id", name: "mj_work_order_base_production_id_fkey", on_delete: :nullify
   add_foreign_key "mj_work_order_base", "res_users", column: "create_uid", name: "mj_work_order_base_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_work_order_base", "res_users", column: "user", name: "mj_work_order_base_user_fkey", on_delete: :nullify

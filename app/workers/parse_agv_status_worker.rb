@@ -23,13 +23,23 @@ class ParseAgvStatusWorker
     sub_element = doc.xpath("//statusMassage/destination")
     location_name = sub_element.attr("locationName").try(:value)
     state = sub_element.attr('state').try(:value)
-    set_order_vehicle(executing_vehicle, order_name)
+
+    update_tcs_order(executing_vehicle, order_name)
+    update_tcs_order_line.update(order_name, location_name, state)
     return location_name, order_name
   end
 
-  def set_order_vehicle(executing_vehicle, order_name)
+  def update_tcs_order(executing_vehicle, order_name)
     tcs_order = Tcs::Order.find_by(order_name: order_name)
     tcs_order.update_attribute(vehicle: executing_vehicle) if tcs_order
+  end
+
+  def update_tcs_order_line(order_name, location_name, state)
+    tcs_order = Tcs::Order.find_by(order_name: order_name)
+    tcs_order_line = tcs_order.order_lines.where(destination_name: location_name).try(:first)
+    if tcs_order_line
+      tcs_order_line.update(location_name: location_name, status: state)
+    end
   end
 
   def notify_workstation_working(location_name, order_name)

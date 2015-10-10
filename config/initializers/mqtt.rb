@@ -37,11 +37,10 @@ $mqtt_agv.subscribe(
 )
 
 if Rails.env == 'production'
-# 工位监听
-WorkstationWorker.perform_async
 # 各设备数据采集
 DaqWorker.perform_async
-DuiduoWorker.perform_async
+MqttDuiduoWorker.perform_async
+MqttRobotWorker.perform_async
 # ParseAgvStatusWorker.perform_async
 Tcs::OrderLine.parse_xml
 end
