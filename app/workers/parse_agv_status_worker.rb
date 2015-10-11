@@ -10,6 +10,7 @@ class ParseAgvStatusWorker
     end
   end
 
+  # 小车到站
   def parse_xml(xml_data)
     doc = Nokogiri.XML(xml_data)
     element = doc.xpath("//statusMassage")

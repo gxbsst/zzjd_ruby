@@ -32,27 +32,8 @@ class Workcenters::Workstation < ActiveRecord::Base
 
     elsif self.type == 'Workcenters::WorkstationAssembly' # 通知装配的机器人
       workstation_no = destination_name.destination_name
-      workstation_no_to_registers = {
-          "1010"  => 4097,
-          "1011" => 4098,
-          "1012" => 4099 ,
-          "1013" => 4100,
-          "1014" =>  4101,
-          "1015"  => 4102
-      }
-
-      ip = Settings.robot_plc.ip
-      workstation_add = workstation_no_to_registers[workstation_no]
-      command_add = 4096
-      value = 1
-      ModBus::TCPClient.new(ip, 502) do |cl|
-        cl.with_slave(2) do |slave|
-          slave.holding_registers[workstation_add] = values
-          slave.holding_registers[command_add] = values
-        end
-      end
-
-
+      robot_plc = ModbusRobot.build
+      robot_plc.start(workstation_no)
       # TODO: 找到这个工位对应的设备, 这里是机器人PLC
     elsif self.type == 'Workcenters::Test' # 通知装配的机器人
       # TODO: 找到这个工位对应的设备, 这里是机器人PLC

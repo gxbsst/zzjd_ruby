@@ -73,7 +73,6 @@ class  Tcs::OrderLine < ActiveRecord::Base
     client_socket.close_write # Send EOF after writing the request.
     # client_socket.read # Read until EOF to get the response.
     # parse_xml(client_socket.read)
-
   end
 
   def to_next_xml
@@ -81,7 +80,7 @@ class  Tcs::OrderLine < ActiveRecord::Base
       xml.tcsOrderSet {
         xml.order('xsi:type' => 'transportOperationOrder',
                   "name" => "#{self.one_tcs_order.order_name}",
-                  "operationName" => 'OP_WAIT',
+                  "operationName" => 'NOP',
                   'operationPgress' => "100",
                   "xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance") do
         end

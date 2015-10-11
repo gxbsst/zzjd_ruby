@@ -192,6 +192,7 @@ class Productions::ProductionOrder < ActiveRecord::Base
 
   def create_nc_tcs_order_lines
     operations = [WMS_STATION_NO] << self.product.workstation_nos << TEST_STATION_NO
+
     operations.flatten.uniq.each do |workstation_no|
       self.one_tcs_order.tcs_order_lines.create!(
           action: 'transport',
@@ -205,12 +206,13 @@ class Productions::ProductionOrder < ActiveRecord::Base
 
   def create_robot_tcs_order_lines
     [WMS_STATION_NO, 1010, 1011, 1012, 1013, 1014, WMS_STATION_NO].each do |workstation_no|
+      operation = WMS_STATION_NO == workstation_no ? 'NOP' : 'OP_WAIT'
       self.one_tcs_order.tcs_order_lines.create!(
           action: 'transport',
           destination_name: workstation_no,
           vehicle_type_available: false,
           # intended_vehicle: 'robot',
-          operation: 'OP_WAIT'
+          operation: operation
       )
     end
   end
