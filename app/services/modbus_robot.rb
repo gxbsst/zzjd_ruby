@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ModbusRobot
 
   WRITE_ACTION =  4096
@@ -31,14 +32,14 @@ class ModbusRobot
 
   def sync
     begin
-      ModBus::TCPClient.new('192.168.5.10', 502) do |cl|
+      ModBus::TCPClient.new(Settings.robot_plc.ip, 502) do |cl|
         cl.with_slave(1) do |slave|
           @w_4096, @w_4097,@w_4098, @w_4099, @w_4100, @w_4101, @w_4102, @r_status, @r_error_code = slave.holding_registers[WRITE_ACTION..READ_STATUS]
         end
       end
     rescue ModBus::Errors::ModBusTimeout => e
       Rails.logger.info("*"*100)
-      Rails.logger.info("IP地址:#{IP}是不是设置错了啊, Modbus无法连接!!!")
+      Rails.logger.info("IP地址:#{Settings.robot_plc.ip}是不是设置错了啊, Modbus无法连接!!!")
       Rails.logger.info("*"*100)
     end
     self
@@ -51,12 +52,12 @@ class ModbusRobot
       ModBus::TCPClient.new(Settings.robot_plc.ip, 502) do |cl|
         cl.with_slave(1) do |slave|
           slave.holding_registers[WRITE_ACTION] = 1
-          slave.holding_registers[ADDRESS_MAP_WORKSTATION_NO[workstation_no]] = 1
+          slave.holding_registers[ADDRESS_MAP_WORKSTATION_NO[workstation_no.to_s]] = 1
         end
       end
     rescue ModBus::Errors::ModBusTimeout => e
       Rails.logger.info("*"*100)
-      Rails.logger.info("IP地址:#{IP}是不是设置错了啊, Modbus无法连接!!!")
+      Rails.logger.info("IP地址:#{Settings.robot_plc.ip}是不是设置错了啊, Modbus无法连接!!!")
       Rails.logger.info("*"*100)
     end
     self
@@ -68,7 +69,7 @@ class ModbusRobot
       ModBus::TCPClient.new(Settings.robot_plc.ip, 502) do |cl|
         cl.with_slave(1) do |slave|
           if workstation_no == 'all'
-            slave.holding_registers[WRITE_ACTION..WRITE_STATION_1015] = 0
+            slave.holding_registers[WRITE_ACTION..WRITE_STATION_1015] = [0,0,0,0,0,0,0]
           else
             slave.holding_registers[WRITE_ACTION] = 0
             slave.holding_registers[ADDRESS_MAP_WORKSTATION_NO[workstation_no]] = 0
@@ -83,32 +84,20 @@ class ModbusRobot
     self
   end
 
-  def status
-   if self.r_status == 1
-     'completed'
-   elsif self.status == 2
-     'processing'
-   elsif self.r_status == 3
-     'error'
-   elsif self.r_status == 4
-     'ready_complete'
-   end
-  end
-
   def completed?
-    self.status == 'completed'
+    self.r_status == 1
   end
 
   def processing?
-    self.status == 'processing'
+    self.r_status == 2
   end
 
   def error?
-    self.status == 'error'
+    self.r_status == 3
   end
 
   def read_complete?
-    self.status == 'ready_complete'
+    self.r_status == 4
   end
 
 end
