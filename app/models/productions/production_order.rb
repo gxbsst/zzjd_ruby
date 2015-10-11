@@ -205,8 +205,8 @@ class Productions::ProductionOrder < ActiveRecord::Base
   end
 
   def create_robot_tcs_order_lines
-    [WMS_STATION_NO, 1010, 1011, 1012, 1013, 1014, WMS_STATION_NO].each do |workstation_no|
-      operation = WMS_STATION_NO == workstation_no ? 'NOP' : 'OP_WAIT'
+    [WMS_STATION_NO, 1010, 1011, 1012, 1013, 1014, WMS_STATION_NO].each_with_index do |workstation_no, index|
+      operation = index == 6  ? 'NOP' : 'OP_WAIT'
       self.one_tcs_order.tcs_order_lines.create!(
           action: 'transport',
           destination_name: workstation_no,

@@ -42,7 +42,7 @@ class Workcenters::Workstation < ActiveRecord::Base
 
   def send_xml_at_wms(tcs_order_line)
     production_order = tcs_order_line.one_tcs_order.production_order
-    production_order.send_xml_at_wms
+    production_order.send_xml
   end
 
   alias_method :notify_robot, :notify_plc_with_agv_ready
