@@ -78,7 +78,7 @@ class ModbusRobot
       end
     rescue ModBus::Errors::ModBusTimeout => e
       Rails.logger.info("*"*100)
-      Rails.logger.info("IP地址:#{IP}是不是设置错了啊, Modbus无法连接!!!")
+      Rails.logger.info("IP地址:#{Setings.robot_plc.ip}是不是设置错了啊, Modbus无法连接!!!")
       Rails.logger.info("*"*100)
     end
     self
