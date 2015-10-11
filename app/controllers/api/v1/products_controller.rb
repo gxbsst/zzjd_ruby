@@ -9,7 +9,7 @@ module Api
 
       # 获取半成品
       def half_product
-        @collections = Products::Product.where(["product_type = ?","半成品"])
+        @collections = Products::Product.where(["product_type = ?","semi-finished"])
 
       end
 
