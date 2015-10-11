@@ -11,7 +11,7 @@ module Api
         @collections = []
 
         # 查询进行中的工单
-        work_orders=Productions::WorkOrder.where(["status = ?" , "未开始"])
+        work_orders=Productions::WorkOrder.processing
 
         # 判断是否返回的为null
         if work_orders == nil

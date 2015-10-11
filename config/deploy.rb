@@ -8,12 +8,11 @@ set :repo_url, 'https://github.com/gxbsst/zzjd_ruby.git'
 set :branch, ENV['BRANCH'] || "master"
 
 set :deploy_to, "/root/zzjd_ruby"
-
 set :scm, :git
 
 set :format, :pretty
 set :log_level, :debug
-set :pty, false
+set :pty, true
 set :default_shell, '/bin/bash -l'
 set :assets_roles, [:web, :app]
 set :whenever_roles, :app
