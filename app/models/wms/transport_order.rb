@@ -53,21 +53,23 @@ class Wms::TransportOrder < ActiveRecord::Base
   end
 
   def in_stock
-    Rails.logger.info("正在入库中....")
+    puts("正在入库中....")
     # location.update!(incoming_active: false)
     duiduiche = Equipments::Duiduoche.build
 
-    duiduiche.in_stock self.one_target_location.no, 1 # TODO: 1， 为库位, 1 为出料口
+    #duiduiche.in_stock self.one_target_location.no, 1 # TODO: 1， 为库位, 1 为出料口
+    duiduiche.in_stock 3, 1 # TODO: 1， 为库位, 1 为出料口
 
     check_work_done_status(duiduiche, self)
   end
 
   def out_stock
-    Rails.logger.info("正在出库中....")
+    puts("正在出库中....")
     # duiduiche = Equipments::Duiduoche.build
     # duiduiche.out_stock 1, 1 # TODO: 1， 为库位, 1 为出料口
     duiduiche = Equipments::Duiduoche.build
-    duiduiche.out_stock self.one_source_location.no, 1 # TODO: 1， 为库位, 1 为出料口
+    # duiduiche.out_stock self.one_source_location.no, 1 # TODO: 1， 为库位, 1 为出料口
+    duiduiche.out_stock 3, 1 # TODO: 1， 为库位, 1 为出料口
     check_work_done_status(duiduiche, self)
   end
 
@@ -76,6 +78,7 @@ class Wms::TransportOrder < ActiveRecord::Base
       work_done = false
       while !work_done
         if duiduiche.work_done?
+          puts "*"*10 + "work done" + "*"*10
           work_done = true
           # TODO:
           # 更新调拨单的状态
@@ -88,7 +91,6 @@ class Wms::TransportOrder < ActiveRecord::Base
             order.one_transport_unit.unlink_products
           end
           Thread.exit
-
         end
       end
     end
