@@ -89,4 +89,4 @@ group :assets do
 end
 
 gem 'turbolinks'
-gem 'celluloid-io'
+# gem 'celluloid-io'
