@@ -1,18 +1,19 @@
 # encoding: utf-8
-$mqtt = MQTT::Client.connect('127.0.0.1')
-$mqtt_nc = MQTT::Client.connect('127.0.0.1')
+if RailsAdmin.env == 'production'
+    $mqtt = MQTT::Client.connect('127.0.0.1')
+    $mqtt_nc = MQTT::Client.connect('127.0.0.1')
 # $mqtt_duiduo = MQTT::Client.connect('127.0.0.1')
-$mqtt_robot = MQTT::Client.connect('127.0.0.1')
-$mqtt_agv = MQTT::Client.connect('127.0.0.1')
+    $mqtt_robot = MQTT::Client.connect('127.0.0.1')
+    $mqtt_agv = MQTT::Client.connect('127.0.0.1')
 
-$mqtt_nc.subscribe(
-    'workstations/1/nc/0001/0001',
-    'workstations/2/nc/0002/0001',
-    'workstations/3/nc/0003/0001',
-    'workstations/4/nc/0004/0001',
-    'workstations/5/nc/0005/0001',
-    'workstations/7/nc/0006/0001',
-)
+    $mqtt_nc.subscribe(
+        'workstations/1/nc/0001/0001',
+        'workstations/2/nc/0002/0001',
+        'workstations/3/nc/0003/0001',
+        'workstations/4/nc/0004/0001',
+        'workstations/5/nc/0005/0001',
+        'workstations/7/nc/0006/0001',
+    )
 
 # $mqtt_duiduo.subscribe(
 #     'workstations/1/duiduo/2001/6496', # 物流方向--01入库--02出库--03取空货箱
@@ -26,21 +27,21 @@ $mqtt_nc.subscribe(
 #     'workstations/1/duiduo/2001/6504' # 料台位置
 # )
 
-$mqtt_robot.subscribe(
-    'workstations/1/robots/0001/0001',
-    'workstations/1/robots/0001/0001',
-)
+    $mqtt_robot.subscribe(
+        'workstations/1/robots/0001/0001',
+        'workstations/1/robots/0001/0001',
+    )
 
-$mqtt_agv.subscribe(
-    'workstations/1/robots/0001/0001',
-    'workstations/1/robots/0001/0001',
-)
+    $mqtt_agv.subscribe(
+        'workstations/1/robots/0001/0001',
+        'workstations/1/robots/0001/0001',
+    )
 
-if Rails.env == 'production'
 # 各设备数据采集
 # DaqWorker.perform_async
 # MqttDuiduoWorker.perform_async
 # MqttRobotWorker.perform_async
 # # ParseAgvStatusWorker.perform_async
 # Tcs::OrderLine.parse_xml
+
 end
