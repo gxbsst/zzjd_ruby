@@ -80,7 +80,7 @@ class  Tcs::OrderLine < ActiveRecord::Base
       xml.tcsOrderSet {
         xml.order('xsi:type' => 'transportOperationOrder',
                   "name" => "#{self.one_tcs_order.order_name}",
-                  "operationName" => 'NOP',
+                  "operationName" => "#{self.operation}",
                   'operationPgress' => "100",
                   "xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance") do
         end
