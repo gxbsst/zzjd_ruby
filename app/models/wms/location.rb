@@ -20,4 +20,11 @@ class Wms::Location < ActiveRecord::Base
     locations = product.transport_units.collect{|tu| tu.location }
     locations.try(:first)
   end
+
+  def incoming_active
+    if read_attribute(:incoming_active).nil?
+      true
+    end
+    read_attribute(:incoming_active)
+  end
 end
