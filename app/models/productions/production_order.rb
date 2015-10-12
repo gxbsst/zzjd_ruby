@@ -114,17 +114,19 @@ class Productions::ProductionOrder < ActiveRecord::Base
 
   def send_xml
     host =  Settings.tcs.send_xml_server.ip
+    host = '127.0.0.1'
     port =  33333
     client_socket = TCPSocket.new(host, port)
     client_socket.write(self.to_xml)
     client_socket.close_write # Send EOF after writing the request.
-    parse_xml(client_socket.read)
+    puts client_socket.read
+    # parse_xml(client_socket.read)
   end
 
   def to_xml
     builder = Nokogiri::XML::Builder.new do |xml|
       xml.ProductionOrder("xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance") {
-        xml.workorder("device" => "1", "program_no" => "6001")
+        xml.workorder("device" => "3", "program_no" => "6001")
       }
     end
     builder.to_xml
@@ -136,6 +138,7 @@ class Productions::ProductionOrder < ActiveRecord::Base
 
   def self.parse_receive_xml
     host =  Settings.tcs.receive_xml_server.ip
+    # host = '127.0.0.1'
     port =  33334
 
     tr = Thread.new do
@@ -145,14 +148,9 @@ class Productions::ProductionOrder < ActiveRecord::Base
         accumulated_text  = ""
         while(line  = socket.readline && started)
           accumulated_text += line
-          if accumulated_text.include?("|")
-            split_xml_data = accumulated_text.split('|')
-            xml_data = split_xml_data[0]
-            # TODO ...
-            # ParseAgvStatusWorker.perform_async(xml_data)
-            accumulated_text = split_xml_data[1]
-          end
+          puts accumulated_text
         end
+        binding.pry
       rescue Exception => e
         socket.close if socket
         started = false

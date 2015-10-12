@@ -1,3 +1,17 @@
+require Rails.root.join('app/workers/test_worker')
+
+def send_one_order
+  name = "J1轴的生产计划"
+  production_no = '000002'
+  product_number = 1
+  product = Products::Product.find_by_no(3008)
+  production_order = Productions::ProductionOrder.find_or_create_by(
+      production_no: production_no,
+      product: product
+  )
+  production_order.send_xml
+end
+
 # encoding: utf-8
 namespace :app do
   desc "同步资源库对应用户"
@@ -154,8 +168,48 @@ namespace :app do
     product = Products::Product.find_by_no(3001)
 
     plan = Productions::Plan.find_or_create_by!(name: name, production_plan_no: production_plan_no, product_number: product_number, product_id: product.id, status: "draft")
-
-
   end
 
+  task :receive_xml => :environment do
+    host =  Settings.tcs.receive_xml_server.ip
+    # host = '127.0.0.1'
+    port =  33334
+    puts(Time.now)
+    # tr = Thread.new do
+    fork do
+      begin
+        socket = TCPSocket.open(host, port)
+        loop do
+          accumulated_text  = ""
+          while(line = socket.recv(1024)) do
+            accumulated_text += line
+            parse_xml(accumulated_text)
+          end
+        end
+      rescue Exception => e
+        puts "Error#{e.message}"
+      ensure
+        socket = TCPSocket.open(host, port)
+      end
+    end
+    # tr.join
+  end
+
+  def parse_xml(xml_data)
+    doc = Nokogiri.XML(xml_data)
+    element = doc.xpath("//status")
+    order_state = element.attr('orderState').try(:value)
+    if order_state == 'True'
+      puts("order state is true")
+      # sleep 2
+      send_one_order
+    else
+      puts("order state is false")
+    end
+  end
+
+  desc "NC与机器人联动演示"
+  task :start_nc => :environment do
+    send_one_order
+    end
 end
