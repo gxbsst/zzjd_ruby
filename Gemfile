@@ -89,4 +89,7 @@ group :assets do
 end
 
 gem 'turbolinks'
+
 gem 'rb-readline'
+gem 'celluloid-io'
+

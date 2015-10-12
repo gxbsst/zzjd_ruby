@@ -1,4 +1,5 @@
-require Rails.root.join('app/workers/test_worker')
+# encoding: utf-8
+# require Rails.root.join('app/workers/test_worker')
 
 def send_one_order
   name = "J1轴的生产计划"
@@ -12,7 +13,6 @@ def send_one_order
   production_order.send_xml
 end
 
-# encoding: utf-8
 namespace :app do
   desc "同步资源库对应用户"
   task :init_data => :environment do
@@ -211,5 +211,33 @@ namespace :app do
   desc "NC与机器人联动演示"
   task :start_nc => :environment do
     send_one_order
-    end
+  end
+
+  desc "堆垛车演示"
+  task :start_ddc => :environment do
+    name = "J1轴的生产计划"
+    production_no = '000002'
+    product_number = 1
+    product = Products::Product.find_by_no(3008)
+    production_order = Productions::ProductionOrder.find_or_create_by(
+        production_no: production_no,
+        product: product
+    )
+    # tr = Thread.new do
+      loop do
+        out_order =  production_order.transport_orders.first
+        in_order =  production_order.transport_orders.last
+
+        out_order.out_stock
+        in_order.in_stock
+        # duiduiche = Equipments::Duiduoche.build
+        # duiduiche.out_stock out_order.one_source_location.no, 1 # TODO: 1， 为库位, 1 为出料口
+        #
+        # if duiduiche.work_done?
+        #   out_order.finish
+        # end
+      end
+    # tr.join
+  end
+
 end

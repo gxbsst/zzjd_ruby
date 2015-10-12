@@ -126,7 +126,7 @@ module Equipments
 
     # value = [1,1] 第一个1表示库位， 第二个1表示料台
     def in_stock(*value)
-      if busy?
+      if busy? || offline?
         Rails.logger.info("忙中，不能工作....")
         return
       end
@@ -144,7 +144,7 @@ module Equipments
     end
 
     def out_stock(*value)
-      if busy?
+      if busy? || offline?
         Rails.logger.info("忙中，不能工作....")
         return
       end
