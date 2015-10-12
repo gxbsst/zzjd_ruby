@@ -1,5 +1,5 @@
 # encoding: utf-8
-if RailsAdmin.env == 'production'
+if Rails.env == 'production'
     $mqtt = MQTT::Client.connect('127.0.0.1')
     $mqtt_nc = MQTT::Client.connect('127.0.0.1')
 # $mqtt_duiduo = MQTT::Client.connect('127.0.0.1')
