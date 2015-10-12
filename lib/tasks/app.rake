@@ -1,4 +1,5 @@
-require Rails.root.join('app/workers/test_worker')
+# encoding: utf-8
+# require Rails.root.join('app/workers/test_worker')
 
 def send_one_order
   name = "J1轴的生产计划"
@@ -12,7 +13,6 @@ def send_one_order
   production_order.send_xml
 end
 
-# encoding: utf-8
 namespace :app do
   desc "同步资源库对应用户"
   task :init_data => :environment do

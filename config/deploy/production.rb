@@ -1,6 +1,6 @@
 set :rails_env, 'production'
 
-server 'jd234-1',
+server 'jd234',
        user: 'root',
        roles: %w{web app db whenever},
        ssh_options: {
