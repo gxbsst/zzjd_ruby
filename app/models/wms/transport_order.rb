@@ -52,15 +52,35 @@ class Wms::TransportOrder < ActiveRecord::Base
 
   end
 
+  def send_xml(action="in")
+    host =  Settings.tcs.send_xml_server.ip
+    # host = '127.0.0.1'
+    port = 22222
+    client_socket = TCPSocket.new(host, port)
+    client_socket.write(self.to_xml(action))
+    client_socket.close_write # Send EOF after writing the request.
+    puts client_socket.read
+  end
+
+  def to_xml(action="in")
+    builder = Nokogiri::XML::Builder.new do |xml|
+      xml.TransportOrder("xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance", "type" => "transport_order") {
+        xml.order("action" => "#{action}", "location" => "3", "outlet_id" => "1")
+      }
+    end
+    builder.to_xml
+  end
+
   def in_stock
     puts("正在入库中....")
     # location.update!(incoming_active: false)
     duiduiche = Equipments::Duiduoche.build
 
     #duiduiche.in_stock self.one_target_location.no, 1 # TODO: 1， 为库位, 1 为出料口
-    duiduiche.in_stock 3, 1 # TODO: 1， 为库位, 1 为出料口
-
-    check_work_done_status(duiduiche, self)
+    if duiduiche.work_done?
+      duiduiche.in_stock 3, 1 # TODO: 1， 为库位, 1 为出料口
+      check_work_done_status(duiduiche, self)
+    end
   end
 
   def out_stock
