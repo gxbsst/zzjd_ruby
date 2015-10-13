@@ -4,8 +4,8 @@ class Wms::Location < ActiveRecord::Base
   validates :x, uniqueness: {scope: [:y, :z]}
   has_many :transport_unit, :class_name => 'Wms::TransportUnit', foreign_key: :actual_location
   has_many :one_products, :class_name => 'Products::Product', through: :transport_unit
-  scope :area_a, -> { where area: 'area_a'}
-  scope :area_b, -> { where area: 'area_b'}
+  scope :area_a, -> { where(area: 'area_a').order(:no)}
+  scope :area_b, -> { where(area: 'area_b').order(:no)}
   scope :available, -> { where incoming_active: [true, nil]}
   scope :unavailable, -> { where incoming_active: false}
 
