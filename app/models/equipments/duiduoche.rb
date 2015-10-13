@@ -11,7 +11,7 @@ module Equipments
     READ_STATUS = 6500 #---物流状态----00堆垛车网络掉线--01正常（空闲）--02忙--03空闲报警--04运行报警
     # 6501--传送链叫料---01需要上料（出库）
     READ_WORK_STATUS = 6502 #--入库/出库工作完成状态--01入库完成--02出库完成--03取空箱完成
-    READ_RETURN_LOCATION = 6503#---入/出库位置--入库/出库/取空箱位置 // 放好库位之后，返回放好的库位
+    READ_RETURN_LOCATION = 6503#---入/出库位置--/出库/取空箱位置 // 放好库位之后，返回放好的库位
     READ_WORKSTATION = 6504 #---料台位置
 
     def self.build
@@ -29,16 +29,45 @@ module Equipments
       @duiduoche
     end
 
+    def in_out_stock
+      out_stock = true
+      in_stock = false
+
+      while out_stock
+        out_stock(3,1)
+        while !work_done?
+          sleep 1
+          puts "*" *100
+          puts "还在出库中..."
+          puts "*" *100
+        end
+        out_stock = false
+        in_stock = true
+      end
+
+      while in_stock
+        in_stock(3,1)
+        while !work_done?
+          sleep 1
+          puts "*" *100
+          puts "还在出库中..."
+          puts "*" *100
+        end
+        out_stock = true
+        in_stock = false
+      end
+    end
+
     def  run_test
       puts Time.now
       i = 1
-      while i < 36
+      while i < 10000
         stock = i
         tt = true
         while tt
           if work_done? && !busy?
             puts "入库中...库位：#{stock}"
-            in_stock(i, 1)
+            in_stock(3, 1)
             tt = false
           end
         end
@@ -47,7 +76,7 @@ module Equipments
         while t
           if work_done? && !busy?
             puts "出库中...库位：#{stock}"
-            out_stock(i,1)
+            out_stock(3,1)
             t = false
           end
         end
@@ -87,6 +116,11 @@ module Equipments
       sync
       return true if @a6500 == 2
       false
+    end
+
+    def free?
+     sync
+      @a6500 == 1
     end
 
     def busy?
@@ -131,13 +165,15 @@ module Equipments
         return
       end
 
-      address = [1] << value
-      # begin
+      if free?
+        address = [1] << value
+        # begin
         ModBus::TCPClient.new(IP, 502) do |cl|
           cl.with_slave(1) do |slave|
             slave.holding_registers[6496..6498] = address.flatten
           end
         end
+      end
       # rescue Exception => e
       #   Rails.logger.info("没有完成，请查看错误日志#{e}")
       # end
@@ -148,15 +184,18 @@ module Equipments
         Rails.logger.info("忙中，不能工作....")
         return
       end
-      address = [2] << value
-      begin
-        ModBus::TCPClient.new(IP, 502) do |cl|
-          cl.with_slave(1) do |slave|
-            slave.holding_registers[6496..6498] = address.flatten
+
+      if free?
+        address = [2] << value
+        begin
+          ModBus::TCPClient.new(IP, 502) do |cl|
+            cl.with_slave(1) do |slave|
+              slave.holding_registers[6496..6498] = address.flatten
+            end
           end
+        rescue Exception => e
+          Rails.logger.info("没有完成，请查看错误日志")
         end
-      rescue Exception => e
-        Rails.logger.info("没有完成，请查看错误日志")
       end
     end
 
@@ -165,6 +204,10 @@ module Equipments
       add = READ_WORK_STATUS
       values = 5
       Modbus.write(IP, add, values)
+    end
+
+    def back?
+      
     end
 
   end

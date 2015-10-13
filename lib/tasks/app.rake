@@ -229,6 +229,7 @@ namespace :app do
         in_order =  production_order.transport_orders.last
 
         out_order.out_stock
+
         in_order.in_stock
         # duiduiche = Equipments::Duiduoche.build
         # duiduiche.out_stock out_order.one_source_location.no, 1 # TODO: 1， 为库位, 1 为出料口
@@ -238,6 +239,59 @@ namespace :app do
         # end
       end
     # tr.join
+  end
+  desc "堆垛车接收返回数据"
+  task :receive_wms_xml => :environment do
+    host =  Settings.tcs.receive_xml_server.ip
+    port =  22223
+    puts(Time.now)
+    tr = Thread.new do
+    # fork do
+      begin
+        socket = TCPSocket.open(host, port)
+        loop do
+          accumulated_text  = ""
+          while(line = socket.recv(1024)) do
+            accumulated_text += line
+            parse_wms_xml(accumulated_text)
+          end
+        end
+      rescue Exception => e
+        puts "Error#{e.message}"
+      ensure
+        socket = TCPSocket.open(host, port)
+      end
+    end
+    tr.join
+  end
+
+  desc "堆垛车演示"
+  task :start_wms => :environment do
+    send_transport_order
+  end
+
+  def parse_wms_xml(xml_data)
+    doc = Nokogiri.XML(xml_data)
+    element = doc.xpath("//status")
+    order_state = element.attr('orderState').try(:value)
+    if order_state == 'True'
+      puts("order state is true")
+      # sleep 2
+
+      # send_transport_order()
+    else
+      puts("order state is false")
+    end
+  end
+
+  def send_transport_order(action = "in")
+    (1..100).each do |i|
+      if i % 2 == 1
+        Wms::TransportOrder.first.send_xml('in')
+      else
+        Wms::TransportOrder.first.send_xml('out')
+      end
+    end
   end
 
 end
