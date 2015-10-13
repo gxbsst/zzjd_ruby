@@ -18,7 +18,7 @@ class Productions::ProductionOrder < ActiveRecord::Base
   before_create :set_production_no, :set_production_name
   after_create :generate_work_orders, :create_tcs_order, :generate_tcs_order_lines
   before_validation :set_status, :set_production_no
-  after_save :generate_wms_transport_order
+  after_create :generate_wms_transport_order
   after_commit :generate_logistics_chains
 
   def set_production_name
