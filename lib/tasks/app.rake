@@ -285,11 +285,34 @@ namespace :app do
   end
 
   def send_transport_order(action = "in")
-    (1..100).each do |i|
+    # location = [1,2,3,4,5,6,7,8,21,22,23,24,25].sample
+    # locations = (1..31).map {|i| [i,i] }.flatten
+
+    # Wms::TransportOrder.first.send_xml('out', 3)
+    # Wms::TransportOrder.first.send_xml('in', 3)
+    (1..12).each do |i|
+      # [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,]
+      # if i == 1 || i == 2
+      #   location = 1
+      #   elsif i == 3 || i == 4
+      #     location = 2
+      # elsif i == 5 || i == 6
+      #   location = 3
+      # elsif i == 7 || i == 8
+      #   location = 4
+      # end
+      locations = [0]
+      locations << (3..8).map {|i| [i,i] }.flatten
+      locations.flatten!
+      location = locations[i]
+      puts ("*"*100)
+      puts location
+      puts ("*"*100)
+      # Wms::TransportOrder.first.send_xml('out', location)
       if i % 2 == 1
-        Wms::TransportOrder.first.send_xml('in')
+        Wms::TransportOrder.first.send_xml('in', location)
       else
-        Wms::TransportOrder.first.send_xml('out')
+        Wms::TransportOrder.first.send_xml('out', location)
       end
     end
   end

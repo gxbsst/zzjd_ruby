@@ -125,11 +125,31 @@ class Productions::ProductionOrder < ActiveRecord::Base
 
   def to_xml
     builder = Nokogiri::XML::Builder.new do |xml|
-      xml.ProductionOrder("xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance") {
+      xml.ProductionOrder("xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance", "type" => 'robot_assemble') {
         xml.workorder("device" => "3", "program_no" => "6001")
       }
     end
     builder.to_xml
+  end
+
+  def send_trigger_xml
+    host =  Settings.tcs.send_xml_server.ip
+    host = '127.0.0.1'
+    port =  33333
+    client_socket = TCPSocket.new(host, port)
+    client_socket.write(self.to_trigger_xml)
+    client_socket.close_write # Send EOF after writing the request.
+    puts client_socket.read
+  end
+
+  def to_trigger_xml
+    builder = Nokogiri::XML::Builder.new do |xml|
+      xml.ProductionOrder("xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance", "type" => 'trigger') {
+        xml.workorderTrigger("device" => "11", "task" => "Task-1")
+      }
+    end
+    builder.to_xml
+
   end
 
   def parse_xml(data)

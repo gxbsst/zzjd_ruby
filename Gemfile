@@ -1,4 +1,5 @@
 source 'https://ruby.taobao.org'
+source 'https://rails-assets.org'
 
 gem 'rails', '4.2.4'
 gem 'rails-api'
@@ -84,8 +85,8 @@ gem 'state_machine', github: 'ugoa/state_machine'
 gem 'redis-objects'
 
 group :assets do
-  gem 'compass-rails'
-  gem 'uglifier', '>= 1.0.3'
+  # gem 'compass-rails'
+
 end
 
 gem 'turbolinks'
@@ -94,3 +95,31 @@ gem 'celluloid-io'
 gem 'rb-readline'
 
 
+# gem 'compass-rails', '~> 2.0.0'
+gem "compass-rails", github: "Compass/compass-rails", branch: "master"
+gem 'uglifier', '>= 1.0.3'
+gem 'rails-assets-jquery', '~> 1.10.0'
+
+gem 'rails-assets-mockjs', '~> 0.1.5'
+
+gem 'rails-assets-css3-mediaqueries-js'
+gem 'rails-assets-es5-shim'
+
+gem 'rails-assets-lodash'
+
+gem 'rails-assets-angular', '~> 1.2.0', :source => 'https://rails-assets.org/'
+gem 'rails-assets-angular-route', '~> 1.2.0'
+gem 'rails-assets-angular-sanitize', '~> 1.2.0'
+gem 'rails-assets-angular-resource', '~> 1.2.0'
+gem 'rails-assets-angular-cache', '~> 2.3.7'
+gem 'rails-assets-angular-ui-router', '~> 0.2.12'
+gem 'rails-assets-angular-validation', '~> 1.2.0'
+gem 'rails-assets-restangular'
+gem 'rails-assets-interact'
+gem 'rails-assets-angular-chart.js'
+gem 'rails-assets-angular-moment'
+gem 'rails-assets-angular-bootstrap-datetimepicker'
+gem 'rails-assets-js-base64'
+
+gem 'htmlcompressor'
+gem 'angular-rails-templates'

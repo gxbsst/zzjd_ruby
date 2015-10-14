@@ -1,0 +1,26 @@
+<div class="gauges-list">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>对应技能</th>
+            <th>量规标准</th>
+            <th width="60">权重</th>
+            <th ng-repeat="column in []" ng-bind="$index|gauge:vm.project.gaugeType" ng-click="vm.setDisabled(!column.disabled, $index)" ng-class="{disabled:column.disabled}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="gauge in vm.gauges.data" class="gauge-item">
+            <td ng-bind="gauge.technique.title||'选择技能'" class="center cur-pointer" ng-class="{'text-red':gauge.technique}"></td>
+            <td class="et-gauge">
+                <textarea ng-model="gauge.standard" spellcheck="false"></textarea>
+            </td>
+            <td class="et-gauge">
+                <textarea class="center" ng-model="gauge.weight" spellcheck="false"></textarea>
+            </td>
+            <td ng-repeat="level in [1,2,3,4,5]" ng-class="{disabled:vm.project.gaugeHead[$index].disabled}" class="et-gauge">
+                <textarea ng-model="gauge['level_'+level]" spellcheck="false" ng-readonly="vm.project.gaugeHead[$index].disabled"></textarea>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

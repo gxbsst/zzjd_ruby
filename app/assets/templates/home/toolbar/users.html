@@ -1,0 +1,12 @@
+<div ng-controller="ToolbarUsersController as vm">
+    <h2>可能认识的人</h2>
+    <ul>
+        <li ng-repeat="user in vm.users">
+            <img ng-src="{{user|avatar}}" />
+            <strong ng-bind="user.username"></strong>
+            <span class="btn btn-sm" ng-if="!HANDLES.isFollowed(user.id)" ng-click="HANDLES.follow(user.id)">关注TA</span>
+            <span class="btn btn-gray btn-sm" ng-if="HANDLES.isFollowed(user.id)" ng-click="HANDLES.unFollow(user.id)">取消关注</span>
+        </li>
+    </ul>
+    <a class="toolbar-more" href="#">查看更多 <i class="pf-arrow-down"></i></a>
+</div>

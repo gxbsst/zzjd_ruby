@@ -1,0 +1,70 @@
+@import "compass/css3";
+
+.et-select{
+  display:inline-block;
+  vertical-align:middle;
+  .et-select-container{
+    position:relative;
+    &.active{
+      z-index:1000;
+    }
+    .et-select-label{
+      position:relative;
+      color:#333;
+      line-height:31px;
+      padding:0 32px 0 12px;
+      overflow:hidden;
+      cursor:pointer;
+      white-space:nowrap;
+      text-overflow:ellipsis;
+      @include border-radius(3px);
+      &:before{
+        display:block;
+        position:absolute;
+        right:0;
+        top:0;
+        bottom:0;
+        width:20px;
+        border-left:1px solid #e0e0e0;
+        font-family:'PblIconFont';
+        line-height:31px;
+        text-align:center;
+        content:'\f05b';
+        @include border-radius(0 3px 3px 0);
+        @include background-image(linear-gradient(#fefefe, #f9f9f9));
+      }
+      &.focusin{
+        color:#000;
+        &:before{
+          color:#0078ff;
+          border-color:#97ccfa;
+          content:'\f0aa';
+          @include background-image(linear-gradient(#f5ffff, #dcf0ff));
+        }
+      }
+    }
+    .et-select-options{
+      position:absolute;
+      left:0;
+      top:37px;
+      min-width:100%;
+      .selection{
+        border:1px solid #d9d9d9;
+        margin:0 -1px;
+        background:#fff;
+        white-space:nowrap;
+        max-height:300px;
+        overflow:auto;
+        @include border-radius(3px);
+        @include box-shadow(0 0 12px 0 rgba(0, 0, 0, .3));
+        & > li:last-of-type{
+          border:none;
+        }
+      }
+      &.et-top-options{
+        top:auto;
+        bottom:37px;
+      }
+    }
+  }
+}

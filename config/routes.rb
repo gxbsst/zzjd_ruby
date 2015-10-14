@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  root :to => 'index#index'
   # post "/admin/:model_name/:id/delete", to: "rails_admin/main#delete"
   # post "/admin/:model_name/:id/edit", to: "rails_admin/main#edit"
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

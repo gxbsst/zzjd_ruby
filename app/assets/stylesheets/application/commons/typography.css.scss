@@ -1,0 +1,89 @@
+@each $int in 25, 50, 75, 100, 125, 150, 175, 200{
+  .font-size-#{$int}{
+    font-size:#{$int + '%'} !important;
+  }
+}
+
+@each $type in border, outline, padding, margin{
+  .no-#{$type}{
+    #{$type}:0 !important;
+  }
+}
+
+@each $color in blue, green, red, yellow, gray, silver, white{
+  .text-#{$color}{
+    color:$color !important;
+  }
+  .bg-#{$color}{
+    background-color:$color;
+  }
+}
+
+.text-bold{
+  font-weight:bold;
+}
+
+@each $int in 12, 16, 20, 35, 40, 60{
+  .lh-#{$int}{
+    line-height:$int + px !important;
+  }
+}
+
+@each $int in 2, 4, 6, 8, 10, 12, 16, 20{
+  .space-#{$int}{
+    height:$int + px !important;
+    overflow:hidden;
+    clear:both;
+  }
+  .padding-#{$int}{
+    padding:$int + px !important;
+  }
+  .margin-#{$int}{
+    margin:$int + px !important;
+  }
+  @each $dir in left, right, top, bottom{
+    .padding-#{$dir}-#{$int}{
+      padding-#{$dir}:$int + px !important;
+    }
+    .margin-#{$dir}-#{$int}{
+      margin-#{$dir}:$int + px !important;
+    }
+  }
+}
+
+@each $type in left, center, right{
+  .text-#{$type}{
+    text-align:$type !important;
+  }
+}
+
+.center{
+  text-align:center;
+}
+
+.clearfix{
+  clear:both;
+  content:'';
+}
+
+.row{
+  display:block;
+  &:before, &:after{
+    display:table;
+    content:' ';
+  }
+  &:after{
+    clear:both;
+  }
+}
+
+.list-group{
+  .list-group-item{
+    line-height:15px;
+    padding:8px 12px;
+    border-bottom:1px solid #f0f0f0;
+    &:hover{
+      background:#f5f5f5;
+    }
+  }
+}

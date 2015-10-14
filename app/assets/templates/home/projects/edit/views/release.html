@@ -1,0 +1,134 @@
+<div class="col-1-1 project-release">
+    <i class="pf-preview-flag"></i>
+    <div class="col-1-1 info " et-init="vm.project.cover=vm.getResources(RESOURCE_TYPES.project.cover,vm.project.id,true)">
+        <div class="cover">
+            <span class="text-red" ng-if="vm.project.resources.length&&!vm.project.cover">尚未上传封面</span>
+            <span class="text-gray" ng-if="!vm.project.resources.length"><i class="pf-spinner-2 rotation"></i></span>
+            <img ng-src="{{vm.project.cover.key|thumb:'120x120'}}" ng-if="vm.project.cover" />
+        </div>
+        <h1 ng-bind="vm.project.name"></h1>
+        <strong>课程时长：</strong><span ng-bind="vm.project.duration + (vm.project.duration_unit|unit)"></span><br/>
+        <strong>学科标签：</strong><span class="tag" ng-repeat="tag in vm.project.tag_list track by $index" ng-bind="tag"></span><br/>
+        <strong>项目概述：</strong>
+        <div class="row text-gray" ng-bind-html="vm.project.description||'尚未填写项目概述'" ng-class="{'text-red':!vm.project.description}"></div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="hr"></div>
+    <div class="col-1-2" et-init="vm.project.final_product.resource=vm.getResources(RESOURCE_TYPES.project.product,vm.project.final_product.id,true)">
+        <div class="row margin-bottom-20">
+            <h3>指导老师：<span ng-bind="vm.project.teachers.length||0"></span>人</h3>
+            <div class="col-1-1 members">
+                <span ng-repeat="member in vm.project.teachers" et-tips="content=member.user.username">
+                    <img ng-src="{{member.user|avatar}}"/>
+                </span>
+            </div>
+        </div>
+        <div class="row margin-bottom-20">
+            <h3>最终产品：</h3>
+            <strong>产品形态：</strong><span ng-bind="vm.project.final_product.product_form.name" et-tips="delay=150;black=false;content=vm.project.final_product.product_form.description"></span><br/>
+            <strong>产品示例：</strong><a ng-href="{{vm.project.final_product.resource|uri}}" target="_blank" ng-bind="vm.project.final_product.resource.name"></a>
+        </div>
+    </div>
+    <div class="col-1-2">
+        <div class="row margin-bottom-20">
+            <h3>项目成员：<span ng-bind="vm.project.members.length||0"></span>人</h3>
+            <div class="col-1-1 members">
+                <span ng-repeat="member in vm.project.members|limitTo:vm.limitTo" et-tips="content=member.user.username">
+                    <img ng-src="{{member.user|avatar}}"/>
+                </span>
+                <a href="javascript:void(0);" ng-if="vm.project.members.length>vm.limit" ng-click="vm.toggle()" ng-bind="vm.showed?'收起':'全部'"></a>
+            </div>
+        </div>
+        <div class="row margin-bottom-20">
+            <h3>启动文档：</h3>
+            <div class="col-1-1 documents">
+                <div class="col-1-2" ng-repeat="doc in vm.getResources(RESOURCE_TYPES.project.document,vm.project.id)"><a ng-href="{{doc|uri}}" ng-bind="doc.name"></a></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-1-1 margin-bottom-20">
+        <h3>课程标准：</h3>
+        <table class="table bg-white">
+            <thead>
+            <tr>
+                <th width="130">学科</th>
+                <th width="150">学段</th>
+                <th>课标</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="entry in vm.project.standard_items">
+                <td ng-bind="entry.standard_item.parents.subject.name"></td>
+                <td ng-bind="entry.standard_item.parents.phase.name"></td>
+                <td ng-bind="entry.standard_item.content"></td>
+            </tr>
+            <tr ng-if="!vm.project.standard_items">
+                <td colspan="3" class="loading"><i class="pf-spinner-2 rotation"></i></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-1-1 margin-bottom-20">
+        <h3>技能：</h3>
+        <table class="table bg-white">
+            <thead>
+            <tr>
+                <th width="130">技能种类</th>
+                <th width="150">分类</th>
+                <th>技能</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="entry in vm.project.techniques">
+                <td ng-bind="entry.technique.parents.category.name"></td>
+                <td ng-bind="entry.technique.parents.sub_category.name"></td>
+                <td ng-bind="entry.technique.title"></td>
+            </tr>
+            <tr ng-if="!vm.project.techniques">
+                <td colspan="3" class="loading"><i class="pf-spinner-2 rotation"></i></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-1-1 margin-bottom-20">
+        <h3>驱动性问题：</h3>
+        <span ng-bind="vm.project.driven_issue"></span>
+    </div>
+    <div class="col-1-1 margin-bottom-20">
+        <h3>知识列表：</h3>
+        <ol>
+            <li ng-repeat="knowledge in vm.project.knowledges">
+                <span ng-bind="knowledge.description"></span>
+            </li>
+        </ol>
+    </div>
+    <div class="col-1-1">
+        <h3>量规：</h3>
+        <table class="table bg-white">
+            <thead>
+            <tr>
+                <th>对应技能</th>
+                <th>量规标准</th>
+                <th width="60">权重</th>
+                <th ng-repeat="column in vm.project.ruleHeads" ng-if="!column.disabled"
+                    ng-bind="$index|gauge:vm.project.rule_template"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="gauge in vm.project.rules" class="gauge-item">
+                <td ng-bind="gauge.technique.title"></td>
+                <td ng-bind="gauge.standard"></td>
+                <td class="center"><span ng-bind="gauge.weight"></span><span class="text-silver font-size-75">%</span></td>
+                <td ng-repeat="column in vm.project.ruleHeads" ng-if="!column.disabled" ng-bind="gauge['level_'+($index+1)]"></td>
+                <td ng-if="gauge._destroy"><i class="pf-spinner-2 rotation"></i></td>
+            </tr>
+            <tr ng-if="!vm.project.rules">
+                <td colspan="8" class="loading"><i class="pf-spinner-2 rotation"></i></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="col-1-1 center padding-20">
+    <span class="btn btn-lg btn-blue" ng-if="!vm.project.state||vm.project.state=='draft'" ng-click="vm.releaseProject(vm.project,$event)"><i class="pf-doc-eye"></i> 发布项目</span>
+</div>

@@ -1,0 +1,36 @@
+<div class="register register-school" et-exec="vm.getClazzs()">
+    <h3 class="center">第三步 编辑班级信息</h3>
+    <form class="form-horizontal" ng-submit="vm.save(5)">
+        <div class="form-group">
+            <select et-select="GRADES" ng-model="vm.clazz.$grade_id" et-config="placeholder='请选择您所在的年级'"
+                    ng-change="vm.onGrade()"></select>
+        </div>
+        <div class="form-group">
+            <select ng-model="vm.clazz.clazz_id" et-select="vm.clazzs"
+                    et-config="label='name';placeholder='请选择您所在的班级'"></select>
+            <span class="note">
+                如果您的班级不在列表中，请点击
+                <a href="javascript:void(0)"
+                   et-modal="$user=vm.user;title='添加班级';controller='ClazzCreatorController as vm';src='register/clazz-creator.html'">添加</a>
+            </span>
+        </div>
+        <div class="form-group">
+            <select ng-model="vm.clazz.role" et-select="ROLES.clazz"
+                    et-config="placeholder='请选择您的角色'"></select>
+            <div class="center margin-top-6">
+                <span class="btn btn-blue btn-sm" ng-class="{disabled:!vm.clazz.clazz_id||!vm.clazz.role}" ng-click="vm.addClazz()">加入班级</span>
+            </div>
+        </div>
+        <div class="hr hr-dotted"></div>
+        <div class="center">
+            <div class="loading" ng-if="!vm.user.clazzs"><i class="pf-spinner-2 rotation"></i></div>
+            <span class="text-red" ng-if="vm.user.clazzs&&!vm.user.clazzs.length">还没有加入任何班级</span>
+            <span class="register-clazz-item block-mini" ng-repeat="entry in vm.user.clazzs" ng-if="entry.clazz"><span ng-bind="entry|group"></span><i class="pf-cross" ng-click="vm.removeClazz(entry.id)"></i></span>
+        </div>
+        <div class="clearfix"></div>
+        <div class="et-modal-footer center">
+            <span class="btn btn-gray" ng-click="setStep(3)">上一步</span>
+            <button type="submit" class="btn" ng-class="vm.btn()" ng-disabled="!vm.user.clazzs.length">保存并继续</button>
+        </div>
+    </form>
+</div>

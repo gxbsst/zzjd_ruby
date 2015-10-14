@@ -1,0 +1,479 @@
+@import "compass/css3";
+
+.selector{
+  width:650px;
+  dl.table{
+    dd{
+      height:350px;
+      ul.categories{
+        margin:0 -12px;
+        li{
+          border-bottom:1px solid #e0e0e0;
+          padding:0 12px;
+          cursor:pointer;
+          &:hover{
+            background:#fafafa;
+          }
+          &.active{
+            background:#f5faff;
+            border-left:2px solid #6faef0;
+            padding-left:10px;
+          }
+        }
+      }
+      .selector-entries{
+        line-height:26px;
+        height:100%;
+        margin:0 -12px;
+        padding:3px 12px;
+        overflow:auto;
+        .selector-entry{
+          font-weight:bold;
+        }
+        .selector-entry-children{
+          //padding-left:1em;
+        }
+        &.busy{
+          position:relative;
+          &:after{
+            display:block;
+            position:absolute;
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            background:rgba(255, 255, 255, 0.45);
+            content:'';
+          }
+        }
+      }
+      .selector-footer{
+        text-align:right;
+        height:30px;
+        padding:8px;
+      }
+      &.scrollbar{
+        padding:0;
+        ul.categories{
+          margin:0;
+        }
+        .remark{
+          margin:0 12px;
+        }
+      }
+    }
+  }
+  .selector{
+    line-height:50px;
+  }
+}
+
+/*.input-group{
+  span{
+    position:relative;
+    input{
+      border:none;
+      border-bottom:#000 solid 1px;
+      width:90px;
+      margin-right:3px;
+      text-align:center;
+    }
+    i{
+      left:50%;
+      bottom:28px;
+      color:red;
+      height:27px;
+      margin-left:-29px;
+      padding:0 5px;
+      line-height:27px;
+      position:absolute;
+      font-style:normal;
+      border:#e0e0e0 solid 1px;
+      display:inline-block;
+      &:before, &:after{
+        width:0;
+        height:0;
+        font-size:0;
+        border-width:8px;
+        position:absolute;
+        content:"";
+        border-style:dashed dashed dashed dashed;
+        border-top-color:#e0e0e0;
+      }
+      &:before{
+        position:absolute;
+        left:50%;
+        bottom:-16px;
+        margin-left:-6px;
+        border-color:rgba(0, 0, 0, .25) transparent transparent transparent;
+      }
+      &:after{
+        position:absolute;
+        left:50%;
+        bottom:-15px;
+        margin-left:-6px;
+        border-color:#FFF transparent transparent transparent;
+      }
+    }
+  }
+}*/
+
+ul.nav-left{
+  li{
+    margin-bottom:1px;
+    a{
+      display:block;
+      color:#333;
+      line-height:30px;
+      padding:0 12px;
+      text-decoration:none;
+      i{
+        display:inline-block;
+        font-size:18px;
+        color:#c8c8c8;
+        line-height:29px;
+        margin-right:6px;
+        float:left;
+      }
+      &:hover,&.active{
+        text-decoration:none;
+        color:#4182f0;
+        background:#f5f5f5;
+        i{
+          color:#4182f0;
+        }
+      }
+    }
+  }
+}
+
+.current-user{
+  position: relative;
+  .user-pic{
+    width: 86px;
+    margin: auto;
+    text-align: center;
+    img{
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+    }
+  }
+  .user-console{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    width: 20px;
+    span{
+      font-size: 20px;
+      color: #aaa;
+      display: block;
+      cursor: pointer;
+    }
+  }
+  .user-info{
+    color: #666;
+  }
+}
+
+.row{
+  &.info-divide{
+    border-bottom: 1px solid #e3e3e3;
+    .info-title{
+      text-align: right;
+      font-size: 18px;
+      line-height: 18px;
+      padding: 20px 0;
+    }
+    .info-cont{
+      font-size: 15px;
+      line-height: 18px;
+      padding: 20px;
+      .sub-title{
+        color: #999;
+        text-align: right;
+      }
+      .col-1-1{
+        margin: 5px 0;
+      }
+      .info-tag{
+        &:after{
+          content: '\, ';
+        }
+        &:last-child{
+          &:after {
+            content: '';
+          }
+        }
+      }
+    }
+  }
+  .row-title{
+    height:36px;
+    border-bottom:1px solid #e3e3e3;
+    margin-bottom: 10px;
+    span{
+      line-height:36px;
+      display:inline-block;
+      height:36px;
+      &.btn{
+        margin: 0px 10px;
+        line-height: 24px;
+        height: 24px;
+      }
+      &.title{
+        font-size: 24px;
+        border-bottom:1px solid #3c7ff2;
+      }
+      &.select-btn{
+        float: right;
+        width: 50px;
+        margin: auto 5px;
+        color: #b0b0b0;
+        text-align: center;
+        &.active,&:hover{
+          color: #397ef3;
+          border-bottom:1px solid #000000;
+        }
+      }
+    }
+  }
+}
+
+.map-tab{
+  height: 242px;
+  &.todo{
+    .no-data{
+      padding: 40px;
+      text-align: center;
+      i{
+        font-size: 92px;
+        color: #e3e3e3;
+      }
+      .slogen{
+        margin-top: 20px;
+        font-size: 19px;
+      }
+    }
+    .todo-data{
+      .todo-ctrl{
+        padding:20px 10px ;
+        text-align: right;
+        span{
+          cursor: pointer;
+          margin-left: 10px;
+          color: #666666;
+        }
+      }
+      .todo-list{
+        height: 160px;
+        .todo-item{
+          height: 40px;
+          line-height: 40px;
+          vertical-align: middle;
+          font-size: 16px;
+          border-bottom: 1px dashed #aaaaaa;
+          &.active,&:hover{
+            .todo-select{
+              i{
+                display: inline-block;
+              }
+            }
+            .todo-edit{
+              display: inline-block;
+            }
+          }
+          .todo-edit{
+            display: none;
+            float: right;
+            color: #aaaaaa;
+            i{
+              cursor: pointer;
+              margin: 0 3px;
+            }
+          }
+          .todo-select{
+            width: 11px;
+            height: 40px;
+            float: left;
+            i{
+              display: none;
+              width: 11px;
+              height: 11px;
+              border: 1px solid #666666;
+              cursor: pointer;
+            }
+          }
+          .todo-title{
+            float: left;
+            margin-left: 5px;
+            display: inline-block;
+            max-width: 70%;
+            cursor: pointer;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            &:before{
+              content: '';
+              background: #3d7ff7;
+              width: 6px;
+              height: 6px;
+              display: inline-block;
+              margin-right: 5px;
+              border-radius: 50%;
+              vertical-align: middle;
+            }
+          }
+          .todo-endat{
+            float: left;
+            display: inline-block;
+            height: 18px;
+            line-height: 15px;
+            margin: 10px 5px;
+            font-size: 10px;
+            color: #ffffff;
+            background: #89bf5d;
+            padding: 2px 5px;
+            border-radius: 2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.et-modal-container{
+  .todo-form{
+    width: 600px;
+    .col-1-1{
+      margin-bottom: 20px;
+    }
+    .form-time{
+      .input-group{
+        display: inline-table;
+        margin-right: 10px;
+      }
+      .control-label{
+        text-align: center;
+      }
+    }
+  }
+  .queue-list{
+    height: 500px;
+    .queue-item{
+      margin-bottom: 10px;
+      .queue-title{
+        line-height:35px;
+        padding:0 12px;
+        background:#f5f5f5;
+        cursor:pointer;
+        i[class^="pf-triangle-"]{
+          margin-right:6px;
+          color:#999;
+        }
+      }
+
+      .todo-list{
+        .todo-item{
+          height: 40px;
+          line-height: 40px;
+          font-size: 16px;
+          border-bottom: 1px dashed #aaaaaa;
+
+          &.active,&:hover{
+            .todo-select{
+              i{
+                display: inline-block;
+              }
+            }
+            .todo-edit{
+              display: inline-block;
+            }
+          }
+          .todo-edit{
+            display: none;
+            float: right;
+            color: #aaaaaa;
+            i{
+              cursor: pointer;
+              margin: 0 3px;
+            }
+          }
+          .todo-select{
+            width: 18px;
+            height: 40px;
+            float: left;
+            display: inline-block;
+            i{
+              &:before{
+                width: 16px;
+                height: 16px;
+                display: inline-block;
+                cursor: pointer;
+                border: 1px solid #666666;
+                font-size: 14px;
+              }
+              &.pf-checkmark{
+                &:before{
+                  border: 1px solid #7ccc1f;
+                  background: #7ccc1f;
+                  color: #ffffff;
+                }
+              }
+            }
+          }
+          .todo-title{
+            height: 40px;
+            float: left;
+            margin-left: 5px;
+            display: inline-block;
+            max-width: 60%;
+            line-height: 40px;
+            cursor: pointer;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+          }
+          .todo-completeat{
+            float: right;
+            margin-left: 5px;
+            font-size: 10px;
+            padding: 0 5px;
+            border-radius: 2px;
+          }
+        }
+      }
+    }
+  }
+  .todo-ctrl{
+    .todo-selectall{
+      margin-right: 10px;
+      display: inline-block;
+      i{
+        &:before{
+          width: 16px;
+          height: 16px;
+          display: inline-block;
+          cursor: pointer;
+          border: 1px solid #666666;
+          font-size: 14px;
+        }
+        &.pf-checkmark{
+          &:before{
+            background: #7ccc1f;
+            border: 1px solid #7ccc1f;
+            color: #ffffff;
+          }
+        }
+      }
+    }
+    .todo-edit{
+      float: right;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .red{
+      color: #ff6504;
+    }
+  }
+}

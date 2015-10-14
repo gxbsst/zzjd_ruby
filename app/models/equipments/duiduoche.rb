@@ -4,7 +4,7 @@ module Equipments
 
     IP =  '192.168.5.7'
     WRITE_ACTION = 6496 #物流方向--01入库--02出库--03取空货箱
-    WRITE_STOCK_LOCATION = 6497 #物流方向--01入库--02出库--03取空货箱
+    WRITE_STOCK_LOCATION = 6497 # 库位
     WRITE_WORKSTATION = 6498 #料台位置--01南料台--02北侧料台
     WRITE_CLEAN_STATUS = 6499 #清理入库、出库、取空箱完成标志位 // 收到完成信号，写5
 

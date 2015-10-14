@@ -1,0 +1,123 @@
+@import "compass/css3";
+
+.group-header{
+  padding:15px 0;
+  border-bottom:3px solid #dcdcdc;
+  color:#999;
+  &:after{
+    display:block;
+    clear:both;
+    content:'';
+  }
+  .group-name{
+    line-height:30px;
+    margin-bottom:6px;
+    strong{
+      display:inline-block;
+      font-size:26px;
+      color:#0064f0;
+      margin-right:10px;
+    }
+    .group-edit{
+      display:inline-block;
+      width:30px;
+      position:relative;
+      cursor:pointer;
+      .pf-edit{
+        display:inline-block;
+        width:30px;
+        height:30px;
+        font-size:18px;
+        line-height:30px;
+      }
+      &:hover{
+        .mini-menu{
+          display:block;
+        }
+        .pf-edit{
+          color:#0064f0;
+        }
+      }
+    }
+  }
+  .pull-right{
+    text-align:right;
+    .group-code{
+      margin-bottom:4px;
+      span{
+        font-size:20px;
+        color:#0064f0;
+        vertical-align:text-bottom;
+      }
+      i{
+        margin-left:5px;
+        font-size:16px;
+        cursor:pointer;
+        &:hover{
+          color:#0064f0;
+        }
+      }
+    }
+    .group-nav{
+      font-size:14px;
+      a{
+        line-height:26px;
+        padding:3px 0;
+        border-bottom:2px solid #fff;
+        color:#999;
+        &:hover{
+          text-decoration:none;
+          color:#5c94f0;
+          border-color:#5c94f0;
+        }
+        &.active{
+          color:#0064f0;
+          border-color:#0064f0;
+        }
+      }
+      .space-x{
+        margin:0 25px;
+      }
+    }
+  }
+}
+
+.group-join{
+  width:300px;
+  .form-control{
+    line-height:40px;
+    font-size:22px;
+    text-align:center;
+    color:#0064f0;
+  }
+  .et-modal-footer{
+    margin:18px -18px -18px !important;
+    background:#fff !important;
+  }
+}
+
+.group-edit{
+  margin-top:-10px;
+  width:450px;
+  h3{
+    line-height:30px;
+    color:#0064f0;
+    span{
+      display:inline-block;
+      margin-left:10px;
+      font-size:12px;
+      font-weight:100;
+      color:#ccc;
+    }
+  }
+  .control-label{
+    display:block;
+  }
+  .block-mini{
+    margin:2px;
+  }
+  .et-modal-footer{
+    margin:18px -18px -18px !important;
+    background:#fff !important;
+  }
+}

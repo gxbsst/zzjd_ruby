@@ -1,0 +1,11 @@
+<div ng-controller="ToolbarGroupsController as vm">
+    <h2>可能喜欢的群</h2>
+    <ul>
+        <li ng-repeat="group in vm.groups">
+            <img ng-src="{{group|avatar}}"/>
+            <strong ng-bind="group.name"></strong>
+            <span class="btn btn-sm" ng-click="HANDLES.join(group.id)">加入群</span>
+        </li>
+    </ul>
+    <a class="toolbar-more" href="#">查看更多 <i class="pf-arrow-down"></i></a>
+</div>
