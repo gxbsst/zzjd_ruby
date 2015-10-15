@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   delete "/admin/:model_name/:id/delete", to: "c_rails_admins#delete"
   post "/admin/:model_name/:id/delete", to: "c_rails_admins#delete"
   # require 'sidekiq/web'
-# ...
-#   mount Sidekiq::Web, at: '/sidekiq'
+  # ...
+  #   mount Sidekiq::Web, at: '/sidekiq'
 
   api_version(:module => "Api::V1", path: {value: 'v1'}) do
     resources :robots, :agv, :nc, :defaults => { :format => 'json' }
@@ -55,7 +55,15 @@ Rails.application.routes.draw do
         get "actions/:id/show", to: "base#show_image"
       end
     end
+
+    resources :test, defaults: {format: "json"} do
+      collection do
+        get "wms/:operation/:location", to: "test#wms"
+        get "nc", to: "test#nc"
+        get "robot", to: "test#robot"
+      end
     end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

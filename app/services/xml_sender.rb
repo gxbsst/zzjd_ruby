@@ -7,9 +7,8 @@ class XMLSender
     end
 
     def send_xml(device_id=11)
-      host =  Settings.tcs.send_xml_server.ip
-      host = '127.0.0.1'
-      port =  33333
+      host =  Settings.device_management.robot.ip
+      port =  Settings.device_management.robot.send_port
       client_socket = TCPSocket.new(host, port)
       client_socket.write(self.to_xml(device_id))
       client_socket.close_write # Send EOF after writing the request.
@@ -28,9 +27,8 @@ class XMLSender
     end
 
     def send_trigger_xml(device_name, task_name)
-      host =  Settings.tcs.send_xml_server.ip
-      host = '127.0.0.1'
-      port =  33333
+      host =  Settings.device_management.robot.ip
+      port =  Settings.device_management.robot.send_port
       client_socket = TCPSocket.new(host, port)
       client_socket.write(self.to_trigger_xml(device_name, task_name))
       client_socket.close_write # Send EOF after writing the request.

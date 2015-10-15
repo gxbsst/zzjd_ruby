@@ -13,6 +13,17 @@ def send_one_order
   production_order.send_xml
 end
 
+def create_production_order
+  name = "J1轴的生产计划"
+  production_no = '000003'
+  product_number = 1
+  product = Products::Product.find_by_no(3001)
+  production_order = Productions::ProductionOrder.find_or_create_by(
+      production_no: production_no,
+      product: product
+  )
+end
+
 namespace :app do
   desc "同步资源库对应用户"
   task :init_data => :environment do
@@ -242,8 +253,9 @@ namespace :app do
   end
   desc "堆垛车接收返回数据"
   task :receive_wms_xml => :environment do
-    host =  Settings.tcs.receive_xml_server.ip
-    port =  22223
+    host =  Settings.device_management.wms.ip
+    port =  Settings.device_management.wms.receive_port
+
     puts(Time.now)
     tr = Thread.new do
     # fork do
@@ -315,6 +327,18 @@ namespace :app do
         Wms::TransportOrder.first.send_xml('out', location)
       end
     end
+  end
+
+  desc "AGV演示"
+  task :start_robot => :environment do
+    production_order = create_production_order
+    production_order.one_tcs_order.send_xml
+  end
+
+  desc "AGV演示下一步"
+  task :start_robot_next => :environment do
+    production_order = create_production_order
+    production_order.one_tcs_order.tcs_order_lines[0].send_next_xml
   end
 
 end

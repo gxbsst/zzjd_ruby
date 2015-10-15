@@ -5,6 +5,20 @@ tcs:
   receive_xml_server:
     ip: 192.168.5.235
     port: 44444
+device_management:
+  robot:
+    ip: 192.168.234
+    send_port: 11111
+    receive_port: 11112
+  wms:
+    ip: 192.168.234
+    send_port: 22222
+    receive_port: 22223
+  nc:
+    ip: 192.168.234
+    send_port: 33333
+    receive_port: 33334
+
 mqtt:
   ip: 127.0.0.1
 duiduoche:

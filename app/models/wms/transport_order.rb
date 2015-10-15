@@ -53,17 +53,22 @@ class Wms::TransportOrder < ActiveRecord::Base
   end
 
   def send_xml(action="in", location)
-    host =  Settings.tcs.send_xml_server.ip
-    # host = '192.168.5.234'
-    # host = '127.0.0.1'
-    port = 22222
+    host =  Settings.device_management.wms.ip
+    port =  Settings.device_management.wms.send_port
+    Rails.logger.info("*"*100)
+    Rails.logger.info(host)
+    Rails.logger.info(port)
     client_socket = TCPSocket.new(host, port)
+
     client_socket.write(self.to_xml(action, location))
+
     client_socket.close_write # Send EOF after writing the request.
     puts client_socket.read
   end
 
   def to_xml(action="in", location)
+    Rails.logger.info("1"*100)
+    Rails.logger.info(location)
     builder = Nokogiri::XML::Builder.new do |xml|
       xml.TransportOrder("xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance", "type" => "transport_order") {
         xml.order("action" => "#{action}", "location" => "#{location}", "outlet_id" => "1")

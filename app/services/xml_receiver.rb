@@ -2,9 +2,9 @@ class XMLReceiver
   class AssembleLine < self
 
     def self.receive_xml
-      host =  Settings.tcs.receive_xml_server.ip
-      # host = '127.0.0.1'
-      port =  33334
+
+      host =  Settings.device_management.robot.ip
+      port =  Settings.device_management.robot.receive_port
 
       tr = Thread.new do
         begin
