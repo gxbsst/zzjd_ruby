@@ -125,7 +125,7 @@ class Productions::ProductionOrder < ActiveRecord::Base
 
   def to_xml
     builder = Nokogiri::XML::Builder.new do |xml|
-      xml.ProductionOrder("xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance", "type" => 'robot_assemble') {
+      xml.ProductionOrder("xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance", "type" => 'robot_assemble', "device" => "12") {
         xml.workorder("device" => "3", "program_no" => "6001")
       }
     end
@@ -145,7 +145,7 @@ class Productions::ProductionOrder < ActiveRecord::Base
   def to_trigger_xml
     builder = Nokogiri::XML::Builder.new do |xml|
       xml.ProductionOrder("xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance", "type" => 'trigger') {
-        xml.workorderTrigger("device" => "11", "task" => "Task-1")
+        xml.workorderTrigger("device" => "12", "task" => "Task-2")
       }
     end
     builder.to_xml
@@ -170,7 +170,6 @@ class Productions::ProductionOrder < ActiveRecord::Base
           accumulated_text += line
           puts accumulated_text
         end
-        binding.pry
       rescue Exception => e
         socket.close if socket
         started = false

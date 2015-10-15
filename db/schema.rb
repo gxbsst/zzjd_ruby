@@ -11,41 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151009150402) do
+ActiveRecord::Schema.define(version: 20151014092137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "base_config_settings", force: :cascade do |t|
-    t.integer  "create_uid"
-    t.datetime "create_date"
-    t.boolean  "module_google_drive"
-    t.boolean  "module_base_import"
-    t.integer  "write_uid"
-    t.boolean  "module_portal"
-    t.boolean  "module_google_calendar"
-    t.datetime "write_date"
-    t.boolean  "module_share"
-    t.integer  "font"
-    t.boolean  "module_auth_oauth"
-    t.boolean  "module_multi_company"
-  end
 
   create_table "base_import_import", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
     t.datetime "write_date"
-    t.string   "file_type",   limit: 255
-    t.string   "file_name",   limit: 255
+    t.string   "file_type"
+    t.string   "file_name"
     t.integer  "write_uid"
     t.binary   "file"
-    t.string   "res_model",   limit: 255
+    t.string   "res_model"
   end
 
   create_table "base_import_tests_models_char", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "value",       limit: 255
+    t.string   "value"
     t.integer  "write_uid"
     t.datetime "write_date"
   end
@@ -53,7 +38,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   create_table "base_import_tests_models_char_noreadonly", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "value",       limit: 255
+    t.string   "value"
     t.integer  "write_uid"
     t.datetime "write_date"
   end
@@ -61,7 +46,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   create_table "base_import_tests_models_char_readonly", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "value",       limit: 255
+    t.string   "value"
     t.integer  "write_uid"
     t.datetime "write_date"
   end
@@ -69,7 +54,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   create_table "base_import_tests_models_char_required", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "value",       limit: 255, null: false
+    t.string   "value",       null: false
     t.integer  "write_uid"
     t.datetime "write_date"
   end
@@ -77,7 +62,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   create_table "base_import_tests_models_char_states", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "value",       limit: 255
+    t.string   "value"
     t.integer  "write_uid"
     t.datetime "write_date"
   end
@@ -85,7 +70,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   create_table "base_import_tests_models_char_stillreadonly", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "value",       limit: 255
+    t.string   "value"
     t.integer  "write_uid"
     t.datetime "write_date"
   end
@@ -142,41 +127,41 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.integer  "create_uid"
     t.integer  "othervalue"
     t.datetime "create_date"
-    t.string   "name",        limit: 255
+    t.string   "name"
     t.integer  "write_uid"
     t.datetime "write_date"
-    t.integer  "somevalue",               null: false
+    t.integer  "somevalue",   null: false
   end
 
   create_table "base_language_export", force: :cascade do |t|
-    t.string   "lang",        limit: 255, null: false
+    t.string   "lang",        null: false
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "name",        limit: 255
-    t.string   "format",      limit: 255, null: false
+    t.string   "name"
+    t.string   "format",      null: false
     t.integer  "write_uid"
-    t.string   "state",       limit: 255
+    t.string   "state"
     t.datetime "write_date"
     t.binary   "data"
   end
 
   create_table "base_language_import", force: :cascade do |t|
     t.integer  "create_uid"
-    t.string   "code",        limit: 5,   null: false
+    t.string   "code",        limit: 5, null: false
     t.datetime "create_date"
-    t.string   "name",        limit: 255, null: false
+    t.string   "name",                  null: false
     t.integer  "write_uid"
     t.datetime "write_date"
-    t.binary   "data",                    null: false
+    t.binary   "data",                  null: false
     t.boolean  "overwrite"
   end
 
   create_table "base_language_install", force: :cascade do |t|
-    t.string   "lang",        limit: 255, null: false
+    t.string   "lang",        null: false
     t.integer  "create_uid"
     t.datetime "create_date"
     t.integer  "write_uid"
-    t.string   "state",       limit: 255
+    t.string   "state"
     t.datetime "write_date"
     t.boolean  "overwrite"
   end
@@ -194,7 +179,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.integer  "added"
     t.datetime "create_date"
     t.integer  "write_uid"
-    t.string   "state",       limit: 255
+    t.string   "state"
     t.datetime "write_date"
   end
 
@@ -206,29 +191,12 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.text     "module_info"
   end
 
-  create_table "base_setup_terminology", force: :cascade do |t|
-    t.integer  "create_uid"
-    t.datetime "create_date"
-    t.integer  "write_uid"
-    t.datetime "write_date"
-    t.string   "partner",     limit: 255, null: false
-  end
-
   create_table "base_update_translations", force: :cascade do |t|
-    t.string   "lang",        limit: 255, null: false
+    t.string   "lang",        null: false
     t.integer  "create_uid"
     t.datetime "create_date"
     t.integer  "write_uid"
     t.datetime "write_date"
-  end
-
-  create_table "board_create", force: :cascade do |t|
-    t.integer  "create_uid"
-    t.datetime "create_date"
-    t.string   "name",           limit: 255, null: false
-    t.integer  "write_uid"
-    t.datetime "write_date"
-    t.integer  "menu_parent_id",             null: false
   end
 
   create_table "bus_bus", force: :cascade do |t|
@@ -236,19 +204,19 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.datetime "create_date"
     t.integer  "write_uid"
     t.datetime "write_date"
-    t.string   "message",     limit: 255
-    t.string   "channel",     limit: 255
+    t.string   "message"
+    t.string   "channel"
   end
 
   create_table "change_password_user", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "user_login",  limit: 255
-    t.string   "new_passwd",  limit: 255
-    t.integer  "wizard_id",               null: false
+    t.string   "user_login"
+    t.string   "new_passwd"
+    t.integer  "wizard_id",   null: false
     t.integer  "write_uid"
     t.datetime "write_date"
-    t.integer  "user_id",                 null: false
+    t.integer  "user_id",     null: false
   end
 
   create_table "change_password_wizard", force: :cascade do |t|
@@ -258,26 +226,62 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.datetime "write_date"
   end
 
-  create_table "decimal_precision", force: :cascade do |t|
-    t.integer  "digits",                  null: false
+  create_table "device_operation_tasks", force: :cascade do |t|
+    t.string   "device_name"
+    t.string   "task_name"
+    t.string   "operation_name"
+    t.string   "params"
+    t.string   "status"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "im_chat_message", force: :cascade do |t|
+    t.integer  "create_uid"
+    t.datetime "create_date", null: false
+    t.integer  "write_uid"
+    t.integer  "to_id",       null: false
+    t.datetime "write_date"
+    t.string   "message"
+    t.string   "type"
+    t.integer  "from_id"
+  end
+
+  add_index "im_chat_message", ["create_date"], name: "im_chat_message_create_date_index", using: :btree
+  add_index "im_chat_message", ["to_id"], name: "im_chat_message_to_id_index", using: :btree
+
+  create_table "im_chat_presence", force: :cascade do |t|
+    t.string   "status"
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "name",        limit: 255, null: false
+    t.datetime "last_presence"
+    t.integer  "write_uid"
+    t.datetime "write_date"
+    t.datetime "last_poll"
+    t.integer  "user_id",       null: false
+  end
+
+  add_index "im_chat_presence", ["user_id"], name: "im_chat_presence_im_chat_user_status_unique", unique: true, using: :btree
+  add_index "im_chat_presence", ["user_id"], name: "im_chat_presence_user_id_index", using: :btree
+
+  create_table "im_chat_session", force: :cascade do |t|
+    t.integer  "create_uid"
+    t.datetime "create_date"
+    t.string   "uuid",        limit: 50
     t.integer  "write_uid"
     t.datetime "write_date"
   end
 
-  add_index "decimal_precision", ["name"], name: "decimal_precision_name_index", using: :btree
-  add_index "decimal_precision", ["name"], name: "decimal_precision_name_uniq", unique: true, using: :btree
+  add_index "im_chat_session", ["uuid"], name: "im_chat_session_uuid_index", using: :btree
 
-  create_table "decimal_precision_test", force: :cascade do |t|
+  create_table "im_chat_session_res_users_rel", force: :cascade do |t|
     t.integer  "create_uid"
-    t.datetime "create_date"
-    t.decimal  "float_2"
-    t.float    "float"
-    t.decimal  "float_4"
+    t.integer  "user_id",     null: false
+    t.integer  "session_id",  null: false
     t.integer  "write_uid"
+    t.string   "state"
     t.datetime "write_date"
+    t.datetime "create_date"
   end
 
   create_table "ir_act_client", force: :cascade do |t|
@@ -286,13 +290,13 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.text     "help"
     t.integer  "write_uid"
     t.datetime "write_date"
-    t.string   "usage",        limit: 255
-    t.string   "type",         limit: 255, null: false
-    t.string   "name",         limit: 255, null: false
-    t.string   "res_model",    limit: 255
+    t.string   "usage"
+    t.string   "type",         null: false
+    t.string   "name",         null: false
+    t.string   "res_model"
     t.binary   "params_store"
-    t.string   "tag",          limit: 255, null: false
-    t.string   "context",      limit: 255, null: false
+    t.string   "tag",          null: false
+    t.string   "context",      null: false
   end
 
   create_table "ir_act_report_xml", force: :cascade do |t|
@@ -301,24 +305,24 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.text     "help"
     t.integer  "write_uid"
     t.datetime "write_date"
-    t.string   "usage",                   limit: 255
-    t.string   "type",                    limit: 255, null: false
-    t.string   "name",                    limit: 255, null: false
-    t.string   "parser",                  limit: 255
+    t.string   "usage"
+    t.string   "type",                    null: false
+    t.string   "name",                    null: false
+    t.string   "parser"
     t.boolean  "header"
-    t.string   "report_type",             limit: 255, null: false
-    t.string   "attachment",              limit: 255
+    t.string   "report_type",             null: false
+    t.string   "attachment"
     t.binary   "report_sxw_content_data"
-    t.string   "report_xml",              limit: 255
+    t.string   "report_xml"
     t.binary   "report_rml_content_data"
     t.boolean  "auto"
-    t.string   "report_file",             limit: 255
+    t.string   "report_file"
     t.boolean  "multi"
-    t.string   "report_xsl",              limit: 255
-    t.string   "report_rml",              limit: 255
-    t.string   "report_name",             limit: 255, null: false
+    t.string   "report_xsl"
+    t.string   "report_rml"
+    t.string   "report_name",             null: false
     t.boolean  "attachment_use"
-    t.string   "model",                   limit: 255, null: false
+    t.string   "model",                   null: false
     t.integer  "paperformat_id"
   end
 
@@ -328,32 +332,32 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.text     "help"
     t.integer  "write_uid"
     t.datetime "write_date"
-    t.string   "usage",                  limit: 255
-    t.string   "type",                   limit: 255, null: false
-    t.string   "name",                   limit: 255, null: false
+    t.string   "usage"
+    t.string   "type",                               null: false
+    t.string   "name",                               null: false
     t.text     "code"
     t.integer  "sequence"
     t.integer  "crud_model_id"
-    t.string   "condition",              limit: 255
+    t.string   "condition"
     t.string   "ref_object",             limit: 128
     t.string   "id_object",              limit: 128
-    t.string   "crud_model_name",        limit: 255
-    t.string   "use_relational_model",   limit: 255, null: false
-    t.string   "use_create",             limit: 255, null: false
+    t.string   "crud_model_name"
+    t.string   "use_relational_model",               null: false
+    t.string   "use_create",                         null: false
     t.integer  "wkf_field_id"
     t.integer  "wkf_model_id"
-    t.string   "state",                  limit: 255, null: false
-    t.string   "id_value",               limit: 255
+    t.string   "state",                              null: false
+    t.string   "id_value"
     t.integer  "action_id"
     t.integer  "model_id",                           null: false
     t.integer  "sub_model_object_field"
     t.boolean  "link_new_record"
     t.integer  "wkf_transition_id"
     t.integer  "sub_object"
-    t.string   "use_write",              limit: 255, null: false
-    t.string   "wkf_model_name",         limit: 255
-    t.string   "copyvalue",              limit: 255
-    t.string   "write_expression",       limit: 255
+    t.string   "use_write",                          null: false
+    t.string   "wkf_model_name"
+    t.string   "copyvalue"
+    t.string   "write_expression"
     t.integer  "menu_ir_values_id"
     t.integer  "model_object_field"
     t.integer  "link_field_id"
@@ -365,11 +369,11 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.text     "help"
     t.integer  "write_uid"
     t.datetime "write_date"
-    t.string   "usage",       limit: 255
-    t.string   "type",        limit: 255, null: false
-    t.string   "name",        limit: 255, null: false
-    t.string   "target",      limit: 255, null: false
-    t.text     "url",                     null: false
+    t.string   "usage"
+    t.string   "type",        null: false
+    t.string   "name",        null: false
+    t.string   "target",      null: false
+    t.text     "url",         null: false
   end
 
   create_table "ir_act_window", force: :cascade do |t|
@@ -378,24 +382,24 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.text     "help"
     t.integer  "write_uid"
     t.datetime "write_date"
-    t.string   "usage",          limit: 255
-    t.string   "type",           limit: 255, null: false
-    t.string   "name",           limit: 255, null: false
-    t.string   "domain",         limit: 255
-    t.string   "res_model",      limit: 255, null: false
+    t.string   "usage"
+    t.string   "type",           null: false
+    t.string   "name",           null: false
+    t.string   "domain"
+    t.string   "res_model",      null: false
     t.integer  "search_view_id"
-    t.string   "view_type",      limit: 255, null: false
-    t.string   "src_model",      limit: 255
+    t.string   "view_type",      null: false
+    t.string   "src_model"
     t.integer  "view_id"
     t.integer  "auto_refresh"
-    t.string   "view_mode",      limit: 255, null: false
+    t.string   "view_mode",      null: false
     t.boolean  "multi"
-    t.string   "target",         limit: 255
+    t.string   "target"
     t.boolean  "auto_search"
     t.integer  "res_id"
     t.boolean  "filter"
     t.integer  "limit"
-    t.string   "context",        limit: 255, null: false
+    t.string   "context",        null: false
   end
 
   create_table "ir_act_window_group_rel", id: false, force: :cascade do |t|
@@ -414,7 +418,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.integer  "sequence"
     t.integer  "view_id"
     t.integer  "write_uid"
-    t.string   "view_mode",     limit: 255, null: false
+    t.string   "view_mode",     null: false
     t.datetime "write_date"
     t.integer  "act_window_id"
   end
@@ -427,22 +431,22 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.text     "help"
     t.integer  "write_uid"
     t.datetime "write_date"
-    t.string   "usage",       limit: 255
-    t.string   "type",        limit: 255, null: false
-    t.string   "name",        limit: 255, null: false
+    t.string   "usage"
+    t.string   "type",        null: false
+    t.string   "name",        null: false
   end
 
   create_table "ir_actions_todo", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "name",        limit: 255
+    t.string   "name"
     t.integer  "sequence"
     t.integer  "write_uid"
     t.text     "note"
-    t.string   "state",       limit: 255, null: false
+    t.string   "state",       null: false
     t.datetime "write_date"
-    t.string   "type",        limit: 255, null: false
-    t.integer  "action_id",               null: false
+    t.string   "type",        null: false
+    t.integer  "action_id",   null: false
   end
 
   add_index "ir_actions_todo", ["action_id"], name: "ir_actions_todo_action_id_index", using: :btree
@@ -452,18 +456,18 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.datetime "create_date"
     t.text     "description"
     t.string   "url",         limit: 1024
-    t.string   "res_model",   limit: 255
+    t.string   "res_model"
     t.integer  "file_size"
     t.integer  "company_id"
     t.integer  "write_uid"
-    t.string   "res_name",    limit: 255
+    t.string   "res_name"
     t.binary   "db_datas"
-    t.string   "datas_fname", limit: 255
+    t.string   "datas_fname"
     t.datetime "write_date"
-    t.string   "type",        limit: 255,  null: false
+    t.string   "type",                     null: false
     t.integer  "res_id"
-    t.string   "store_fname", limit: 255
-    t.string   "name",        limit: 255,  null: false
+    t.string   "store_fname"
+    t.string   "name",                     null: false
   end
 
   add_index "ir_attachment", ["res_model", "res_id"], name: "ir_attachment_res_idx", using: :btree
@@ -472,9 +476,9 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.integer  "create_uid"
     t.datetime "create_date"
     t.datetime "write_date"
-    t.text     "value",                   null: false
+    t.text     "value",       null: false
     t.integer  "write_uid"
-    t.string   "key",         limit: 255, null: false
+    t.string   "key",         null: false
   end
 
   add_index "ir_config_parameter", ["key"], name: "ir_config_parameter_key_index", using: :btree
@@ -490,16 +494,16 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   add_index "ir_config_parameter_groups_rel", ["icp_id"], name: "ir_config_parameter_groups_rel_icp_id_index", using: :btree
 
   create_table "ir_cron", force: :cascade do |t|
-    t.string   "function",        limit: 255
+    t.string   "function"
     t.integer  "create_uid"
     t.text     "args"
-    t.integer  "user_id",                     null: false
-    t.string   "name",            limit: 255, null: false
-    t.string   "interval_type",   limit: 255
+    t.integer  "user_id",         null: false
+    t.string   "name",            null: false
+    t.string   "interval_type"
     t.integer  "numbercall"
-    t.datetime "nextcall",                    null: false
+    t.datetime "nextcall",        null: false
     t.integer  "priority"
-    t.string   "model",           limit: 255
+    t.string   "model"
     t.boolean  "doall"
     t.datetime "write_date"
     t.boolean  "active"
@@ -512,21 +516,21 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.integer  "create_uid"
     t.datetime "create_date"
     t.integer  "uid"
-    t.string   "ref_table",   limit: 255
+    t.string   "ref_table"
     t.integer  "company_id"
-    t.string   "value",       limit: 255
+    t.string   "value"
     t.integer  "ref_id"
     t.datetime "write_date"
-    t.string   "field_tbl",   limit: 255
+    t.string   "field_tbl"
     t.integer  "write_uid"
-    t.string   "field_name",  limit: 255
-    t.string   "page",        limit: 255
+    t.string   "field_name"
+    t.string   "page"
   end
 
   create_table "ir_exports", force: :cascade do |t|
     t.integer  "create_uid"
-    t.string   "resource",    limit: 255
-    t.string   "name",        limit: 255
+    t.string   "resource"
+    t.string   "name"
     t.integer  "write_uid"
     t.datetime "write_date"
     t.datetime "create_date"
@@ -537,7 +541,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   create_table "ir_exports_line", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "name",        limit: 255
+    t.string   "name"
     t.integer  "write_uid"
     t.datetime "write_date"
     t.integer  "export_id"
@@ -553,14 +557,14 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   end
 
   create_table "ir_filters", force: :cascade do |t|
-    t.string   "model_id",    limit: 255, null: false
-    t.text     "domain",                  null: false
+    t.string   "model_id",    null: false
+    t.text     "domain",      null: false
     t.integer  "user_id"
-    t.string   "name",        limit: 255, null: false
+    t.string   "name",        null: false
     t.integer  "create_uid"
     t.integer  "write_uid"
     t.boolean  "is_default"
-    t.text     "context",                 null: false
+    t.text     "context",     null: false
     t.datetime "write_date"
     t.datetime "create_date"
     t.integer  "action_id"
@@ -572,16 +576,16 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   create_table "ir_logging", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "name",        limit: 255, null: false
-    t.string   "level",       limit: 255
-    t.string   "line",        limit: 255, null: false
-    t.string   "dbname",      limit: 255
+    t.string   "name",        null: false
+    t.string   "level"
+    t.string   "line",        null: false
+    t.string   "dbname"
     t.integer  "write_uid"
-    t.string   "func",        limit: 255, null: false
+    t.string   "func",        null: false
     t.datetime "write_date"
-    t.string   "path",        limit: 255, null: false
-    t.text     "message",                 null: false
-    t.string   "type",        limit: 255, null: false
+    t.string   "path",        null: false
+    t.text     "message",     null: false
+    t.string   "type",        null: false
   end
 
   add_index "ir_logging", ["dbname"], name: "ir_logging_dbname_index", using: :btree
@@ -590,12 +594,12 @@ ActiveRecord::Schema.define(version: 20151009150402) do
 
   create_table "ir_mail_server", force: :cascade do |t|
     t.integer  "create_uid"
-    t.string   "smtp_encryption", limit: 255, null: false
+    t.string   "smtp_encryption",            null: false
     t.datetime "create_date"
-    t.string   "name",            limit: 255, null: false
+    t.string   "name",                       null: false
     t.integer  "sequence"
-    t.integer  "smtp_port",                   null: false
-    t.string   "smtp_host",       limit: 255, null: false
+    t.integer  "smtp_port",                  null: false
+    t.string   "smtp_host",                  null: false
     t.integer  "write_uid"
     t.string   "smtp_pass",       limit: 64
     t.boolean  "smtp_debug"
@@ -607,9 +611,9 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   add_index "ir_mail_server", ["name"], name: "ir_mail_server_name_index", using: :btree
 
   create_table "ir_model", force: :cascade do |t|
-    t.string   "model",       limit: 255, null: false
-    t.string   "name",        limit: 255, null: false
-    t.string   "state",       limit: 255
+    t.string   "model",       null: false
+    t.string   "name",        null: false
+    t.string   "state"
     t.text     "info"
     t.integer  "create_uid"
     t.datetime "create_date"
@@ -621,9 +625,9 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   add_index "ir_model", ["model"], name: "ir_model_obj_name_uniq", unique: true, using: :btree
 
   create_table "ir_model_access", force: :cascade do |t|
-    t.integer  "model_id",                null: false
+    t.integer  "model_id",    null: false
     t.boolean  "perm_read"
-    t.string   "name",        limit: 255, null: false
+    t.string   "name",        null: false
     t.integer  "create_uid"
     t.integer  "write_uid"
     t.boolean  "active"
@@ -642,10 +646,10 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   create_table "ir_model_constraint", force: :cascade do |t|
     t.datetime "date_init"
     t.datetime "date_update"
-    t.integer  "module",                  null: false
-    t.integer  "model",                   null: false
-    t.string   "type",        limit: 1,   null: false
-    t.string   "name",        limit: 255, null: false
+    t.integer  "module",                null: false
+    t.integer  "model",                 null: false
+    t.string   "type",        limit: 1, null: false
+    t.string   "name",                  null: false
     t.integer  "create_uid"
     t.datetime "create_date"
     t.integer  "write_uid"
@@ -664,11 +668,11 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.datetime "write_date"
     t.integer  "write_uid"
     t.boolean  "noupdate"
-    t.string   "name",        limit: 255, null: false
+    t.string   "name",        null: false
     t.datetime "date_init"
     t.datetime "date_update"
-    t.string   "module",      limit: 255, null: false
-    t.string   "model",       limit: 255, null: false
+    t.string   "module",      null: false
+    t.string   "model",       null: false
     t.integer  "res_id"
   end
 
@@ -680,27 +684,27 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   add_index "ir_model_data", ["res_id"], name: "ir_model_data_res_id_index", using: :btree
 
   create_table "ir_model_fields", force: :cascade do |t|
-    t.string   "model",                  limit: 255,                  null: false
-    t.integer  "model_id",                                            null: false
-    t.string   "name",                   limit: 255,                  null: false
-    t.string   "relation",               limit: 255
-    t.string   "select_level",           limit: 255,                  null: false
-    t.string   "field_description",      limit: 255,                  null: false
-    t.string   "ttype",                  limit: 255,                  null: false
-    t.string   "state",                  limit: 255, default: "base", null: false
-    t.string   "relation_field",         limit: 255
-    t.boolean  "translate",                          default: false
+    t.string   "model",                                   null: false
+    t.integer  "model_id",                                null: false
+    t.string   "name",                                    null: false
+    t.string   "relation"
+    t.string   "select_level",                            null: false
+    t.string   "field_description",                       null: false
+    t.string   "ttype",                                   null: false
+    t.string   "state",                  default: "base", null: false
+    t.string   "relation_field"
+    t.boolean  "translate",              default: false
     t.integer  "serialization_field_id"
-    t.string   "domain",                 limit: 255
+    t.string   "domain"
     t.datetime "create_date"
     t.datetime "write_date"
-    t.string   "on_delete",              limit: 255
+    t.string   "on_delete"
     t.integer  "write_uid"
-    t.string   "selection",              limit: 255
+    t.string   "selection"
     t.integer  "size"
     t.integer  "create_uid"
     t.boolean  "readonly"
-    t.string   "complete_name",          limit: 255
+    t.string   "complete_name"
     t.boolean  "selectable"
     t.boolean  "required"
   end
@@ -723,9 +727,9 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   create_table "ir_model_relation", force: :cascade do |t|
     t.datetime "date_init"
     t.datetime "date_update"
-    t.integer  "module",                  null: false
-    t.integer  "model",                   null: false
-    t.string   "name",        limit: 255, null: false
+    t.integer  "module",      null: false
+    t.integer  "model",       null: false
+    t.string   "name",        null: false
     t.integer  "create_uid"
     t.datetime "create_date"
     t.integer  "write_uid"
@@ -742,7 +746,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.datetime "write_date"
     t.integer  "write_uid"
     t.integer  "parent_id"
-    t.string   "name",        limit: 255, null: false
+    t.string   "name",        null: false
     t.text     "description"
     t.integer  "sequence"
     t.boolean  "visible"
@@ -756,29 +760,29 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.datetime "create_date"
     t.datetime "write_date"
     t.integer  "write_uid"
-    t.string   "website",           limit: 255
-    t.string   "summary",           limit: 255
-    t.string   "name",              limit: 255,                 null: false
-    t.string   "author",            limit: 255
-    t.string   "icon",              limit: 255
-    t.string   "state",             limit: 255
-    t.string   "latest_version",    limit: 255
-    t.string   "shortdesc",         limit: 255
+    t.string   "website"
+    t.string   "summary"
+    t.string   "name",                              null: false
+    t.string   "author"
+    t.string   "icon"
+    t.string   "state"
+    t.string   "latest_version"
+    t.string   "shortdesc"
     t.integer  "category_id"
     t.text     "description"
-    t.boolean  "application",                   default: false
-    t.boolean  "demo",                          default: false
-    t.boolean  "web",                           default: false
-    t.string   "license",           limit: 255
-    t.integer  "sequence",                      default: 100
-    t.boolean  "auto_install",                  default: false
+    t.boolean  "application",       default: false
+    t.boolean  "demo",              default: false
+    t.boolean  "web",               default: false
+    t.string   "license"
+    t.integer  "sequence",          default: 100
+    t.boolean  "auto_install",      default: false
     t.text     "menus_by_module"
     t.text     "reports_by_module"
-    t.string   "maintainer",        limit: 255
+    t.string   "maintainer"
     t.text     "contributors"
     t.text     "views_by_module"
-    t.string   "published_version", limit: 255
-    t.string   "url",               limit: 255
+    t.string   "published_version"
+    t.string   "url"
   end
 
   add_index "ir_module_module", ["category_id"], name: "ir_module_module_category_id_index", using: :btree
@@ -792,7 +796,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.datetime "create_date"
     t.datetime "write_date"
     t.integer  "write_uid"
-    t.string   "name",        limit: 255
+    t.string   "name"
     t.integer  "module_id"
   end
 
@@ -802,18 +806,18 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.text     "value_text"
     t.float    "value_float"
     t.datetime "create_date"
-    t.string   "name",            limit: 255
+    t.string   "name"
     t.integer  "create_uid"
-    t.string   "type",            limit: 255, null: false
+    t.string   "type",            null: false
     t.integer  "company_id"
     t.integer  "write_uid"
-    t.integer  "fields_id",                   null: false
+    t.integer  "fields_id",       null: false
     t.datetime "value_datetime"
     t.binary   "value_binary"
     t.datetime "write_date"
-    t.string   "value_reference", limit: 255
+    t.string   "value_reference"
     t.integer  "value_integer"
-    t.string   "res_id",          limit: 255
+    t.string   "res_id"
   end
 
   add_index "ir_property", ["company_id"], name: "ir_property_company_id_index", using: :btree
@@ -823,9 +827,9 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   add_index "ir_property", ["type"], name: "ir_property_type_index", using: :btree
 
   create_table "ir_rule", force: :cascade do |t|
-    t.integer  "model_id",                 null: false
+    t.integer  "model_id",     null: false
     t.text     "domain_force"
-    t.string   "name",         limit: 255
+    t.string   "name"
     t.integer  "create_uid"
     t.boolean  "global"
     t.integer  "write_uid"
@@ -845,24 +849,24 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.integer  "create_uid"
     t.string   "code",             limit: 64
     t.datetime "create_date"
-    t.string   "name",             limit: 64,  null: false
-    t.integer  "number_next",                  null: false
-    t.string   "implementation",   limit: 255, null: false
+    t.string   "name",             limit: 64, null: false
+    t.integer  "number_next",                 null: false
+    t.string   "implementation",              null: false
     t.integer  "company_id"
     t.integer  "write_uid"
-    t.integer  "padding",                      null: false
-    t.integer  "number_increment",             null: false
-    t.string   "prefix",           limit: 255
+    t.integer  "padding",                     null: false
+    t.integer  "number_increment",            null: false
+    t.string   "prefix"
     t.datetime "write_date"
     t.boolean  "active"
-    t.string   "suffix",           limit: 255
+    t.string   "suffix"
   end
 
   create_table "ir_sequence_type", force: :cascade do |t|
     t.integer  "create_uid"
-    t.string   "code",        limit: 32,  null: false
+    t.string   "code",        limit: 32, null: false
     t.datetime "create_date"
-    t.string   "name",        limit: 255, null: false
+    t.string   "name",                   null: false
     t.integer  "write_uid"
     t.datetime "write_date"
   end
@@ -873,23 +877,23 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.integer  "create_uid"
     t.integer  "server_id"
     t.datetime "create_date"
-    t.text     "value",                   null: false
-    t.integer  "col1",                    null: false
+    t.text     "value",       null: false
+    t.integer  "col1",        null: false
     t.datetime "write_date"
     t.integer  "write_uid"
-    t.string   "type",        limit: 255, null: false
+    t.string   "type",        null: false
   end
 
   create_table "ir_translation", force: :cascade do |t|
-    t.string  "lang",     limit: 255
+    t.string  "lang"
     t.text    "src"
-    t.string  "name",     limit: 255, null: false
+    t.string  "name",     null: false
     t.integer "res_id"
-    t.string  "module",   limit: 255
-    t.string  "state",    limit: 255
+    t.string  "module"
+    t.string  "state"
     t.text    "comments"
     t.text    "value"
-    t.string  "type",     limit: 255
+    t.string  "type"
   end
 
   add_index "ir_translation", ["comments"], name: "ir_translation_comments_index", using: :btree
@@ -905,13 +909,13 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.binary   "web_icon_data"
     t.boolean  "needaction_enabled"
     t.datetime "create_date"
-    t.string   "name",                limit: 255, null: false
+    t.string   "name",                           null: false
     t.string   "icon",                limit: 64
     t.integer  "sequence"
-    t.string   "web_icon_hover",      limit: 255
+    t.string   "web_icon_hover"
     t.integer  "write_uid"
     t.integer  "parent_id"
-    t.string   "web_icon",            limit: 255
+    t.string   "web_icon"
     t.datetime "write_date"
     t.integer  "create_uid"
     t.binary   "web_icon_hover_data"
@@ -933,18 +937,18 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   create_table "ir_ui_view", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "name",          limit: 255, null: false
+    t.string   "name",          null: false
     t.integer  "inherit_id"
     t.datetime "write_date"
-    t.text     "arch",                      null: false
+    t.text     "arch",          null: false
     t.integer  "write_uid"
-    t.integer  "priority",                  null: false
-    t.string   "mode",          limit: 255, null: false
+    t.integer  "priority",      null: false
+    t.string   "mode",          null: false
     t.boolean  "active"
-    t.string   "model",         limit: 255
+    t.string   "model"
     t.integer  "model_data_id"
-    t.string   "type",          limit: 255
-    t.string   "field_parent",  limit: 255
+    t.string   "type"
+    t.string   "field_parent"
   end
 
   add_index "ir_ui_view", ["inherit_id"], name: "ir_ui_view_inherit_id_index", using: :btree
@@ -977,16 +981,16 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   create_table "ir_values", force: :cascade do |t|
     t.integer  "model_id"
     t.integer  "user_id"
-    t.string   "name",        limit: 255, null: false
+    t.string   "name",        null: false
     t.integer  "create_uid"
-    t.string   "key2",        limit: 255
+    t.string   "key2"
     t.integer  "company_id"
     t.text     "value"
     t.integer  "write_uid"
-    t.string   "key",         limit: 255, null: false
+    t.string   "key",         null: false
     t.datetime "write_date"
     t.datetime "create_date"
-    t.string   "model",       limit: 255, null: false
+    t.string   "model",       null: false
     t.integer  "res_id"
     t.integer  "action_id"
   end
@@ -1003,152 +1007,108 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.integer  "create_uid"
     t.binary   "file"
     t.datetime "create_date"
-    t.string   "name",        limit: 255
+    t.string   "name"
     t.integer  "write_uid"
     t.datetime "write_date"
-    t.string   "owner_type",  limit: 255
+    t.string   "resource_no"
+    t.string   "owner_type"
     t.integer  "owner_id"
-    t.string   "resource_no", limit: 255
   end
 
   create_table "mj_bill_of_material_base", force: :cascade do |t|
+    t.string   "bill_of_material_no"
     t.integer  "create_uid"
-    t.integer  "product"
     t.datetime "create_date"
-    t.integer  "write_uid"
-    t.datetime "write_date"
-    t.string   "bill_of_material",    limit: 255
-    t.string   "bill_of_material_no", limit: 255
     t.integer  "product_id"
-  end
-
-  create_table "mj_dashboard_dashboard", force: :cascade do |t|
-    t.integer  "create_uid"
-    t.datetime "create_date"
-    t.datetime "write_date"
     t.integer  "write_uid"
+    t.datetime "write_date"
   end
 
   create_table "mj_duiduoche_task_queues", force: :cascade do |t|
     t.integer "work_order_id"
-    t.string  "task",          limit: 255
-    t.string  "state",         limit: 255
+    t.string  "task"
+    t.string  "state"
   end
 
   create_table "mj_material_base", force: :cascade do |t|
     t.integer  "create_uid"
-    t.integer  "product"
     t.datetime "create_date"
+    t.integer  "product_id"
     t.integer  "number"
+    t.integer  "bill_of_material_id"
     t.integer  "write_uid"
     t.datetime "write_date"
-    t.integer  "bill_of_material"
     t.integer  "bom_id"
-    t.integer  "product_id"
-    t.integer  "bill_of_material_id"
   end
 
   create_table "mj_product_base", force: :cascade do |t|
     t.integer  "create_uid"
-    t.datetime "create_date"
-    t.string   "name",                limit: 255
-    t.integer  "write_uid"
-    t.datetime "write_date"
-    t.string   "status",              limit: 255
-    t.integer  "project"
-    t.string   "product_name",        limit: 255
-    t.string   "product_no",          limit: 255
-    t.string   "remark",              limit: 255
-    t.integer  "product_type_moved0"
-    t.string   "product_type",        limit: 255
-    t.string   "uuid",                limit: 255
-    t.string   "standard",            limit: 255
-    t.string   "unit",                limit: 255
+    t.string   "remark"
     t.integer  "project_id"
+    t.string   "product_type"
+    t.string   "name"
+    t.string   "uuid"
+    t.integer  "write_uid"
+    t.string   "product_no"
+    t.datetime "write_date"
+    t.datetime "create_date"
+    t.string   "standard"
+    t.string   "unit"
   end
 
   create_table "mj_production_base", force: :cascade do |t|
-    t.string   "status",             limit: 255
+    t.string   "status"
     t.integer  "create_uid"
-    t.string   "remark",             limit: 255
+    t.string   "remark"
     t.date     "begin_date"
     t.date     "end_date"
-    t.integer  "production_plan"
+    t.integer  "production_plan_id"
     t.integer  "write_uid"
-    t.string   "production_no",      limit: 255
+    t.integer  "parent_id"
+    t.string   "production_no"
     t.datetime "write_date"
     t.datetime "create_date"
-    t.integer  "parent_id"
+    t.string   "name"
     t.integer  "product_id"
-    t.string   "name",               limit: 255
-    t.integer  "production_plan_id"
   end
 
   create_table "mj_production_plan_base", force: :cascade do |t|
-    t.string   "status",             limit: 255
+    t.string   "status"
     t.integer  "create_uid"
-    t.integer  "product"
+    t.string   "remark"
     t.date     "begin_date"
-    t.string   "name",               limit: 255
+    t.integer  "product_id"
     t.date     "end_date"
-    t.string   "production_plan_no", limit: 255
-    t.string   "remark",             limit: 255
+    t.string   "production_plan_no"
+    t.string   "plan_type"
     t.integer  "write_uid"
     t.integer  "product_number"
     t.datetime "write_date"
     t.datetime "create_date"
-    t.string   "plan_type",          limit: 255
-    t.integer  "product_id"
+    t.string   "name"
   end
 
   create_table "mj_project_base", force: :cascade do |t|
-    t.string   "status",      limit: 255
+    t.string   "status"
     t.integer  "create_uid"
+    t.text     "remark"
     t.date     "begin_date"
-    t.string   "name",        limit: 255
+    t.string   "name"
     t.date     "end_date"
     t.integer  "write_uid"
     t.datetime "write_date"
     t.datetime "create_date"
-    t.string   "project_no",  limit: 255
-    t.text     "remark"
+    t.string   "project_no"
   end
 
   create_table "mj_project_user_base", force: :cascade do |t|
-    t.string   "duty",        limit: 255
+    t.string   "duty"
     t.integer  "create_uid"
-    t.datetime "create_date"
-    t.integer  "write_uid"
-    t.integer  "project"
-    t.integer  "user"
-    t.datetime "write_date"
     t.integer  "user_id"
+    t.integer  "write_uid"
+    t.datetime "write_date"
+    t.datetime "create_date"
     t.integer  "project_id"
-  end
-
-  create_table "mj_routing", force: :cascade do |t|
-    t.integer  "create_uid"
-    t.string   "code",        limit: 255
-    t.datetime "create_date"
-    t.string   "name",        limit: 255
-    t.integer  "write_uid"
-    t.text     "note"
-    t.datetime "write_date"
-    t.boolean  "active"
-    t.integer  "product"
-  end
-
-  create_table "mj_routing_operation", force: :cascade do |t|
-    t.integer  "create_uid"
-    t.string   "workstation_moved0", limit: 255
-    t.datetime "create_date"
-    t.string   "name",               limit: 255
-    t.float    "time_cost"
-    t.integer  "write_uid"
-    t.datetime "write_date"
-    t.integer  "routing_id"
-    t.string   "technology_arg",     limit: 255
-    t.integer  "workstation"
   end
 
   create_table "mj_stock_tray_base", force: :cascade do |t|
@@ -1161,47 +1121,42 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   end
 
   create_table "mj_tcs_order_base", force: :cascade do |t|
-    t.string   "status",                limit: 255
+    t.string   "status"
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.integer  "write_uid"
-    t.integer  "production"
-    t.datetime "write_date"
-    t.string   "no",                    limit: 255
-    t.string   "order_name",            limit: 255
-    t.string   "execution_success_ful", limit: 255
     t.integer  "production_id"
-    t.string   "vehicle",               limit: 255
+    t.string   "no"
+    t.string   "order_name"
+    t.integer  "write_uid"
+    t.datetime "write_date"
+    t.string   "execution_success_ful"
+    t.string   "vehicle"
   end
 
   create_table "mj_tcs_order_task_base", force: :cascade do |t|
-    t.string   "status",                 limit: 255
-    t.string   "intendedVehicle",        limit: 255
-    t.datetime "create_date"
-    t.string   "no",                     limit: 255
-    t.string   "order_name",             limit: 255
-    t.integer  "write_uid"
-    t.string   "locationName",           limit: 255
-    t.integer  "tcs_order"
-    t.datetime "write_date"
-    t.string   "action",                 limit: 255
-    t.integer  "create_uid"
-    t.string   "executionSuccessful",    limit: 255
-    t.string   "current_position",       limit: 255
-    t.string   "intended_vehicle",       limit: 255
-    t.string   "destination_name",       limit: 255
-    t.string   "execution_success_ful",  limit: 255
-    t.boolean  "vehicle_type_available"
-    t.string   "operation",              limit: 255
+    t.string   "status"
     t.integer  "tcs_order_id"
-    t.string   "location_name",          limit: 255
+    t.string   "current_position"
+    t.datetime "create_date"
+    t.string   "no"
+    t.string   "order_name"
+    t.integer  "write_uid"
+    t.string   "action"
+    t.datetime "write_date"
+    t.string   "intended_vehicle"
+    t.string   "destination_name"
+    t.integer  "create_uid"
+    t.string   "execution_success_ful"
+    t.boolean  "vehicle_type_available"
+    t.string   "operation"
+    t.string   "location_name"
   end
 
   create_table "mj_technology_arg", force: :cascade do |t|
     t.integer  "create_uid"
-    t.string   "code",        limit: 255
+    t.string   "code"
     t.datetime "create_date"
-    t.string   "name",        limit: 255
+    t.string   "name"
     t.integer  "write_uid"
     t.datetime "write_date"
   end
@@ -1210,35 +1165,35 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.integer  "create_uid"
     t.integer  "mj_technology_arg_id"
     t.datetime "create_date"
-    t.string   "name",                 limit: 255
+    t.string   "name"
     t.integer  "sequence"
-    t.string   "low_value",            limit: 255
-    t.string   "value",                limit: 255
+    t.string   "low_value"
+    t.string   "value"
     t.integer  "write_uid"
     t.datetime "write_date"
-    t.string   "high_value",           limit: 255
+    t.string   "high_value"
   end
 
   create_table "mj_tm_operation", force: :cascade do |t|
     t.integer  "create_uid"
+    t.string   "name"
+    t.integer  "sequence"
+    t.float    "time_cost"
+    t.string   "program_no"
+    t.integer  "equipment_id"
+    t.integer  "write_uid"
+    t.text     "note"
+    t.datetime "write_date"
+    t.string   "technology_arg"
+    t.integer  "routing_id"
     t.datetime "create_date"
     t.integer  "workstation_id"
-    t.float    "time_cost"
-    t.integer  "write_uid"
-    t.datetime "write_date"
-    t.integer  "routing_id"
-    t.string   "technology_arg", limit: 255
-    t.string   "name",           limit: 255
-    t.integer  "equipment_id"
-    t.text     "note"
-    t.integer  "sequence"
-    t.string   "program_no",     limit: 255
   end
 
   create_table "mj_tm_operation_material", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "name",         limit: 255
+    t.string   "name"
     t.integer  "qty"
     t.datetime "write_date"
     t.integer  "operation_id"
@@ -1257,7 +1212,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   end
 
   create_table "mj_tm_routing", force: :cascade do |t|
-    t.string   "code",        limit: 255
+    t.string   "code"
     t.datetime "create_date"
     t.integer  "product_id"
     t.integer  "create_uid"
@@ -1265,7 +1220,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.text     "note"
     t.datetime "write_date"
     t.boolean  "active"
-    t.string   "name",        limit: 255
+    t.string   "name"
   end
 
   create_table "mj_tray_product_base", force: :cascade do |t|
@@ -1279,101 +1234,96 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   end
 
   create_table "mj_vehicle_workstations", force: :cascade do |t|
-    t.string   "workstation_no", limit: 255
-    t.string   "vehicle_no",     limit: 255
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "workstation_no"
+    t.string   "vehicle_no"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "mj_work_order_base", force: :cascade do |t|
-    t.string   "status",               limit: 255
+    t.string   "status"
     t.integer  "create_uid"
-    t.date     "begin_date"
+    t.integer  "routing_operation_id"
     t.integer  "takes"
     t.date     "end_date"
-    t.string   "operation_content",    limit: 255
-    t.integer  "write_uid"
-    t.integer  "production"
-    t.integer  "user"
-    t.datetime "write_date"
-    t.integer  "routing_operation"
-    t.string   "operation_name",       limit: 255
-    t.datetime "create_date"
-    t.string   "work_order_no",        limit: 255
-    t.integer  "work_station"
-    t.integer  "sequence"
-    t.integer  "routing_operation_id"
+    t.string   "operation_content"
     t.integer  "work_station_id"
+    t.integer  "write_uid"
+    t.datetime "create_date"
     t.integer  "production_id"
+    t.string   "operation_name"
+    t.datetime "write_date"
     t.integer  "user_id"
+    t.date     "begin_date"
+    t.string   "work_order_no"
+    t.integer  "sequence"
   end
 
   create_table "mj_workcenter_equipment", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "name",        limit: 255
-    t.string   "no",          limit: 255
+    t.string   "name"
+    t.string   "no"
+    t.string   "e_type"
     t.integer  "write_uid"
     t.text     "note"
     t.datetime "write_date"
-    t.string   "e_type",      limit: 255
-    t.string   "type",        limit: 255
+    t.string   "type"
   end
 
   create_table "mj_workcenter_resource", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
+    t.integer  "workstation_id"
+    t.string   "name"
     t.integer  "write_uid"
     t.datetime "write_date"
-    t.string   "owner_type",     limit: 255
+    t.string   "owner_type"
     t.integer  "owner_id"
-    t.integer  "workstation_id"
-    t.string   "name",           limit: 255
   end
 
   create_table "mj_workcenter_workcenter", force: :cascade do |t|
     t.integer  "create_uid"
-    t.string   "code",        limit: 255
     t.datetime "create_date"
-    t.string   "name",        limit: 255
+    t.string   "name"
+    t.string   "no"
     t.integer  "write_uid"
     t.text     "note"
-    t.datetime "write_date"
-    t.string   "no",          limit: 255
     t.integer  "parent_id"
-    t.string   "state",       limit: 255
+    t.string   "state"
+    t.datetime "write_date"
   end
 
   create_table "mj_workcenter_workstation", force: :cascade do |t|
     t.integer  "create_uid"
     t.float    "time_start"
-    t.string   "name",          limit: 255
+    t.string   "name"
     t.float    "time_stop"
-    t.string   "no",            limit: 255
+    t.string   "no"
     t.integer  "write_uid"
     t.text     "note"
+    t.string   "state"
     t.float    "cost_hour"
     t.float    "costs_cycle"
-    t.integer  "workcenter_id"
     t.datetime "write_date"
+    t.integer  "workcenter_id"
     t.datetime "create_date"
     t.float    "time_cycle"
-    t.string   "state",         limit: 255
-    t.string   "type",          limit: 255
+    t.string   "type"
   end
 
   create_table "multi_company_default", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "name",            limit: 255, null: false
+    t.string   "name",            null: false
     t.integer  "sequence"
     t.integer  "field_id"
-    t.integer  "company_id",                  null: false
-    t.integer  "object_id",                   null: false
+    t.integer  "company_id",      null: false
+    t.integer  "object_id",       null: false
     t.integer  "write_uid"
     t.datetime "write_date"
-    t.integer  "company_dest_id",             null: false
-    t.string   "expression",      limit: 255, null: false
+    t.integer  "company_dest_id", null: false
+    t.string   "expression",      null: false
   end
 
   create_table "osv_memory_autovacuum", force: :cascade do |t|
@@ -1385,12 +1335,12 @@ ActiveRecord::Schema.define(version: 20151009150402) do
 
   create_table "productions_logistics_chains", force: :cascade do |t|
     t.integer  "production_order_id"
-    t.string   "owner_type",          limit: 255
+    t.string   "owner_type"
     t.integer  "owner_id"
     t.integer  "sequence"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.string   "status",              limit: 255
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "status"
   end
 
   add_index "productions_logistics_chains", ["owner_id", "owner_type"], name: "index_productions_logistics_chains_on_owner_id_and_owner_type", using: :btree
@@ -1398,10 +1348,10 @@ ActiveRecord::Schema.define(version: 20151009150402) do
 
   create_table "productions_work_order_executions", force: :cascade do |t|
     t.integer  "work_order_id"
-    t.string   "type",          limit: 255
-    t.string   "state",         limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "type"
+    t.string   "state"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "rel_modules_langexport", id: false, force: :cascade do |t|
@@ -1433,12 +1383,12 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.integer  "create_uid"
     t.integer  "page_width"
     t.datetime "create_date"
-    t.string   "name",           limit: 255, null: false
-    t.string   "format",         limit: 255
+    t.string   "name",           null: false
+    t.string   "format"
     t.boolean  "default"
     t.boolean  "header_line"
     t.integer  "header_spacing"
-    t.integer  "dpi",                        null: false
+    t.integer  "dpi",            null: false
     t.integer  "write_uid"
     t.integer  "margin_right"
     t.integer  "margin_top"
@@ -1446,49 +1396,49 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.datetime "write_date"
     t.integer  "margin_bottom"
     t.integer  "page_height"
-    t.string   "orientation",    limit: 255
+    t.string   "orientation"
   end
 
   create_table "res_bank", force: :cascade do |t|
-    t.string   "city",        limit: 255
-    t.string   "fax",         limit: 255
+    t.string   "city"
+    t.string   "fax"
     t.datetime "create_date"
-    t.string   "name",        limit: 255, null: false
+    t.string   "name",                   null: false
     t.string   "zip",         limit: 24
     t.integer  "create_uid"
     t.integer  "country"
-    t.string   "street2",     limit: 255
+    t.string   "street2"
     t.string   "bic",         limit: 64
     t.integer  "write_uid"
-    t.string   "email",       limit: 255
-    t.string   "phone",       limit: 255
+    t.string   "email"
+    t.string   "phone"
     t.integer  "state"
-    t.string   "street",      limit: 255
+    t.string   "street"
     t.datetime "write_date"
     t.boolean  "active"
   end
 
   create_table "res_company", force: :cascade do |t|
-    t.string   "name",             limit: 255, null: false
-    t.integer  "partner_id",                   null: false
-    t.integer  "currency_id",                  null: false
+    t.string   "name",                        null: false
+    t.integer  "partner_id",                  null: false
+    t.integer  "currency_id",                 null: false
     t.text     "rml_footer"
     t.datetime "create_date"
-    t.text     "rml_header",                   null: false
-    t.string   "rml_paper_format", limit: 255, null: false
+    t.text     "rml_header",                  null: false
+    t.string   "rml_paper_format",            null: false
     t.integer  "write_uid"
     t.binary   "logo_web"
     t.integer  "font"
-    t.string   "account_no",       limit: 255
+    t.string   "account_no"
     t.integer  "parent_id"
     t.string   "email",            limit: 64
     t.integer  "create_uid"
     t.boolean  "custom_footer"
     t.string   "phone",            limit: 64
-    t.text     "rml_header2",                  null: false
-    t.text     "rml_header3",                  null: false
+    t.text     "rml_header2",                 null: false
+    t.text     "rml_header3",                 null: false
     t.datetime "write_date"
-    t.string   "rml_header1",      limit: 255
+    t.string   "rml_header1"
     t.string   "company_registry", limit: 64
     t.integer  "paperformat_id"
   end
@@ -1530,7 +1480,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.integer  "create_uid"
     t.string   "code",           limit: 2
     t.datetime "create_date"
-    t.string   "name",           limit: 255, null: false
+    t.string   "name",                     null: false
     t.binary   "image"
     t.integer  "write_uid"
     t.integer  "currency_id"
@@ -1544,7 +1494,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   create_table "res_country_group", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "name",        limit: 255, null: false
+    t.string   "name",        null: false
     t.integer  "write_uid"
     t.datetime "write_date"
   end
@@ -1560,16 +1510,16 @@ ActiveRecord::Schema.define(version: 20151009150402) do
 
   create_table "res_country_state", force: :cascade do |t|
     t.integer  "create_uid"
-    t.string   "code",        limit: 3,   null: false
+    t.string   "code",        limit: 3, null: false
     t.datetime "create_date"
-    t.string   "name",        limit: 255, null: false
-    t.integer  "country_id",              null: false
+    t.string   "name",                  null: false
+    t.integer  "country_id",            null: false
     t.integer  "write_uid"
     t.datetime "write_date"
   end
 
   create_table "res_currency", force: :cascade do |t|
-    t.string   "name",        limit: 255, null: false
+    t.string   "name",                  null: false
     t.integer  "create_uid"
     t.datetime "create_date"
     t.decimal  "rounding"
@@ -1579,7 +1529,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.boolean  "base"
     t.datetime "write_date"
     t.boolean  "active"
-    t.string   "position",    limit: 255
+    t.string   "position"
     t.integer  "accuracy"
   end
 
@@ -1601,12 +1551,12 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   create_table "res_font", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "name",        limit: 255, null: false
-    t.string   "family",      limit: 255, null: false
+    t.string   "name",        null: false
+    t.string   "family",      null: false
     t.integer  "write_uid"
-    t.string   "mode",        limit: 255, null: false
+    t.string   "mode",        null: false
     t.datetime "write_date"
-    t.string   "path",        limit: 255, null: false
+    t.string   "path",        null: false
   end
 
   add_index "res_font", ["family", "name"], name: "res_font_name_font_uniq", unique: true, using: :btree
@@ -1615,7 +1565,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.text     "comment"
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "name",        limit: 255, null: false
+    t.string   "name",        null: false
     t.integer  "write_uid"
     t.datetime "write_date"
     t.integer  "category_id"
@@ -1661,21 +1611,21 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   add_index "res_groups_users_rel", ["uid"], name: "res_groups_users_rel_uid_index", using: :btree
 
   create_table "res_lang", force: :cascade do |t|
-    t.string   "name",          limit: 255, null: false
-    t.string   "code",          limit: 16,  null: false
-    t.string   "date_format",   limit: 255, null: false
-    t.string   "direction",     limit: 255, null: false
+    t.string   "name",                     null: false
+    t.string   "code",          limit: 16, null: false
+    t.string   "date_format",              null: false
+    t.string   "direction",                null: false
     t.datetime "create_date"
     t.integer  "create_uid"
-    t.string   "thousands_sep", limit: 255
+    t.string   "thousands_sep"
     t.boolean  "translatable"
     t.integer  "write_uid"
-    t.string   "time_format",   limit: 255, null: false
+    t.string   "time_format",              null: false
     t.datetime "write_date"
-    t.string   "decimal_point", limit: 255, null: false
+    t.string   "decimal_point",            null: false
     t.boolean  "active"
     t.string   "iso_code",      limit: 16
-    t.string   "grouping",      limit: 255, null: false
+    t.string   "grouping",                 null: false
   end
 
   add_index "res_lang", ["code"], name: "res_lang_code_key", unique: true, using: :btree
@@ -1684,7 +1634,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   add_index "res_lang", ["name"], name: "res_lang_name_uniq", unique: true, using: :btree
 
   create_table "res_partner", force: :cascade do |t|
-    t.string   "name",                  limit: 255, null: false
+    t.string   "name",                             null: false
     t.integer  "company_id"
     t.text     "comment"
     t.string   "ean13",                 limit: 13
@@ -1693,38 +1643,38 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.binary   "image_small"
     t.binary   "image"
     t.date     "date"
-    t.string   "street",                limit: 255
-    t.string   "city",                  limit: 255
-    t.string   "display_name",          limit: 255
+    t.string   "street"
+    t.string   "city"
+    t.string   "display_name"
     t.string   "zip",                   limit: 24
     t.integer  "title"
-    t.string   "function",              limit: 255
+    t.string   "function"
     t.integer  "country_id"
     t.integer  "parent_id"
     t.boolean  "supplier"
-    t.string   "ref",                   limit: 255
-    t.string   "email",                 limit: 255
+    t.string   "ref"
+    t.string   "email"
     t.boolean  "is_company"
-    t.string   "website",               limit: 255
+    t.string   "website"
     t.boolean  "customer"
-    t.string   "fax",                   limit: 255
-    t.string   "street2",               limit: 255
+    t.string   "fax"
+    t.string   "street2"
     t.boolean  "employee"
     t.float    "credit_limit"
     t.datetime "write_date"
     t.boolean  "active"
     t.string   "tz",                    limit: 64
     t.integer  "write_uid"
-    t.string   "lang",                  limit: 255
+    t.string   "lang"
     t.integer  "create_uid"
     t.binary   "image_medium"
-    t.string   "phone",                 limit: 255
-    t.string   "mobile",                limit: 255
-    t.string   "type",                  limit: 255
+    t.string   "phone"
+    t.string   "mobile"
+    t.string   "type"
     t.boolean  "use_parent_address"
     t.integer  "user_id"
-    t.string   "birthdate",             limit: 255
-    t.string   "vat",                   limit: 255
+    t.string   "birthdate"
+    t.string   "vat"
     t.integer  "state_id"
     t.integer  "commercial_partner_id"
   end
@@ -1738,34 +1688,34 @@ ActiveRecord::Schema.define(version: 20151009150402) do
 
   create_table "res_partner_bank", force: :cascade do |t|
     t.integer  "create_uid"
-    t.string   "owner_name",  limit: 255
+    t.string   "owner_name"
     t.datetime "create_date"
-    t.string   "name",        limit: 255
+    t.string   "name"
     t.string   "zip",         limit: 24
     t.integer  "sequence"
     t.boolean  "footer"
     t.integer  "country_id"
     t.integer  "company_id"
-    t.string   "bank_name",   limit: 255
+    t.string   "bank_name"
     t.integer  "write_uid"
-    t.string   "state",       limit: 255, null: false
-    t.string   "street",      limit: 255
-    t.string   "city",        limit: 255
+    t.string   "state",                  null: false
+    t.string   "street"
+    t.string   "city"
     t.datetime "write_date"
     t.integer  "state_id"
     t.string   "bank_bic",    limit: 16
     t.integer  "partner_id"
     t.integer  "bank"
-    t.string   "acc_number",  limit: 64,  null: false
+    t.string   "acc_number",  limit: 64, null: false
   end
 
   add_index "res_partner_bank", ["partner_id"], name: "res_partner_bank_partner_id_index", using: :btree
 
   create_table "res_partner_bank_type", force: :cascade do |t|
     t.integer  "create_uid"
-    t.string   "code",          limit: 64,  null: false
+    t.string   "code",          limit: 64, null: false
     t.datetime "create_date"
-    t.string   "name",          limit: 255, null: false
+    t.string   "name",                     null: false
     t.integer  "write_uid"
     t.text     "format_layout"
     t.datetime "write_date"
@@ -1774,12 +1724,12 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   create_table "res_partner_bank_type_field", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "name",         limit: 255, null: false
+    t.string   "name",         null: false
     t.boolean  "required"
     t.integer  "write_uid"
     t.boolean  "readonly"
     t.datetime "write_date"
-    t.integer  "bank_type_id",             null: false
+    t.integer  "bank_type_id", null: false
     t.integer  "size"
   end
 
@@ -1788,7 +1738,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.integer  "parent_right"
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "name",         limit: 255, null: false
+    t.string   "name",         null: false
     t.integer  "write_uid"
     t.integer  "parent_id"
     t.datetime "write_date"
@@ -1810,10 +1760,10 @@ ActiveRecord::Schema.define(version: 20151009150402) do
 
   create_table "res_partner_title", force: :cascade do |t|
     t.integer  "create_uid"
-    t.string   "domain",      limit: 255, null: false
+    t.string   "domain",      null: false
     t.datetime "create_date"
-    t.string   "name",        limit: 255, null: false
-    t.string   "shortcut",    limit: 255
+    t.string   "name",        null: false
+    t.string   "shortcut"
     t.integer  "write_uid"
     t.datetime "write_date"
   end
@@ -1821,19 +1771,19 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   create_table "res_request_link", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "name",        limit: 255, null: false
-    t.string   "object",      limit: 255, null: false
+    t.string   "name",        null: false
+    t.string   "object",      null: false
     t.integer  "write_uid"
     t.integer  "priority"
     t.datetime "write_date"
   end
 
   create_table "res_users", force: :cascade do |t|
-    t.boolean  "active",                     default: true
-    t.string   "login",          limit: 64,                 null: false
-    t.string   "password",       limit: 255
-    t.integer  "company_id",                                null: false
-    t.integer  "partner_id",                                null: false
+    t.boolean  "active",                    default: true
+    t.string   "login",          limit: 64,                null: false
+    t.string   "password"
+    t.integer  "company_id",                               null: false
+    t.integer  "partner_id",                               null: false
     t.integer  "create_uid"
     t.datetime "create_date"
     t.date     "login_date"
@@ -1841,66 +1791,12 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.datetime "write_date"
     t.text     "signature"
     t.integer  "action_id"
-    t.string   "password_crypt", limit: 255
-    t.string   "access_token",   limit: 255,                null: false
+    t.string   "password_crypt"
+    t.string   "access_token"
   end
 
   add_index "res_users", ["login"], name: "res_users_login_key", unique: true, using: :btree
   add_index "res_users", ["login_date"], name: "res_users_login_date_index", using: :btree
-
-  create_table "resource_calendar", force: :cascade do |t|
-    t.integer  "create_uid"
-    t.datetime "create_date"
-    t.string   "name",        limit: 255, null: false
-    t.integer  "company_id"
-    t.integer  "write_uid"
-    t.integer  "manager"
-    t.datetime "write_date"
-  end
-
-  create_table "resource_calendar_attendance", force: :cascade do |t|
-    t.string   "dayofweek",   limit: 255, null: false
-    t.integer  "create_uid"
-    t.datetime "create_date"
-    t.string   "name",        limit: 255, null: false
-    t.date     "date_from"
-    t.integer  "write_uid"
-    t.float    "hour_from",               null: false
-    t.float    "hour_to",                 null: false
-    t.datetime "write_date"
-    t.integer  "calendar_id",             null: false
-  end
-
-  add_index "resource_calendar_attendance", ["dayofweek"], name: "resource_calendar_attendance_dayofweek_index", using: :btree
-  add_index "resource_calendar_attendance", ["hour_from"], name: "resource_calendar_attendance_hour_from_index", using: :btree
-
-  create_table "resource_calendar_leaves", force: :cascade do |t|
-    t.integer  "create_uid"
-    t.datetime "create_date"
-    t.string   "name",        limit: 255
-    t.integer  "resource_id"
-    t.datetime "date_from",               null: false
-    t.integer  "company_id"
-    t.integer  "write_uid"
-    t.datetime "write_date"
-    t.datetime "date_to",                 null: false
-    t.integer  "calendar_id"
-  end
-
-  create_table "resource_resource", force: :cascade do |t|
-    t.integer  "create_uid"
-    t.float    "time_efficiency",             null: false
-    t.string   "code",            limit: 16
-    t.integer  "user_id"
-    t.string   "name",            limit: 255, null: false
-    t.integer  "company_id"
-    t.integer  "write_uid"
-    t.datetime "write_date"
-    t.integer  "calendar_id"
-    t.boolean  "active"
-    t.datetime "create_date"
-    t.string   "resource_type",   limit: 255, null: false
-  end
 
   create_table "rule_group_rel", id: false, force: :cascade do |t|
     t.integer "rule_group_id", null: false
@@ -1911,30 +1807,19 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   add_index "rule_group_rel", ["rule_group_id", "group_id"], name: "rule_group_rel_rule_group_id_group_id_key", unique: true, using: :btree
   add_index "rule_group_rel", ["rule_group_id"], name: "rule_group_rel_rule_group_id_index", using: :btree
 
-  create_table "sale_config_settings", force: :cascade do |t|
-    t.integer  "create_uid"
-    t.boolean  "module_web_linkedin"
-    t.datetime "create_date"
-    t.integer  "write_uid"
-    t.boolean  "module_sale"
-    t.datetime "write_date"
-    t.boolean  "module_crm"
-    t.boolean  "module_mass_mailing"
-  end
-
   create_table "wizard_ir_model_menu_create", force: :cascade do |t|
-    t.integer  "menu_id",                 null: false
+    t.integer  "menu_id",     null: false
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "name",        limit: 255, null: false
+    t.string   "name",        null: false
     t.integer  "write_uid"
     t.datetime "write_date"
   end
 
   create_table "wkf", force: :cascade do |t|
-    t.string   "name",        limit: 255,                 null: false
-    t.string   "osv",         limit: 255,                 null: false
-    t.boolean  "on_create",               default: false
+    t.string   "name",                        null: false
+    t.string   "osv",                         null: false
+    t.boolean  "on_create",   default: false
     t.datetime "create_date"
     t.integer  "create_uid"
     t.datetime "write_date"
@@ -1946,18 +1831,18 @@ ActiveRecord::Schema.define(version: 20151009150402) do
 
   create_table "wkf_activity", force: :cascade do |t|
     t.integer  "create_uid"
-    t.string   "kind",        limit: 255, null: false
+    t.string   "kind",                  null: false
     t.datetime "create_date"
-    t.string   "name",        limit: 255, null: false
-    t.string   "join_mode",   limit: 3,   null: false
+    t.string   "name",                  null: false
+    t.string   "join_mode",   limit: 3, null: false
     t.boolean  "flow_stop"
     t.integer  "write_uid"
     t.integer  "subflow_id"
-    t.string   "split_mode",  limit: 3,   null: false
+    t.string   "split_mode",  limit: 3, null: false
     t.datetime "write_date"
     t.text     "action"
-    t.integer  "wkf_id",                  null: false
-    t.string   "signal_send", limit: 255
+    t.integer  "wkf_id",                null: false
+    t.string   "signal_send"
     t.boolean  "flow_start"
     t.integer  "action_id"
   end
@@ -1965,10 +1850,10 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   add_index "wkf_activity", ["wkf_id"], name: "wkf_activity_wkf_id_index", using: :btree
 
   create_table "wkf_instance", force: :cascade do |t|
-    t.string  "res_type", limit: 255
+    t.string  "res_type"
     t.integer "uid"
     t.integer "wkf_id"
-    t.string  "state",    limit: 255
+    t.string  "state"
     t.integer "res_id"
   end
 
@@ -1979,16 +1864,16 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   create_table "wkf_transition", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "trigger_model",   limit: 255
-    t.string   "signal",          limit: 255
+    t.string   "trigger_model"
+    t.string   "signal"
     t.integer  "sequence"
     t.integer  "write_uid"
-    t.integer  "act_from",                    null: false
-    t.string   "condition",       limit: 255, null: false
+    t.integer  "act_from",        null: false
+    t.string   "condition",       null: false
     t.datetime "write_date"
-    t.string   "trigger_expr_id", limit: 255
+    t.string   "trigger_expr_id"
     t.integer  "group_id"
-    t.integer  "act_to",                      null: false
+    t.integer  "act_to",          null: false
   end
 
   add_index "wkf_transition", ["act_from"], name: "wkf_transition_act_from_index", using: :btree
@@ -1996,8 +1881,8 @@ ActiveRecord::Schema.define(version: 20151009150402) do
 
   create_table "wkf_triggers", force: :cascade do |t|
     t.integer "instance_id"
-    t.integer "workitem_id",             null: false
-    t.string  "model",       limit: 255
+    t.integer "workitem_id", null: false
+    t.string  "model"
     t.integer "res_id"
   end
 
@@ -2013,10 +1898,10 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   add_index "wkf_witm_trans", ["trans_id"], name: "wkf_witm_trans_trans_id_index", using: :btree
 
   create_table "wkf_workitem", force: :cascade do |t|
-    t.integer "act_id",                 null: false
-    t.integer "inst_id",                null: false
+    t.integer "act_id",     null: false
+    t.integer "inst_id",    null: false
     t.integer "subflow_id"
-    t.string  "state",      limit: 255
+    t.string  "state"
   end
 
   add_index "wkf_workitem", ["act_id"], name: "wkf_workitem_act_id_index", using: :btree
@@ -2031,9 +1916,9 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.integer  "write_uid"
     t.boolean  "incoming_active"
     t.integer  "create_uid"
-    t.string   "area",                           limit: 255, null: false
+    t.string   "area",                           null: false
     t.boolean  "considered_in_allocation"
-    t.string   "check_state",                    limit: 255
+    t.string   "check_state"
     t.datetime "last_access"
     t.float    "maximum_weight"
     t.text     "description"
@@ -2043,10 +1928,10 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.boolean  "outgoing_active"
     t.datetime "write_date"
     t.integer  "location_type"
-    t.string   "aisle",                          limit: 255, null: false
-    t.string   "y",                              limit: 255, null: false
-    t.string   "x",                              limit: 255, null: false
-    t.string   "z",                              limit: 255, null: false
+    t.string   "aisle",                          null: false
+    t.string   "y",                              null: false
+    t.string   "x",                              null: false
+    t.string   "z",                              null: false
     t.integer  "no"
   end
 
@@ -2055,17 +1940,17 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.datetime "create_date"
     t.integer  "parent"
     t.boolean  "location_group_counting_active"
-    t.string   "name",                           limit: 255, null: false
+    t.string   "name",                           null: false
     t.integer  "state_out_locker"
     t.integer  "state_in_locker"
-    t.string   "group_state_in",                 limit: 255
+    t.string   "group_state_in"
     t.float    "max_fill_level"
-    t.string   "system_code",                    limit: 255
+    t.string   "system_code"
     t.datetime "write_date"
-    t.string   "group_state_out",                limit: 255
+    t.string   "group_state_out"
     t.boolean  "no_locations"
     t.integer  "write_uid"
-    t.string   "group_type",                     limit: 255
+    t.string   "group_type"
     t.text     "description"
   end
 
@@ -2081,7 +1966,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.integer  "length"
     t.datetime "write_date"
     t.integer  "write_uid"
-    t.string   "type",        limit: 255, null: false
+    t.string   "type",        null: false
   end
 
   add_index "wms_location_type", ["type"], name: "wms_location_type_type_index", using: :btree
@@ -2099,8 +1984,8 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   create_table "wms_message", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.string   "message_no",   limit: 255
-    t.string   "message_text", limit: 255
+    t.string   "message_no"
+    t.string   "message_text"
     t.integer  "write_uid"
     t.datetime "write_date"
   end
@@ -2111,7 +1996,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.text     "description"
     t.integer  "write_uid"
     t.datetime "write_date"
-    t.string   "name",        limit: 255, null: false
+    t.string   "name",        null: false
   end
 
   add_index "wms_product", ["name"], name: "wms_product_name_index", using: :btree
@@ -2119,14 +2004,14 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   create_table "wms_transport_order", force: :cascade do |t|
     t.integer  "create_uid"
     t.datetime "create_date"
-    t.integer  "transport_unit",                    null: false
+    t.integer  "transport_unit",        null: false
     t.datetime "end_date"
     t.integer  "problem_message_no"
     t.integer  "source_location"
     t.integer  "target_location_group"
     t.datetime "problem_occurred"
-    t.string   "priority",              limit: 255
-    t.string   "state",                 limit: 255
+    t.string   "priority"
+    t.string   "state"
     t.integer  "target_location"
     t.datetime "start_date"
     t.datetime "write_date"
@@ -2142,10 +2027,10 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.integer  "parent"
     t.float    "weight"
     t.integer  "transport_unit_type"
-    t.string   "barcode",             limit: 255, null: false
+    t.string   "barcode",             null: false
     t.integer  "write_uid"
     t.datetime "inventory_date"
-    t.string   "state",               limit: 255
+    t.string   "state"
     t.integer  "target_location"
     t.datetime "actualLocation_date"
     t.datetime "write_date"
@@ -2165,14 +2050,14 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.text     "description"
     t.integer  "create_uid"
     t.float    "payload"
-    t.string   "compatibility", limit: 255
+    t.string   "compatibility"
     t.integer  "height"
     t.integer  "width"
     t.integer  "length"
     t.datetime "write_date"
     t.float    "weight_tare"
     t.integer  "write_uid"
-    t.string   "type",          limit: 255, null: false
+    t.string   "type",          null: false
   end
 
   add_index "wms_transport_unit_type", ["type"], name: "wms_transport_unit_type_type_index", using: :btree
@@ -2192,40 +2077,37 @@ ActiveRecord::Schema.define(version: 20151009150402) do
     t.datetime "create_date"
     t.integer  "write_uid"
     t.datetime "write_date"
-    t.string   "error_no",    limit: 255
+    t.string   "error_no"
     t.text     "error_text"
   end
 
   create_table "workcenters_equipment_daq", force: :cascade do |t|
-    t.string   "name",         limit: 255
+    t.string   "name"
     t.integer  "equipment_id"
-    t.string   "address",      limit: 255
-    t.string   "value",        limit: 255
+    t.string   "address"
+    t.string   "value"
     t.text     "description"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "workcenters_workstation_task_items", force: :cascade do |t|
     t.integer  "task_id"
-    t.string   "no",         limit: 255
-    t.string   "name",       limit: 255
+    t.string   "no"
+    t.string   "name"
     t.integer  "step"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "workcenters_workstation_tasks", force: :cascade do |t|
     t.integer  "workstation_id"
-    t.string   "name",           limit: 255
-    t.string   "no",             limit: 255
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "name"
+    t.string   "no"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
-  add_foreign_key "base_config_settings", "res_font", column: "font", name: "base_config_settings_font_fkey", on_delete: :nullify
-  add_foreign_key "base_config_settings", "res_users", column: "create_uid", name: "base_config_settings_create_uid_fkey", on_delete: :nullify
-  add_foreign_key "base_config_settings", "res_users", column: "write_uid", name: "base_config_settings_write_uid_fkey", on_delete: :nullify
   add_foreign_key "base_import_import", "res_users", column: "create_uid", name: "base_import_import_create_uid_fkey", on_delete: :nullify
   add_foreign_key "base_import_import", "res_users", column: "write_uid", name: "base_import_import_write_uid_fkey", on_delete: :nullify
   add_foreign_key "base_import_tests_models_char", "res_users", column: "create_uid", name: "base_import_tests_models_char_create_uid_fkey", on_delete: :nullify
@@ -2269,13 +2151,8 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   add_foreign_key "base_module_update", "res_users", column: "write_uid", name: "base_module_update_write_uid_fkey", on_delete: :nullify
   add_foreign_key "base_module_upgrade", "res_users", column: "create_uid", name: "base_module_upgrade_create_uid_fkey", on_delete: :nullify
   add_foreign_key "base_module_upgrade", "res_users", column: "write_uid", name: "base_module_upgrade_write_uid_fkey", on_delete: :nullify
-  add_foreign_key "base_setup_terminology", "res_users", column: "create_uid", name: "base_setup_terminology_create_uid_fkey", on_delete: :nullify
-  add_foreign_key "base_setup_terminology", "res_users", column: "write_uid", name: "base_setup_terminology_write_uid_fkey", on_delete: :nullify
   add_foreign_key "base_update_translations", "res_users", column: "create_uid", name: "base_update_translations_create_uid_fkey", on_delete: :nullify
   add_foreign_key "base_update_translations", "res_users", column: "write_uid", name: "base_update_translations_write_uid_fkey", on_delete: :nullify
-  add_foreign_key "board_create", "ir_ui_menu", column: "menu_parent_id", name: "board_create_menu_parent_id_fkey", on_delete: :nullify
-  add_foreign_key "board_create", "res_users", column: "create_uid", name: "board_create_create_uid_fkey", on_delete: :nullify
-  add_foreign_key "board_create", "res_users", column: "write_uid", name: "board_create_write_uid_fkey", on_delete: :nullify
   add_foreign_key "bus_bus", "res_users", column: "create_uid", name: "bus_bus_create_uid_fkey", on_delete: :nullify
   add_foreign_key "bus_bus", "res_users", column: "write_uid", name: "bus_bus_write_uid_fkey", on_delete: :nullify
   add_foreign_key "change_password_user", "change_password_wizard", column: "wizard_id", name: "change_password_user_wizard_id_fkey", on_delete: :nullify
@@ -2284,10 +2161,19 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   add_foreign_key "change_password_user", "res_users", column: "write_uid", name: "change_password_user_write_uid_fkey", on_delete: :nullify
   add_foreign_key "change_password_wizard", "res_users", column: "create_uid", name: "change_password_wizard_create_uid_fkey", on_delete: :nullify
   add_foreign_key "change_password_wizard", "res_users", column: "write_uid", name: "change_password_wizard_write_uid_fkey", on_delete: :nullify
-  add_foreign_key "decimal_precision", "res_users", column: "create_uid", name: "decimal_precision_create_uid_fkey", on_delete: :nullify
-  add_foreign_key "decimal_precision", "res_users", column: "write_uid", name: "decimal_precision_write_uid_fkey", on_delete: :nullify
-  add_foreign_key "decimal_precision_test", "res_users", column: "create_uid", name: "decimal_precision_test_create_uid_fkey", on_delete: :nullify
-  add_foreign_key "decimal_precision_test", "res_users", column: "write_uid", name: "decimal_precision_test_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "im_chat_message", "im_chat_session", column: "to_id", name: "im_chat_message_to_id_fkey", on_delete: :cascade
+  add_foreign_key "im_chat_message", "res_users", column: "create_uid", name: "im_chat_message_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "im_chat_message", "res_users", column: "from_id", name: "im_chat_message_from_id_fkey", on_delete: :nullify
+  add_foreign_key "im_chat_message", "res_users", column: "write_uid", name: "im_chat_message_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "im_chat_presence", "res_users", column: "create_uid", name: "im_chat_presence_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "im_chat_presence", "res_users", column: "user_id", name: "im_chat_presence_user_id_fkey", on_delete: :cascade
+  add_foreign_key "im_chat_presence", "res_users", column: "write_uid", name: "im_chat_presence_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "im_chat_session", "res_users", column: "create_uid", name: "im_chat_session_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "im_chat_session", "res_users", column: "write_uid", name: "im_chat_session_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "im_chat_session_res_users_rel", "im_chat_session", column: "session_id", name: "im_chat_session_res_users_rel_session_id_fkey", on_delete: :cascade
+  add_foreign_key "im_chat_session_res_users_rel", "res_users", column: "create_uid", name: "im_chat_session_res_users_rel_create_uid_fkey", on_delete: :nullify
+  add_foreign_key "im_chat_session_res_users_rel", "res_users", column: "user_id", name: "im_chat_session_res_users_rel_user_id_fkey", on_delete: :cascade
+  add_foreign_key "im_chat_session_res_users_rel", "res_users", column: "write_uid", name: "im_chat_session_res_users_rel_write_uid_fkey", on_delete: :nullify
   add_foreign_key "ir_act_client", "res_users", column: "create_uid", name: "ir_act_client_create_uid_fkey", on_delete: :nullify
   add_foreign_key "ir_act_client", "res_users", column: "write_uid", name: "ir_act_client_write_uid_fkey", on_delete: :nullify
   add_foreign_key "ir_act_report_xml", "report_paperformat", column: "paperformat_id", name: "ir_act_report_xml_paperformat_id_fkey", on_delete: :nullify
@@ -2420,50 +2306,36 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   add_foreign_key "ir_values", "res_users", column: "write_uid", name: "ir_values_write_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_base_resource", "res_users", column: "create_uid", name: "mj_base_resource_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_base_resource", "res_users", column: "write_uid", name: "mj_base_resource_write_uid_fkey", on_delete: :nullify
-  add_foreign_key "mj_bill_of_material_base", "mj_product_base", column: "product", name: "mj_bill_of_material_base_product_fkey", on_delete: :nullify
   add_foreign_key "mj_bill_of_material_base", "mj_product_base", column: "product_id", name: "mj_bill_of_material_base_product_id_fkey", on_delete: :nullify
   add_foreign_key "mj_bill_of_material_base", "res_users", column: "create_uid", name: "mj_bill_of_material_base_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_bill_of_material_base", "res_users", column: "write_uid", name: "mj_bill_of_material_base_write_uid_fkey", on_delete: :nullify
-  add_foreign_key "mj_dashboard_dashboard", "res_users", column: "create_uid", name: "mj_dashboard_dashboard_create_uid_fkey", on_delete: :nullify
-  add_foreign_key "mj_dashboard_dashboard", "res_users", column: "write_uid", name: "mj_dashboard_dashboard_write_uid_fkey", on_delete: :nullify
-  add_foreign_key "mj_material_base", "mj_bill_of_material_base", column: "bill_of_material", name: "mj_material_base_bill_of_material_fkey", on_delete: :nullify
   add_foreign_key "mj_material_base", "mj_bill_of_material_base", column: "bill_of_material_id", name: "mj_material_base_bill_of_material_id_fkey", on_delete: :nullify
-  add_foreign_key "mj_material_base", "mj_product_base", column: "product", name: "mj_material_base_product_fkey", on_delete: :nullify
   add_foreign_key "mj_material_base", "mj_product_base", column: "product_id", name: "mj_material_base_product_id_fkey", on_delete: :nullify
   add_foreign_key "mj_material_base", "res_users", column: "create_uid", name: "mj_material_base_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_material_base", "res_users", column: "write_uid", name: "mj_material_base_write_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_product_base", "res_users", column: "create_uid", name: "mj_product_base_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_product_base", "res_users", column: "write_uid", name: "mj_product_base_write_uid_fkey", on_delete: :nullify
+  add_foreign_key "mj_production_base", "mj_product_base", column: "product_id", name: "mj_production_base_product_id_fkey", on_delete: :nullify
   add_foreign_key "mj_production_base", "mj_production_base", column: "parent_id", name: "mj_production_base_parent_id_fkey", on_delete: :nullify
-  add_foreign_key "mj_production_base", "mj_production_plan_base", column: "production_plan", name: "mj_production_base_production_plan_fkey", on_delete: :nullify
   add_foreign_key "mj_production_base", "mj_production_plan_base", column: "production_plan_id", name: "mj_production_base_production_plan_id_fkey", on_delete: :nullify
   add_foreign_key "mj_production_base", "res_users", column: "create_uid", name: "mj_production_base_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_production_base", "res_users", column: "write_uid", name: "mj_production_base_write_uid_fkey", on_delete: :nullify
-  add_foreign_key "mj_production_plan_base", "mj_product_base", column: "product", name: "mj_production_plan_base_product_fkey", on_delete: :nullify
   add_foreign_key "mj_production_plan_base", "mj_product_base", column: "product_id", name: "mj_production_plan_base_product_id_fkey", on_delete: :nullify
   add_foreign_key "mj_production_plan_base", "res_users", column: "create_uid", name: "mj_production_plan_base_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_production_plan_base", "res_users", column: "write_uid", name: "mj_production_plan_base_write_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_project_base", "res_users", column: "create_uid", name: "mj_project_base_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_project_base", "res_users", column: "write_uid", name: "mj_project_base_write_uid_fkey", on_delete: :nullify
-  add_foreign_key "mj_project_user_base", "mj_project_base", column: "project", name: "mj_project_user_base_project_fkey", on_delete: :nullify
   add_foreign_key "mj_project_user_base", "mj_project_base", column: "project_id", name: "mj_project_user_base_project_id_fkey", on_delete: :nullify
   add_foreign_key "mj_project_user_base", "res_users", column: "create_uid", name: "mj_project_user_base_create_uid_fkey", on_delete: :nullify
-  add_foreign_key "mj_project_user_base", "res_users", column: "user", name: "mj_project_user_base_user_fkey", on_delete: :nullify
   add_foreign_key "mj_project_user_base", "res_users", column: "user_id", name: "mj_project_user_base_user_id_fkey", on_delete: :nullify
   add_foreign_key "mj_project_user_base", "res_users", column: "write_uid", name: "mj_project_user_base_write_uid_fkey", on_delete: :nullify
-  add_foreign_key "mj_routing", "mj_product_base", column: "product", name: "mj_routing_product_fkey", on_delete: :nullify
-  add_foreign_key "mj_routing", "res_users", column: "create_uid", name: "mj_routing_create_uid_fkey", on_delete: :nullify
-  add_foreign_key "mj_routing", "res_users", column: "write_uid", name: "mj_routing_write_uid_fkey", on_delete: :nullify
-  add_foreign_key "mj_routing_operation", "mj_routing", column: "routing_id", name: "mj_routing_operation_routing_id_fkey", on_delete: :nullify
-  add_foreign_key "mj_routing_operation", "res_users", column: "create_uid", name: "mj_routing_operation_create_uid_fkey", on_delete: :nullify
-  add_foreign_key "mj_routing_operation", "res_users", column: "write_uid", name: "mj_routing_operation_write_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_stock_tray_base", "res_users", column: "create_uid", name: "mj_stock_tray_base_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_stock_tray_base", "res_users", column: "write_uid", name: "mj_stock_tray_base_write_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_stock_tray_base", "wms_location", column: "location", name: "mj_stock_tray_base_location_fkey", on_delete: :nullify
   add_foreign_key "mj_stock_tray_base", "wms_transport_unit", column: "tray", name: "mj_stock_tray_base_tray_fkey", on_delete: :nullify
+  add_foreign_key "mj_tcs_order_base", "mj_production_base", column: "production_id", name: "mj_tcs_order_base_production_id_fkey", on_delete: :nullify
   add_foreign_key "mj_tcs_order_base", "res_users", column: "create_uid", name: "mj_tcs_order_base_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_tcs_order_base", "res_users", column: "write_uid", name: "mj_tcs_order_base_write_uid_fkey", on_delete: :nullify
-  add_foreign_key "mj_tcs_order_task_base", "mj_tcs_order_base", column: "tcs_order", name: "mj_tcs_order_task_base_tcs_order_fkey", on_delete: :nullify
   add_foreign_key "mj_tcs_order_task_base", "mj_tcs_order_base", column: "tcs_order_id", name: "mj_tcs_order_task_base_tcs_order_id_fkey", on_delete: :nullify
   add_foreign_key "mj_tcs_order_task_base", "res_users", column: "create_uid", name: "mj_tcs_order_task_base_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_tcs_order_task_base", "res_users", column: "write_uid", name: "mj_tcs_order_task_base_write_uid_fkey", on_delete: :nullify
@@ -2490,10 +2362,8 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   add_foreign_key "mj_tray_product_base", "res_users", column: "create_uid", name: "mj_tray_product_base_create_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_tray_product_base", "res_users", column: "write_uid", name: "mj_tray_product_base_write_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_tray_product_base", "wms_transport_unit", column: "tray", name: "mj_tray_product_base_tray_fkey", on_delete: :nullify
-  add_foreign_key "mj_work_order_base", "mj_production_base", column: "production", name: "mj_work_order_base_production_fkey", on_delete: :nullify
   add_foreign_key "mj_work_order_base", "mj_production_base", column: "production_id", name: "mj_work_order_base_production_id_fkey", on_delete: :nullify
   add_foreign_key "mj_work_order_base", "res_users", column: "create_uid", name: "mj_work_order_base_create_uid_fkey", on_delete: :nullify
-  add_foreign_key "mj_work_order_base", "res_users", column: "user", name: "mj_work_order_base_user_fkey", on_delete: :nullify
   add_foreign_key "mj_work_order_base", "res_users", column: "user_id", name: "mj_work_order_base_user_id_fkey", on_delete: :nullify
   add_foreign_key "mj_work_order_base", "res_users", column: "write_uid", name: "mj_work_order_base_write_uid_fkey", on_delete: :nullify
   add_foreign_key "mj_workcenter_equipment", "res_users", column: "create_uid", name: "mj_workcenter_equipment_create_uid_fkey", on_delete: :nullify
@@ -2605,27 +2475,8 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   add_foreign_key "res_users", "res_partner", column: "partner_id", name: "res_users_partner_id_fkey", on_delete: :restrict
   add_foreign_key "res_users", "res_users", column: "create_uid", name: "res_users_create_uid_fkey", on_delete: :nullify
   add_foreign_key "res_users", "res_users", column: "write_uid", name: "res_users_write_uid_fkey", on_delete: :nullify
-  add_foreign_key "resource_calendar", "res_company", column: "company_id", name: "resource_calendar_company_id_fkey", on_delete: :nullify
-  add_foreign_key "resource_calendar", "res_users", column: "create_uid", name: "resource_calendar_create_uid_fkey", on_delete: :nullify
-  add_foreign_key "resource_calendar", "res_users", column: "manager", name: "resource_calendar_manager_fkey", on_delete: :nullify
-  add_foreign_key "resource_calendar", "res_users", column: "write_uid", name: "resource_calendar_write_uid_fkey", on_delete: :nullify
-  add_foreign_key "resource_calendar_attendance", "res_users", column: "create_uid", name: "resource_calendar_attendance_create_uid_fkey", on_delete: :nullify
-  add_foreign_key "resource_calendar_attendance", "res_users", column: "write_uid", name: "resource_calendar_attendance_write_uid_fkey", on_delete: :nullify
-  add_foreign_key "resource_calendar_attendance", "resource_calendar", column: "calendar_id", name: "resource_calendar_attendance_calendar_id_fkey", on_delete: :nullify
-  add_foreign_key "resource_calendar_leaves", "res_company", column: "company_id", name: "resource_calendar_leaves_company_id_fkey", on_delete: :nullify
-  add_foreign_key "resource_calendar_leaves", "res_users", column: "create_uid", name: "resource_calendar_leaves_create_uid_fkey", on_delete: :nullify
-  add_foreign_key "resource_calendar_leaves", "res_users", column: "write_uid", name: "resource_calendar_leaves_write_uid_fkey", on_delete: :nullify
-  add_foreign_key "resource_calendar_leaves", "resource_calendar", column: "calendar_id", name: "resource_calendar_leaves_calendar_id_fkey", on_delete: :nullify
-  add_foreign_key "resource_calendar_leaves", "resource_resource", column: "resource_id", name: "resource_calendar_leaves_resource_id_fkey", on_delete: :nullify
-  add_foreign_key "resource_resource", "res_company", column: "company_id", name: "resource_resource_company_id_fkey", on_delete: :nullify
-  add_foreign_key "resource_resource", "res_users", column: "create_uid", name: "resource_resource_create_uid_fkey", on_delete: :nullify
-  add_foreign_key "resource_resource", "res_users", column: "user_id", name: "resource_resource_user_id_fkey", on_delete: :nullify
-  add_foreign_key "resource_resource", "res_users", column: "write_uid", name: "resource_resource_write_uid_fkey", on_delete: :nullify
-  add_foreign_key "resource_resource", "resource_calendar", column: "calendar_id", name: "resource_resource_calendar_id_fkey", on_delete: :nullify
   add_foreign_key "rule_group_rel", "ir_rule", column: "rule_group_id", name: "rule_group_rel_rule_group_id_fkey", on_delete: :cascade
   add_foreign_key "rule_group_rel", "res_groups", column: "group_id", name: "rule_group_rel_group_id_fkey", on_delete: :cascade
-  add_foreign_key "sale_config_settings", "res_users", column: "create_uid", name: "sale_config_settings_create_uid_fkey", on_delete: :nullify
-  add_foreign_key "sale_config_settings", "res_users", column: "write_uid", name: "sale_config_settings_write_uid_fkey", on_delete: :nullify
   add_foreign_key "wizard_ir_model_menu_create", "ir_ui_menu", column: "menu_id", name: "wizard_ir_model_menu_create_menu_id_fkey", on_delete: :nullify
   add_foreign_key "wizard_ir_model_menu_create", "res_users", column: "create_uid", name: "wizard_ir_model_menu_create_create_uid_fkey", on_delete: :nullify
   add_foreign_key "wizard_ir_model_menu_create", "res_users", column: "write_uid", name: "wizard_ir_model_menu_create_write_uid_fkey", on_delete: :nullify
@@ -2648,7 +2499,7 @@ ActiveRecord::Schema.define(version: 20151009150402) do
   add_foreign_key "wkf_witm_trans", "wkf_transition", column: "trans_id", name: "wkf_witm_trans_trans_id_fkey", on_delete: :cascade
   add_foreign_key "wkf_workitem", "wkf_activity", column: "act_id", name: "wkf_workitem_act_id_fkey", on_delete: :cascade
   add_foreign_key "wkf_workitem", "wkf_instance", column: "inst_id", name: "wkf_workitem_inst_id_fkey", on_delete: :cascade
-  add_foreign_key "wkf_workitem", "wkf_instance", column: "subflow_id", name: "wkf_workitem_subflow_id_fkey", on_delete: :nullify
+  add_foreign_key "wkf_workitem", "wkf_instance", column: "subflow_id", name: "wkf_workitem_subflow_id_fkey", on_delete: :cascade
   add_foreign_key "wms_location", "res_users", column: "create_uid", name: "wms_location_create_uid_fkey", on_delete: :nullify
   add_foreign_key "wms_location", "res_users", column: "write_uid", name: "wms_location_write_uid_fkey", on_delete: :nullify
   add_foreign_key "wms_location", "wms_location_group", column: "location_group", name: "wms_location_location_group_fkey", on_delete: :nullify
